@@ -6,7 +6,7 @@ return [
         '@npm'   => '@vendor/npm-asset',
     ],
     'bootstrap' => [
-        'common\bootstrap\SetUp',
+
     ],
     'components' => [
        'cache' => [
