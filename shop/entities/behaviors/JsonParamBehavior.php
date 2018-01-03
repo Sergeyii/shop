@@ -9,8 +9,8 @@ use yii\helpers\Json;
 
 class JsonParamBehavior extends Behavior
 {
-    protected $attribute;
-    protected $dbAttribute;
+    public $attribute;
+    public $dbAttribute;
     
     public function events()
     {

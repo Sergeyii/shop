@@ -24,7 +24,7 @@ class Characteristic extends ActiveRecord
 
     public static function tableName(): string
     {
-        return '{{%shop_categories}}';
+        return '{{%shop_characteristics}}';
     }
 
     public static function create($name, $type, $required, $default, array $variants, $sort): self
