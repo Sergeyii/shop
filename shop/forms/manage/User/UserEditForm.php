@@ -26,7 +26,7 @@ class UserEditForm extends Model
             [['username', 'email'], 'required'],
             ['email', 'email'],
             [['username', 'email'], 'string', 'max' => 255],
-            [['username', 'email'], 'unique', 'targetClass' => User::class, 'filter' => ['<>', 'id', $this->_user->id]],
+            [['username', 'email'], 'unique', 'targetClass' => User::class, 'filter' => $this->_user ? ['<>', 'id', $this->_user->id] : null],
         ];
     }
 }

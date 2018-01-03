@@ -2,8 +2,8 @@ require 'yaml'
 require 'fileutils'
 
 domains = {
-  frontend: 'shop.dev',
-  backend:  'backend.shop.dev'
+  frontend: 'shop.local',
+  backend:  'backend.shop.local'
 }
 
 config = {

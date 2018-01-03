@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use shop\entities\User\User;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -69,8 +70,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-       /*
-        * //Создание тестового пользователя в базе
+        /*
+        //Создание тестового пользователя в базе
         $model = User::find()->where(['username' => 'admin'])->one();
         if (empty($model)) {
             $user = new User();
@@ -83,6 +84,7 @@ class SiteController extends Controller
             }
         }
         die();*/
+
         return $this->render('index');
     }
 

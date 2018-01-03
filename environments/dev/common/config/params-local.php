@@ -1,5 +1,5 @@
 <?php
 return [
     'cookieValidationKey' => '',
-    'cookieDomain' => '.shop.dev',
+    'cookieDomain' => '.shop.local',
 ];

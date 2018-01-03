@@ -1,5 +1,5 @@
 <?php
 return [
     'adminEmail' => 'admin@example.com',
-    'backendHostInfo' => 'backend.shop.dev',
+    'backendHostInfo' => 'backend.shop.local',
 ];
