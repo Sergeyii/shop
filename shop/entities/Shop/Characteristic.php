@@ -55,6 +55,21 @@ class Characteristic extends ActiveRecord
         return count($this->variants) > 0;
     }
 
+    public function isString()
+    {
+        $this->type === self::TYPE_STRING;
+    }
+
+    public function isInteger()
+    {
+        $this->type === self::TYPE_INTEGER;
+    }
+
+    public function isFloat()
+    {
+        $this->type === self::TYPE_FLOAT;
+    }
+
    public function behaviors()
    {
        return [

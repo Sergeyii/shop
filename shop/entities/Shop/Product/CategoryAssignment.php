@@ -12,7 +12,7 @@ class CategoryAssignment extends ActiveRecord
 {
     public static function tableName()
     {
-        return '{{shop_category_assignments}}';
+        return '{{%shop_category_assignments}}';
     }
 
     public function isForCategory($id): bool

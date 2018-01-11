@@ -1,0 +1,2 @@
+192.168.83.1 - - [05/Jan/2018:13:18:41 +0300] "GET / HTTP/1.1" 403 208 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+192.168.83.1 - - [05/Jan/2018:13:18:41 +0300] "GET /favicon.ico HTTP/1.1" 404 208 "http://static.shop.local/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"

@@ -3,6 +3,7 @@
 namespace shop\forms\manage\Shop\Product;
 
 use shop\entities\Shop\Characteristic;
+use shop\entities\Shop\Product\Value;
 use yii\base\Model;
 
 class ValueForm extends Model
@@ -28,7 +29,7 @@ class ValueForm extends Model
             $this->_characteristic->isInteger() ? ['value', 'integer'] : false,
             $this->_characteristic->isFloat() ? ['value', 'number'] : false,
             ['value', 'safe']
-        ], callback);
+        ]);
     }
 
     public function attributeLabels(): array
@@ -41,5 +42,10 @@ class ValueForm extends Model
     public function getId(): int
     {
         return $this->_characteristic->id;
+    }
+
+    public function variantsList()
+    {
+        return $this->_characteristic->variants ? array_combine($this->_characteristic->variants, $this->_characteristic->variants) : [];
     }
 }

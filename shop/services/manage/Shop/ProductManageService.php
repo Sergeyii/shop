@@ -2,6 +2,8 @@
 
 namespace shop\services\manage\Shop;
 
+use forms\manage\Shop\Product\ProductImportForm;
+use services\manage\Shop\ProductReader;
 use shop\entities\Meta;
 use shop\entities\Shop\Product\Product;
 use shop\entities\Shop\Tag;
@@ -14,6 +16,7 @@ use shop\repositories\Shop\CategoryRepository;
 use shop\repositories\Shop\ProductRepository;
 use shop\repositories\Shop\TagRepository;
 use shop\services\TransactionManager;
+use yii\web\UploadedFile;
 
 class ProductManageService
 {
@@ -48,6 +51,7 @@ class ProductManageService
             $category->id,
             $form->code,
             $form->name,
+            $form->description,
             new Meta($form->meta->title,$form->meta->keywords,$form->meta->description)
         );
 
@@ -62,26 +66,30 @@ class ProductManageService
             $product->setValue($value->id, $value->value);
         }
 
-        foreach($form->photos->files as $file){
-            $product->addPhoto($file);
+        if(!empty($form->photos->files)){
+            foreach($form->photos->files as $file){
+                $product->addPhoto($file);
+            }
         }
 
         //--Tags
-        foreach($form->tags->existing as $tagId){
+        //TODO::почему-то не работает
+        /*foreach($form->tags->existing as $tagId){
             $tag = $this->tags->get($tagId);
             $product->assignTag($tag->id);
-        }
+        }*/
 
 
         $this->transaction->wrap(function() use($form, $product){
-            foreach($form->tags->newNames as $tagName){
-                if( !$tag = $this->tags->findByName($tagName) ){
+            //TODO::почему-то не работает
+            /*foreach($form->tags->newNames as $tagName){
+                if( !($tag = $this->tags->findByName($tagName)) ){
                     $tag = Tag::create($tagName, $tagName);
                     $this->tags->save($tag);
                 }
 
                 $product->assignTag($tag->id);
-            }
+            }*/
 
             $this->products->save($product);
         });
@@ -93,46 +101,46 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         $brand = $this->brands->get($form->brandId);
-
+        $category = $this->categories->get($form->categories->main);
 
         $product->edit(
-            $brand->id,
-            $form->code,
-            $form->name,
-            new Meta(
+            $brand->id, $form->code, $form->name, $form->description, new Meta(
                 $form->meta->title,
                 $form->meta->keywords,
                 $form->meta->description
             )
         );
 
-        foreach($form->values as $value){
-            $product->setValue($value->id, $value->value);
-        }
+        $product->changeMainCategory($category->id);
 
-        $product->revokeTags();
+        $this->transaction->wrap(function () use ($product, $form) {
 
-        foreach($form->photos->files as $file){
-            $product->addPhoto($file);
-        }
+            $product->revokeCategories();
+            $product->revokeTags();
+            $this->products->save($product);
 
-        //--Tags
-        foreach($form->tags->existing as $tagId){
-            $tag = $this->tags->get($tagId);
-            $product->assignTag($tag->id);
-        }
+            foreach ($form->categories->others as $otherId) {
+                $category = $this->categories->get($otherId);
+                $product->assignCategory($category->id);
+            }
 
+            foreach ($form->values as $value) {
+                $product->setValue($value->id, $value->value);
+            }
 
-        $this->transaction->wrap(function() use($form, $product){
-            foreach($form->tags->newNames as $tagName){
-                if( !$tag = $this->tags->findByName($tagName) ){
+            //TODO::почему-то не работает!
+            /*
+            foreach ($form->tags->existing as $tagId) {
+                $tag = $this->tags->get($tagId);
+                $product->assignTag($tag->id);
+            }
+            foreach ($form->tags->newNames as $tagName) {
+                if (!$tag = $this->tags->findByName($tagName)) {
                     $tag = Tag::create($tagName, $tagName);
                     $this->tags->save($tag);
                 }
-
                 $product->assignTag($tag->id);
-            }
-
+            }*/
             $this->products->save($product);
         });
     }
@@ -188,5 +196,20 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         $this->products->remove($product);
+    }
+
+    public function import(ProductImportForm $form): void
+    {
+        $reader = new ProductReader();
+        $result = $reader->readCSV($form->file->tempName);
+
+        foreach($result as $row){
+            //Если такой товар есть => обновить
+            $product = $this->products->getByCode($row->code);
+            $product->setPrice($row->price_old, $row->price_new);
+            $product->setModificationPriceByCode($row->modification, $row->modification_price);
+
+            $this->products->save($product);
+        }
     }
 }

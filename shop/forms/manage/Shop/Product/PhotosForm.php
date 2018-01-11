@@ -19,7 +19,6 @@ class PhotosForm extends Model
         ];
     }
 
-
     public function beforeValidate()
     {
         if( parent::beforeValidate() ){

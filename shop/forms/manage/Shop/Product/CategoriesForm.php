@@ -2,6 +2,8 @@
 
 namespace shop\forms\manage\Shop\Product;
 
+use shop\entities\Shop\Category;
+use shop\entities\Shop\Product\Product;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -27,5 +29,12 @@ class CategoriesForm extends Model
             ['main', 'integer'],
             ['others', 'each', 'rule' => ['integer']],
         ];
+    }
+
+    public function categoriesList(): array
+    {
+        return ArrayHelper::map(Category::find()->andWhere(['>', 'depth', 0])->orderBy('lft')->asArray()->all(),'id',function(array $category){
+            return ($category['depth'] > 1 ? str_repeat('-- ', $category['depth']-1).' ' : '').$category['name'];
+        });
     }
 }
