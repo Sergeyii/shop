@@ -7,6 +7,8 @@ use shop\services\auth\PasswordResetService;
 use yii\base\BootstrapInterface;
 use yii\mail\MailerInterface;
 
+/* @var $app \yii\web\Application */
+
 class SetUp implements BootstrapInterface
 {
     public function bootstrap($app){

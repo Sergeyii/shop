@@ -7,10 +7,13 @@ use shop\services\auth\NetworkService;
 use yii\authclient\AuthAction;
 use yii\authclient\ClientInterface;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\web\Controller;
 
 class NetworkController extends Controller
 {
+    public $layout = 'cabinet';
+
     private $service;
 
     public function __construct($id, $module, array $config = [], NetworkService $service)
@@ -26,6 +29,7 @@ class NetworkController extends Controller
             'attach' => [
                 'class' => AuthAction::class,
                 'successCallback' => [$this, 'onAuthSuccess'],
+                'successUrl' => Url::to(['cabinet/default/index']),
             ],
         ];
     }

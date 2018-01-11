@@ -70,7 +70,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout = 'home';
         /*
         //Создание тестового пользователя в базе
         $model = User::find()->where(['username' => 'admin'])->one();
@@ -86,6 +85,7 @@ class SiteController extends Controller
         }
         die();*/
 
+        $this->layout = 'home';
         return $this->render('index');
     }
 
