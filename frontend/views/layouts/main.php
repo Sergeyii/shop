@@ -8,6 +8,8 @@ use frontend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
+use \yii\bootstrap\Nav;
+use \yii\bootstrap\NavBar;
 
 AppAsset::register($this);
 ?>
@@ -300,6 +302,42 @@ AppAsset::register($this);
                 </ul>
             </div>
         </nav>
+        <?php NavBar::begin([
+            'options' => [
+                'screenReaderToggleText' => 'Menu',
+                'id' => 'menu',
+            ],
+        ]);
+        ?>
+        <?php
+        $menuItems = [
+            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'About', 'url' => ['/site/about']],
+            ['label' => 'Contact', 'url' => ['/contact/index']],
+        ];
+
+        if( Yii::$app->user->isGuest ){
+            $menuItems[] = [
+                ['label' => 'Signup', 'url' => ['/auth/signup/request']],
+                ['label' => 'Login', 'url' => ['/auth/auth/login']],
+            ];
+        }else{
+            $menuItems[] = '<li>'
+                .Html::beginForm(['/auth/auth/login'], 'post')
+                .Html::submitButton('Logout ('.Yii::$app->user->id.')',
+                    ['class' => 'btn btn-link logout'])
+                .Html::endForm()
+            .'</li>';
+        }
+
+        echo Nav::widget([
+            'options' => ['class' => 'nav navbar-nav'],
+            'items' => $menuItems,
+        ]);
+
+        NavBar::end();
+        ?>
+
     </div>
     <div class="container">
         <?= Breadcrumbs::widget([
