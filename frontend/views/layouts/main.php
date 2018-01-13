@@ -72,8 +72,17 @@ AppAsset::register($this);
                                             class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span
                                     class="hidden-xs hidden-sm hidden-md">My Account</span> <span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="/index.php?route=account/register">Register</a></li>
-                            <li><a href="/index.php?route=account/login">Login</a></li>
+                            <?php
+                            if(Yii::$app->user->isGuest){
+                                ?>
+                                <li><a href="<?= Html::encode(Url::to(['/auth/auth/login'])) ?>">Login</a></li>
+                                <li><a href="<?= Html::encode(Url::to(['/auth/signup/request'])) ?>">Signup</a></li>
+                                <?
+                            }else{
+                                ?><li><a href="<?= Html::encode(Url::to(['/auth/auth/logout'])) ?>" data-method="post">Logout</a></li><?
+                            }
+                            ?>
+
                         </ul>
                     </li>
                     <li><a href="/index.php?route=account/wishlist" id="wishlist-total"
