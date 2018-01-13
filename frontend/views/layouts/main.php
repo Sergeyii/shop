@@ -77,12 +77,11 @@ AppAsset::register($this);
                                 ?>
                                 <li><a href="<?= Html::encode(Url::to(['/auth/auth/login'])) ?>">Login</a></li>
                                 <li><a href="<?= Html::encode(Url::to(['/auth/signup/request'])) ?>">Signup</a></li>
-                                <?
+                                <?php
                             }else{
-                                ?><li><a href="<?= Html::encode(Url::to(['/auth/auth/logout'])) ?>" data-method="post">Logout</a></li><?
+                                ?><li><a href="<?= Html::encode(Url::to(['/auth/auth/logout'])) ?>" data-method="post">Logout</a></li><?php
                             }
                             ?>
-
                         </ul>
                     </li>
                     <li><a href="/index.php?route=account/wishlist" id="wishlist-total"
@@ -326,17 +325,15 @@ AppAsset::register($this);
         ];
 
         if( Yii::$app->user->isGuest ){
-            $menuItems[] = [
-                ['label' => 'Signup', 'url' => ['/auth/signup/request']],
-                ['label' => 'Login', 'url' => ['/auth/auth/login']],
-            ];
+            $menuItems[] = ['label' => 'Signup', 'url' => ['/auth/signup/request']];
+            $menuItems[] = ['label' => 'Login', 'url' => ['/auth/auth/login']];
         }else{
             $menuItems[] = '<li>'
                 .Html::beginForm(['/auth/auth/login'], 'post')
                 .Html::submitButton('Logout ('.Yii::$app->user->id.')',
                     ['class' => 'btn btn-link logout'])
                 .Html::endForm()
-            .'</li>';
+                .'</li>';
         }
 
         echo Nav::widget([
@@ -353,7 +350,6 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-
         <?= $content ?>
     </div>
     <footer>
