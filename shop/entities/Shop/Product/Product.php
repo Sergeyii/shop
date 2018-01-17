@@ -7,6 +7,7 @@ use shop\entities\behaviors\MetaBehavior;
 use shop\entities\Meta;
 use shop\entities\Shop\Brand;
 use shop\entities\Shop\Category;
+use shop\entities\Shop\Product\queries\ProductQuery;
 use shop\forms\manage\Shop\Product\Modification;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -374,6 +375,7 @@ class Product extends ActiveRecord
             if($photo->isEqualTo($id)){
                 unset($photos[$i]);
 
+                $this->photos = $photos;
                 return;
             }
         }
@@ -476,5 +478,10 @@ class Product extends ActiveRecord
         if(array_key_exists('mainPhoto', $related)){
             $this->updateAttributes(['main_photo_id' => $related['mainPhoto'] ? $related['mainPhoto']->id : null]);
         }
+    }
+
+    public static function find()
+    {
+        return new ProductQuery(static::class);
     }
 }

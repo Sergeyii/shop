@@ -6,7 +6,13 @@ return [
         '@npm'   => '@vendor/npm-asset',
     ],
     'bootstrap' => [
-
+        'debug'
+    ],
+    'modules' => [
+        'debug' => [
+            'class' => 'yii\debug\Module',
+            'allowedIPs' => ['*'],
+        ],
     ],
     'components' => [
        'cache' => [

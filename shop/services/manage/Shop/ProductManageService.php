@@ -198,6 +198,20 @@ class ProductManageService
         $this->products->remove($product);
     }
 
+    public function activate($id)
+    {
+        $product = $this->products->get($id);
+        $product->activate();
+        $this->products->save($product);
+    }
+
+    public function draft($id)
+    {
+        $product = $this->products->get($id);
+        $product->draft();
+        $this->products->save($product);
+    }
+
     public function import(ProductImportForm $form): void
     {
         $reader = new ProductReader();

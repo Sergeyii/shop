@@ -176,6 +176,61 @@ class ProductController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionActivate($id)
+    {
+        try{
+            $this->service->activate($id);
+        }catch(\DomainException $e){
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+
+        return $this->redirect(['index']);
+    }
+
+    public function actionDraft($id)
+    {
+        try{
+            $this->service->draft($id);
+        }catch(\DomainException $e){
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+
+        return $this->redirect(['index']);
+    }
+
+    public function actionDeletePhoto($id, $photo_id)
+    {
+        try{
+            $this->service->removePhoto($id, $photo_id);
+        }catch(\DomainException $e){
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+
+        return $this->redirect(['view', 'id' => $id]);
+    }
+
+    public function actionMovePhotoDown($id, $photo_id)
+    {
+        try{
+            $this->service->movePhotoDown($id, $photo_id);
+        }catch(\DomainException $e){
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+
+        return $this->redirect(['view', 'id' => $id]);
+    }
+
+    public function actionMovePhotoUp($id, $photo_id)
+    {
+        try{
+            $this->service->movePhotoUp($id, $photo_id);
+        }catch(\DomainException $e){
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+
+        return $this->redirect(['view', 'id' => $id]);
+    }
+
     public function actionImport()
     {
         $form = new ProductImportForm();

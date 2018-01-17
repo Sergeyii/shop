@@ -9,10 +9,7 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
-    'aliases' => [
-        '@staticRoot' => $params['staticHostInfo'],
-        '@static' => $params['staticPath'],
-    ],
+    'aliases' => $params['aliases'],
     'bootstrap' => [
         'log',
         'common\bootstrap\SetUp',
