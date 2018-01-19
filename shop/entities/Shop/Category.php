@@ -16,6 +16,7 @@ use yii\db\ActiveRecord;
  * @property string description
  * @property Meta meta
  * @property Category parent
+ * @property Category[] $children
  * @mixin NestedSetsBehavior
  * */
 
@@ -69,6 +70,6 @@ class Category extends ActiveRecord
 
     public static function find()
     {
-        return new CategoryQuery(get_called_class());
+        return new CategoryQuery(static::class);
     }
 }

@@ -2,13 +2,48 @@
 
 namespace frontend\controllers\shop;
 
-class CatalogController extends \yii\web\Controller
+use shop\readModels\Shop\BrandReadRepository;
+use shop\readModels\Shop\CategoryReadRepository;
+use shop\readModels\Shop\ProductReadRepository;
+use shop\readModels\Shop\TagReadRepository;
+use yii\web\Controller;
+
+class CatalogController extends Controller
 {
+    public $products;
+    public $categories;
+    public $brands;
+    public $tags;
+
     public $layout = 'catalog';
+
+    public function __construct(string $id, $module,
+        ProductReadRepository $products,
+        CategoryReadRepository $categories,
+        BrandReadRepository $brands,
+        TagReadRepository $tags,
+        array $config = []
+    )
+    {
+        parent::__construct($id, $module, $config);
+
+
+        $this->products = $products;
+        $this->categories = $categories;
+        $this->brands = $brands;
+        $this->tags = $tags;
+    }
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $dataProvider = $this->products->getAll();
+        $category = $this->categories->getRoot();
+
+
+        return $this->render('index', [
+            'category' => $category,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function actionCategory($id)
