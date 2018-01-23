@@ -2,11 +2,13 @@
 
 namespace frontend\controllers\shop;
 
+use shop\forms\Shop\ReviewForm;
 use shop\readModels\Shop\BrandReadRepository;
 use shop\readModels\Shop\CategoryReadRepository;
 use shop\readModels\Shop\ProductReadRepository;
 use shop\readModels\Shop\TagReadRepository;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 class CatalogController extends Controller
 {
@@ -46,23 +48,60 @@ class CatalogController extends Controller
         ]);
     }
 
+    private function throwPageNotFound(){
+        throw new NotFoundHttpException('The requested page does not exists!');
+    }
+
     public function actionCategory($id)
     {
-        return $this->render('category');
+        if( !($category = $this->categories->find($id)) ){
+            $this->throwPageNotFound();
+        }
+
+        $dataProvider = $this->products->getAllByCategory($category);
+
+        return $this->render('category', [
+            'category' => $category,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function actionBrand($id)
     {
-        return $this->render('brand');
+        if( !($brand = $this->brands->find($id)) ){
+            $this->throwPageNotFound();
+        }
+
+        $dataProvider = $this->products->getAllByBrand($brand);
+
+        return $this->render('brand', [
+            'brand' => $brand,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function actionTag($id)
     {
-        return $this->render('tag');
+        if( !($tag = $this->tags->find($id)) ){
+            $this->throwPageNotFound();
+        }
+
+        $dataProvider = $this->products->getAllByTag($tag);
+
+        return $this->render('tag', [
+            'tag' => $tag,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function actionProduct($id)
     {
-        return $this->render('product');
+        $product = $this->products->find($id);
+        $reviewForm = new ReviewForm();
+
+        return $this->render('product', [
+            'product' => $product,
+            'reviewForm' => $reviewForm,
+        ]);
     }
 }

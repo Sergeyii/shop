@@ -48,6 +48,6 @@ class Value extends ActiveRecord
 
     public function getCharacteristic(): ActiveQuery
     {
-        return $this->hasMany(Characteristic::class, ['id' => 'characteristic_id']);
+        return $this->hasOne(Characteristic::class, ['id' => 'characteristic_id']);
     }
 }

@@ -73,23 +73,20 @@ class ProductManageService
         }
 
         //--Tags
-        //TODO::почему-то не работает
-        /*foreach($form->tags->existing as $tagId){
+        foreach($form->tags->existing as $tagId){
             $tag = $this->tags->get($tagId);
             $product->assignTag($tag->id);
-        }*/
-
+        }
 
         $this->transaction->wrap(function() use($form, $product){
-            //TODO::почему-то не работает
-            /*foreach($form->tags->newNames as $tagName){
+            foreach($form->tags->newNames as $tagName){
                 if( !($tag = $this->tags->findByName($tagName)) ){
                     $tag = Tag::create($tagName, $tagName);
                     $this->tags->save($tag);
                 }
 
                 $product->assignTag($tag->id);
-            }*/
+            }
 
             $this->products->save($product);
         });
@@ -128,19 +125,21 @@ class ProductManageService
                 $product->setValue($value->id, $value->value);
             }
 
-            //TODO::почему-то не работает!
-            /*
             foreach ($form->tags->existing as $tagId) {
                 $tag = $this->tags->get($tagId);
                 $product->assignTag($tag->id);
             }
-            foreach ($form->tags->newNames as $tagName) {
-                if (!$tag = $this->tags->findByName($tagName)) {
-                    $tag = Tag::create($tagName, $tagName);
-                    $this->tags->save($tag);
+
+            if( !empty($form->tags->newNames) ){
+                foreach ($form->tags->newNames as $tagName) {
+                    if (!$tag = $this->tags->findByName($tagName)) {
+                        $tag = Tag::create($tagName, $tagName);
+                        $this->tags->save($tag);
+                    }
+                    $product->assignTag($tag->id);
                 }
-                $product->assignTag($tag->id);
-            }*/
+            }
+
             $this->products->save($product);
         });
     }

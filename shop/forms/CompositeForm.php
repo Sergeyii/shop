@@ -1,6 +1,7 @@
 <?php
 
 namespace shop\forms;
+use shop\forms\manage\Shop\Product\TagsForm;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -19,11 +20,13 @@ abstract class CompositeForm extends Model
         //Валидация-проверка вложенных форм
         foreach($this->forms as $name => $form){
             if( is_array($form) ){
-                $success = Model::loadMUltiple($form, $data, $formName === null ? null : $name) && $success;
+                $success = Model::loadMultiple($form, $data, $formName === null ? null : $name) && $success;
             }else{
                 $success = $form->load($data, $formName !== '' ? null : $name) && $success;
             }
         }
+
+
 
         return $success;
     }
@@ -32,7 +35,7 @@ abstract class CompositeForm extends Model
     {
         //Разделяем поля для форм
         //1. Для родительской формы
-        $parentNames = $attributeNames !== null ? array_filter($attributeNames, 'is_string') : null;
+        $parentNames = $attributeNames !== null ? array_filter((array)$attributeNames, 'is_string') : null;
         $success = parent::validate($parentNames, $clearErrors);
 
         //2. Для вложенной формы

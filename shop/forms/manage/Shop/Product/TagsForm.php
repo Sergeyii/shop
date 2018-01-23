@@ -25,13 +25,14 @@ class TagsForm extends Model
     {
         return [
             ['existing', 'each', 'rule' => ['integer']],
+            ['existing', 'default', 'value' => []],
             ['textNew', 'string'],
         ];
     }
 
     public function getNewNames(): array
     {
-        return array_map('trim', preg_split('#\s*,\s*#i', $this->textNew));
+        return array_filter(explode(',', $this->textNew), 'trim');
     }
 
     public function tagsList(): array

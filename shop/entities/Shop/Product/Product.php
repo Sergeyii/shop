@@ -8,17 +8,24 @@ use shop\entities\Meta;
 use shop\entities\Shop\Brand;
 use shop\entities\Shop\Category;
 use shop\entities\Shop\Product\queries\ProductQuery;
+use shop\entities\Shop\Tag;
 use shop\forms\manage\Shop\Product\Modification;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
+use yiidreamteam\upload\ImageUploadBehavior;
 
 /**
  * @property integer $status
+ * @property integer $price_new
+ * @property integer $price_old
+ * @property string $description
  * @property Value[] values
  * @property Photo[] photos
  * @property Modification[] modifications
  * @property Review[] reviews
+ * @mixin ImageUploadBehavior mainPhoto
+ * @mixin MetaBehavior
  * */
 
 class Product extends ActiveRecord
@@ -90,7 +97,7 @@ class Product extends ActiveRecord
 
     public function getBrand(): ActiveQuery
     {
-        return $this->hasOne(Brand::class, ['id', 'brand_id']);
+        return $this->hasOne(Brand::class, ['id' => 'brand_id']);
     }
 
     public function getCategory(): ActiveQuery
@@ -111,6 +118,11 @@ class Product extends ActiveRecord
     public function getTagAssignments(): ActiveQuery
     {
         return $this->hasMany(TagAssignment::class, ['product_id' => 'id']);
+    }
+
+    public function getTags(): ActiveQuery
+    {
+        return $this->hasMany(Tag::class, ['id' => 'tag_id'])->via('tagAssignments');
     }
 
     public function getModifications(): ActiveQuery
@@ -434,7 +446,7 @@ class Product extends ActiveRecord
             }
         }
 
-        $assignments[] = CategoryAssignment::create($id);
+        $assignments[] = TagAssignment::create($id);
         $this->tagAssignments = $assignments;
     }
 

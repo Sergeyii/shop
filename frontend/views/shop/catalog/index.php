@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="panel panel-default">
     <div class="panel-body">
         <?php foreach($category->children as $child){?>
-            <a href="<?=Html::encode(Url::to(['category', 'id' => $child->id]))?>"><?=Html::encode($child->name)?></a>&nbsp;
+            <a href="<?=Html::encode(Url::to(['shop/catalog/category', 'id' => $child->id]))?>"><?=Html::encode($child->name)?></a>&nbsp;
 
        <?php }?>
     </div>
