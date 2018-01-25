@@ -6,7 +6,7 @@
 
 use yii\helpers\Html;
 
-$this->title = $brand->meta->title ? $brand->meta->title : $brand->name;
+$this->title = $brand->getSeoTitle();
 
 $this->registerMetaTag(['name' => 'keywords', 'content' => $brand->meta->keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $brand->meta->description]);

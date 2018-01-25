@@ -33,6 +33,11 @@ class Brand extends ActiveRecord
         $this->meta = $meta;
     }
 
+    public function getSeoTitle(): string
+    {
+        return $this->meta->title ?: $this->name;
+    }
+
     public static function tableName(): string
     {
         return '{{%shop_brands}}';
