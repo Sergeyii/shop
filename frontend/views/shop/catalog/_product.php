@@ -16,7 +16,7 @@ $url = Url::to(['product', 'id' => $product->id]);
         <?php if($product->mainPhoto){ ?>
             <div class="image">
                 <a href="<?= Html::encode($url)?>">
-                    <img src="<?= Html::encode($product->mainPhoto->getThumbFileUrl('file', 'thumb')) ?>" alt="" class="img-responsive" />
+                    <img src="<?= Html::encode($product->mainPhoto->getThumbFileUrl('file', 'catalog_list')) ?>" alt="" class="img-responsive" />
                 </a>
             </div>
         <?php } ?>
