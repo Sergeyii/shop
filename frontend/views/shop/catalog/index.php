@@ -39,15 +39,22 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="form-group input-group input-group-sm">
             <label class="input-group-addon" for="input-sort">Sort By:</label>
             <select id="input-sort" class="form-control" onchange="location = this.value;">
-                <option value="/index.php?route=product/category&amp;path=20&amp;sort=p.sort_order&amp;order=ASC" selected="selected">Default</option>
-                <option value="/index.php?route=product/category&amp;path=20&amp;sort=pd.name&amp;order=ASC">Name (A - Z)</option>
-                <option value="/index.php?route=product/category&amp;path=20&amp;sort=pd.name&amp;order=DESC">Name (Z - A)</option>
-                <option value="/index.php?route=product/category&amp;path=20&amp;sort=p.price&amp;order=ASC">Price (Low &gt; High)</option>
-                <option value="/index.php?route=product/category&amp;path=20&amp;sort=p.price&amp;order=DESC">Price (High &gt; Low)</option>
-                <option value="/index.php?route=product/category&amp;path=20&amp;sort=rating&amp;order=DESC">Rating (Highest)</option>
-                <option value="/index.php?route=product/category&amp;path=20&amp;sort=rating&amp;order=ASC">Rating (Lowest)</option>
-                <option value="/index.php?route=product/category&amp;path=20&amp;sort=p.model&amp;order=ASC">Model (A - Z)</option>
-                <option value="/index.php?route=product/category&amp;path=20&amp;sort=p.model&amp;order=DESC">Model (Z - A)</option>
+                <?php
+                $sortValues = [
+                    '' => 'Default',
+                    'name' => 'Name (A - Z)',
+                    '-name' => 'Name (Z - A)',
+                    'price' => 'Price (Low &gt; High)',
+                    '-price' => 'Price (High &gt; Low)',
+                    'rating' => 'Rating (Highest)',
+                    '-rating' => 'Rating (Lowest)',
+                ];
+
+                $currentSortValue = Yii::$app->request->get('sort');
+                ?>
+                <?php foreach($sortValues as $k => $v) {?>
+                    <option value="<?=Url::current(['sort' => $k ?: null])?>" <?=($currentSortValue == $k ? ' selected="selected"' : '')?>><?=$v?></option>
+                <?php }?>
             </select>
         </div>
     </div>
@@ -55,11 +62,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="form-group input-group input-group-sm">
             <label class="input-group-addon" for="input-limit">Show:</label>
             <select id="input-limit" class="form-control" onchange="location = this.value;">
-                <option value="/index.php?route=product/category&amp;path=20&amp;limit=15" selected="selected">15</option>
-                <option value="/index.php?route=product/category&amp;path=20&amp;limit=25">25</option>
-                <option value="/index.php?route=product/category&amp;path=20&amp;limit=50">50</option>
-                <option value="/index.php?route=product/category&amp;path=20&amp;limit=75">75</option>
-                <option value="/index.php?route=product/category&amp;path=20&amp;limit=100">100</option>
+                <?php
+                $paginationValues = [15, 25, 50, 75, 100];
+
+                $currentPageValue = $dataProvider->getPagination()->getPageSize();
+                ?>
+                <?php foreach($paginationValues as $v) {?>
+                    <option value="<?=Url::current(['per-page' => $v])?>" <?=($currentPageValue == $v ? ' selected="selected"' : '')?>><?=$v?></option>
+                <?php }?>
             </select>
         </div>
     </div>

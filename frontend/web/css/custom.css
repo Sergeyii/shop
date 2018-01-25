@@ -1,0 +1,6 @@
+.price-old{
+    text-decoration: line-through;
+}
+.price-new{
+    color: #F00;
+}
