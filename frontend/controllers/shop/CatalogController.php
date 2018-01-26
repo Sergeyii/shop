@@ -2,6 +2,7 @@
 
 namespace frontend\controllers\shop;
 
+use shop\forms\Shop\AddToCartForm;
 use shop\forms\Shop\ReviewForm;
 use shop\readModels\Shop\BrandReadRepository;
 use shop\readModels\Shop\CategoryReadRepository;
@@ -98,10 +99,12 @@ class CatalogController extends Controller
     {
         $product = $this->products->find($id);
         $reviewForm = new ReviewForm();
+        $cartForm = new AddToCartForm($product);
 
         return $this->render('product', [
             'product' => $product,
             'reviewForm' => $reviewForm,
+            'cartForm' => $cartForm,
         ]);
     }
 }

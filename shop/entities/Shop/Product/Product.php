@@ -25,7 +25,7 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property Modification[] modifications
  * @property Review[] reviews
  * @mixin ImageUploadBehavior mainPhoto
- * @mixin MetaBehavior
+ * @mixin MetaBehavior $meta
  * */
 
 class Product extends ActiveRecord
@@ -194,6 +194,11 @@ class Product extends ActiveRecord
     public function canChangeQuantity(): bool
     {
         return !$this->modifications;
+    }
+
+    public function getSeoTitle(): string
+    {
+        return $this->meta->title ?: $this->name;
     }
 
     public function setValue($id, $value): void
