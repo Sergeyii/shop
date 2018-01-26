@@ -2,7 +2,7 @@
 /* @var $product \shop\entities\Shop\Product\Product */
 /* @var $photo \shop\entities\Shop\Product\Photo */
 /* @var $reviewForm \shop\forms\Shop\ReviewForm */
-/* @var $cartForm \forms\Shop\AddToCartForm */
+/* @var $cartForm \shop\forms\Shop\AddToCartForm */
 /* @var $this \yii\web\View */
 
 use yii\helpers\Html;
