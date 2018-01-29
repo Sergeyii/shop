@@ -22,7 +22,11 @@ class CategoriesWidget extends Widget
     {
         return Html::tag('div', implode(PHP_EOL, array_map(function(Category $category){
             $indent = $category->depth > 1 ? str_repeat('&nbsp;&nbsp;&nbsp;', $category->depth-1).'- ' : '';
-            $isActive = $category->id == $this->active->id || $this->active->isChildOf($category);
+
+            $isActive = false;
+            if($this->active){
+                $isActive = $category->id == $this->active->id || $this->active->isChildOf($category);
+            }
 
             $content = $indent.Html::encode($category->name).' '.'('.$category->getChildren()->count().')';
 

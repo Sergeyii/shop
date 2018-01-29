@@ -7,6 +7,7 @@ use shop\entities\Shop\Product\Product;
 use shop\forms\CompositeForm;
 use shop\forms\manage\MetaForm;
 use shop\entities\Shop\Brand;
+use shop\readModels\Shop\BrandReadRepository;
 use yii\helpers\ArrayHelper;
 
 class ProductCreateForm extends CompositeForm
@@ -16,8 +17,12 @@ class ProductCreateForm extends CompositeForm
     public $name;
     public $description;
 
-    public function __construct(array $config = [])
+    public $brandReadRepository;
+
+    public function __construct(BrandReadRepository $brandReadRepository = null, array $config = [])
     {
+        $this->brandReadRepository = $brandReadRepository;
+
         $this->price = new PriceForm();
         $this->meta = new MetaForm();
         $this->categories = new CategoriesForm();
@@ -48,6 +53,6 @@ class ProductCreateForm extends CompositeForm
 
     public function brandsList(): array
     {
-        return ArrayHelper::map(Brand::find()->orderBy('id')->asArray()->all(), 'id', 'name');
+        return $this->brandReadRepository->brandsList('id');
     }
 }

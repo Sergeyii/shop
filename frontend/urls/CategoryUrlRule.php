@@ -3,7 +3,6 @@
 namespace frontend\urls;
 
 use shop\entities\Shop\Category;
-use \Yii;
 use shop\readModels\Shop\CategoryReadRepository;
 use yii\base\InvalidParamException;
 use yii\caching\TagDependency;
@@ -23,7 +22,7 @@ class CategoryUrlRule extends UrlRule
     {
         parent::__construct($config);
         $this->repository = $repository;
-        $this->cache = Yii::$app->cache;
+        $this->cache = \Yii::$app->cache;
     }
 
     public function init(){}

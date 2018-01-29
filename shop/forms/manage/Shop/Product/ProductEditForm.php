@@ -20,10 +20,12 @@ class ProductEditForm extends CompositeForm
     public $categories;
 
     private $_product;
+    public $brandReadRepository;
 
-    public function __construct(Product $product, array $config = [])
+    public function __construct(Product $product, BrandReadRepository $brandReadRepository = null, array $config = [])
     {
         $this->_product = $product;
+        $this->brandReadRepository = $brandReadRepository;
 
         $this->code = $product->code;
         $this->name = $product->name;
@@ -58,6 +60,6 @@ class ProductEditForm extends CompositeForm
 
     public function brandsList(): array
     {
-        return ArrayHelper::map(Brand::find()->orderBy('name')->asArray()->all(), 'id', 'name');
+        return $this->brandReadRepository->brandsList('name');
     }
 }

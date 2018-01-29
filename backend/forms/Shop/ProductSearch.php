@@ -2,12 +2,10 @@
 
 namespace backend\forms\Shop;
 
-use shop\entities\Shop\Category;
-use Yii;
+use shop\readModels\Shop\CategoryReadRepository;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use shop\entities\Shop\Product\Product;
-use yii\helpers\ArrayHelper;
 use shop\helpers\ProductHelper;
 
 /**
@@ -17,6 +15,14 @@ class ProductSearch extends Product
 {
     public $status;
     public $quantity;
+    public $categories;
+
+    public function __construct(CategoryReadRepository $categories = null, array $config = [])
+    {
+        $this->categories = $categories;
+
+        parent::__construct($config);
+    }
 
     /**
      * @inheritdoc
@@ -83,9 +89,7 @@ class ProductSearch extends Product
 
     public function categoriesList()
     {
-        return ArrayHelper::map(Category::find()->andWhere(['>', 'depth', 0])->orderBy('lft')->asArray()->all(),'id',function(array $category){
-            return ($category['depth'] > 1 ? str_repeat('-- ', $category['depth']-1).' ' : '').$category['name'];
-        });
+        return $this->categories->categoriesList();
     }
 
     public function statusList()
