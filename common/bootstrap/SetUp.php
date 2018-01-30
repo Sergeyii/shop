@@ -27,7 +27,7 @@ class SetUp implements BootstrapInterface
         ]);
 
         $container->setSingleton(Client::class, function(){
-           return ClientBuilder::create();
+           return ClientBuilder::create()->build();
         });
 
         /*//TODO::почему-то не работает!
