@@ -2,6 +2,8 @@
 
 namespace common\bootstrap;
 
+use Elasticsearch\Client;
+use Elasticsearch\ClientBuilder;
 use frontend\urls\CategoryUrlRule;
 use shop\readModels\Shop\CategoryReadRepository;
 use shop\services\ContactService;
@@ -24,6 +26,9 @@ class SetUp implements BootstrapInterface
             $app->params['adminEmail']
         ]);
 
+        $container->setSingleton(Client::class, function(){
+           return ClientBuilder::create();
+        });
 
         /*//TODO::почему-то не работает!
         $container->setSingleton('cache', function () use($app){
