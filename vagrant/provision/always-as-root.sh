@@ -17,3 +17,5 @@ info "Restart web-stack"
 sudo service php7.1-fpm restart
 sudo service nginx restart
 sudo service mysql restart
+
+service elasticsearch restart

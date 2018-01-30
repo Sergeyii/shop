@@ -2,7 +2,6 @@
 
 namespace shop\forms\manage\Shop\Product;
 
-use shop\entities\Shop\Category;
 use shop\entities\Shop\Product\Product;
 use shop\readModels\Shop\CategoryReadRepository;
 use yii\base\Model;
@@ -21,7 +20,9 @@ class CategoriesForm extends Model
             $this->others = ArrayHelper::getColumn($product->categoryAssignments, 'category_id');
         }
 
-        $this->categories = $categories;
+        if($categories){
+            $this->categories = $categories;
+        }
 
         parent::__construct($config);
     }

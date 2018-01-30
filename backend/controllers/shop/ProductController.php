@@ -7,6 +7,7 @@ use shop\forms\manage\Shop\Product\Modification;
 use shop\forms\manage\Shop\Product\PhotosForm;
 use shop\forms\manage\Shop\Product\ProductCreateForm;
 use shop\forms\manage\Shop\Product\ProductEditForm;
+use shop\readModels\Shop\BrandReadRepository;
 use shop\services\manage\Shop\ProductManageService;
 use Yii;
 use shop\entities\Shop\Product\Product;
@@ -141,7 +142,9 @@ class ProductController extends Controller
     public function actionUpdate($id)
     {
         $product = $this->findModel($id);
-        $form = new ProductEditForm($product);
+
+        $brandReadRepository = new BrandReadRepository();
+        $form = new ProductEditForm($product, $brandReadRepository);
 
         if( $form->load(Yii::$app->request->post()) && $form->validate() ){
             try{

@@ -2,12 +2,12 @@
 
 namespace shop\forms\manage\Shop\Product;
 
-use shop\entities\Shop\Brand;
 use shop\entities\Shop\Characteristic;
 use shop\entities\Shop\Product\Product;
 use shop\forms\CompositeForm;
 use shop\forms\manage\MetaForm;
-use yii\helpers\ArrayHelper;
+use shop\readModels\Shop\BrandReadRepository;
+use shop\readModels\Shop\CategoryReadRepository;
 
 class ProductEditForm extends CompositeForm
 {
@@ -22,7 +22,7 @@ class ProductEditForm extends CompositeForm
     private $_product;
     public $brandReadRepository;
 
-    public function __construct(Product $product, BrandReadRepository $brandReadRepository = null, array $config = [])
+    public function __construct(Product $product, BrandReadRepository $brandReadRepository, array $config = [])
     {
         $this->_product = $product;
         $this->brandReadRepository = $brandReadRepository;
@@ -32,7 +32,8 @@ class ProductEditForm extends CompositeForm
         $this->description = $product->description;
 
         $this->meta = new MetaForm($product->meta);
-        $this->categories = new CategoriesForm($product);
+
+        $this->categories = new CategoriesForm($product, new CategoryReadRepository());
         $this->tags = new TagsForm($product);
 
         $this->values = array_map(function(Characteristic $characteristic){
