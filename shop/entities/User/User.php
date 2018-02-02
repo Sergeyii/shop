@@ -24,6 +24,7 @@ use yii\web\IdentityInterface;
  * @property integer $updated_at
  * @property string $password write-only password
  * @property array|mixed networks
+ * @property WishlistItem[] wishlistItems
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -35,7 +36,7 @@ class User extends ActiveRecord implements IdentityInterface
         $user = new static();
         $user->username = $username;
         $user->email = $email;
-        $user->setPassword( !empty($password) ? $password : Yii::$app->security->generateRandomString() );
+        $user->setPassword(!empty($password) ? $password : Yii::$app->security->generateRandomString());
         $user->created_at = time();
         $user->status = static::STATUS_ACTIVE;
         $user->generateAuthKey();
@@ -66,7 +67,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function confirmSignup(): void
     {
-        if(!$this->isWait()){
+        if (!$this->isWait()) {
             throw new \DomainException('User is already active');
         }
 
@@ -74,7 +75,7 @@ class User extends ActiveRecord implements IdentityInterface
         $this->removeEmailConfirmToken();
     }
 
-    public static function signupByNetwork($network, $identity):self
+    public static function signupByNetwork($network, $identity): self
     {
         //Создать нового пользователя
         $user = new User();
@@ -90,11 +91,11 @@ class User extends ActiveRecord implements IdentityInterface
         return $user;
     }
 
-    public function attachNetwork($network, $identity):void
+    public function attachNetwork($network, $identity): void
     {
         $networks = $this->networks;
-        foreach($networks as $network){
-            if( $network->isFor($network, $identity) ){
+        foreach ($networks as $network) {
+            if ($network->isFor($network, $identity)) {
                 throw new \DomainException('Network is already attached!');
             }
         }
@@ -135,7 +136,7 @@ class User extends ActiveRecord implements IdentityInterface
             TimestampBehavior::className(),
             'saveRelations' => [
                 'class' => SaveRelationsBehavior::className(),
-                'relations' => ['networks'],
+                'relations' => ['networks', 'wishlistItems'],
             ],
         ];
     }
@@ -204,7 +205,7 @@ class User extends ActiveRecord implements IdentityInterface
             return false;
         }
 
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $timestamp = (int)substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }
@@ -239,7 +240,7 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $password password to validate
      * @return bool if password provided is valid for current user
      */
-    public function validatePassword($password):bool
+    public function validatePassword($password): bool
     {
         return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
@@ -256,7 +257,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function resetPassword($password)
     {
-        if( empty($this->password_reset_token) ){
+        if (empty($this->password_reset_token)) {
             throw new \DomainException('Password resetting is not requested.');
         }
 
@@ -297,15 +298,51 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function requestPasswordReset(): void
     {
-        if( !empty($this->password_reset_token) && static::isPasswordResetTokenValid($this->password_reset_token) ){
+        if (!empty($this->password_reset_token) && static::isPasswordResetTokenValid($this->password_reset_token)) {
             throw new \DomainException('Password resetting is already requested.');
         }
 
-        $this->password_reset_token = Yii::$app->security->generateRandomString().'_'.time();
+        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
 
-    public function getNetworks():ActiveQuery
+    public function getNetworks(): ActiveQuery
     {
         return $this->hasMany(Network::className(), ['user_id' => 'id']);
+    }
+
+    public function getWishlistItems(): ActiveQuery
+    {
+        return $this->hasMany(WishlistItem::class, ['user_id' => 'id']);
+    }
+
+
+    public function addToWishlist($productId): void
+    {
+        $items = $this->wishlistItems;
+
+        foreach($items as $item){
+            if($item->isForProduct($productId)){
+                throw new \DomainException('Item is already added!');
+            }
+        }
+
+        $items[] = WishlistItem::create($this->id, $productId);
+        $this->wishlistItems = $items;
+    }
+
+    public function removeFromWishlist($productId): void
+    {
+        $items = $this->wishlistItems;
+
+        foreach($items as $i => $item){
+            if($item->isForProduct($productId)) {
+                unset($items[$i]);
+                $this->wishlistItems = $items;
+
+                return;
+            }
+        }
+
+        throw new \DomainException('Item not exists!');
     }
 }

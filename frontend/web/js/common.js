@@ -269,12 +269,17 @@ var voucher = {
     }
 }
 
+var FlashtextHolder = {
+    'show' : function(status, text){
+        $('#content').parent().before('<div class="alert alert-' + status + '"><i class="fa fa-check-circle"></i> ' + text + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+    }
+}
+
 var wishlist = {
     'add': function(product_id) {
         $.ajax({
-            url: 'index.php?route=account/wishlist/add',
+            url: '/cabinet/wishlist/add?id=' + product_id,
             type: 'post',
-            data: 'product_id=' + product_id,
             dataType: 'json',
             success: function(json) {
                 $('.alert').remove();
@@ -283,8 +288,13 @@ var wishlist = {
                     location = json['redirect'];
                 }
 
+
                 if (json['success']) {
-                    $('#content').parent().before('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                    FlashtextHolder.show('success', json['success']);
+                }
+
+                if (json['error']) {
+                    FlashtextHolder.show('danger', json['error']);
                 }
 
                 $('#wishlist-total span').html(json['total']);
