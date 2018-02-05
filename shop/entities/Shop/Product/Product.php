@@ -10,7 +10,7 @@ use shop\entities\Shop\Category;
 use shop\entities\Shop\Product\queries\ProductQuery;
 use shop\entities\Shop\Tag;
 use shop\entities\User\WishlistItem;
-use shop\forms\manage\Shop\Product\Modification;
+use shop\entities\Shop\Product\Modification;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
@@ -238,6 +238,17 @@ class Product extends ActiveRecord
         foreach($this->modifications as $modification){
             if($modification->isIdEqualTo($id)){
                 return $modification;
+            }
+        }
+
+        throw new \DomainException('Modification not found!');
+    }
+
+    public function getModificationPrice($id): float
+    {
+        foreach($this->modifications as $modification){
+            if($modification->isIdEqualTo($id)){
+                return $modification->price ? $modification->price : $this->price_new;
             }
         }
 

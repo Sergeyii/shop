@@ -57,18 +57,15 @@ class WishlistController extends Controller
 
         try{
             $this->service->add(Yii::$app->user->id, $id);
-            //Yii::$app->session->setFlash('success', 'Success!');
 
             $resultStatus = ['success' => 'Success!'];
         }catch(\DomainException $e){
             Yii::$app->errorHandler->logException($e);
-            //Yii::$app->session->setFlash('error', $e->getMessage());
 
             $resultStatus = ['error' => 'Error!'];
         }
 
         return $this->asJson($resultStatus);
-        //return $this->redirect(Yii::$app->request->referrer ?: ['index']);
     }
 
     public function actionDelete($id){

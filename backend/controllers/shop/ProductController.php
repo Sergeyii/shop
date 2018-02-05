@@ -3,7 +3,7 @@
 namespace backend\controllers\shop;
 
 use forms\manage\Shop\Product\ProductImportForm;
-use shop\forms\manage\Shop\Product\Modification;
+use shop\entities\Shop\Product\Modification;
 use shop\forms\manage\Shop\Product\PhotosForm;
 use shop\forms\manage\Shop\Product\ProductCreateForm;
 use shop\forms\manage\Shop\Product\ProductEditForm;

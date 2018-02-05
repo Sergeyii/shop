@@ -3,7 +3,7 @@
 namespace shop\forms\Shop;
 
 use shop\entities\Shop\Product\Product;
-use shop\forms\manage\Shop\Product\Modification;
+use shop\entities\Shop\Product\Modification;
 use shop\helpers\PriceHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;

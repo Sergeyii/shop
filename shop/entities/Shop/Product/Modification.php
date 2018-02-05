@@ -1,6 +1,6 @@
 <?php
 
-namespace shop\forms\manage\Shop\Product;
+namespace shop\entities\Shop\Product;
 
 use yii\db\ActiveRecord;
 
