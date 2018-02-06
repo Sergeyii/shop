@@ -139,9 +139,9 @@ $(document).ready(function() {
 var cart = {
     'add': function(product_id, quantity) {
         $.ajax({
-            url: 'index.php?route=checkout/cart/add',
+            url: '/shop/cart/add?id='+product_id,
             type: 'post',
-            data: 'product_id=' + product_id + '&quantity=' + (typeof(quantity) != 'undefined' ? quantity : 1),
+            data: 'quantity=' + (typeof(quantity) != 'undefined' ? quantity : 1),
             dataType: 'json',
             beforeSend: function() {
                 $('#cart > button').button('loading');

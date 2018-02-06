@@ -63,6 +63,10 @@ class CartItem
 
     public function changeQuantity($quantity)
     {
+        if($quantity <= 0){
+            throw new \DomainException('Количество должно быть больше 0!');
+        }
+
         return new static($this->product, $this->modificationId, $quantity);
     }
 }

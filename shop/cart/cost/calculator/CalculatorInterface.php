@@ -3,6 +3,7 @@
 namespace shop\cart\cost\calculator;
 
 use shop\cart\CartItem;
+use shop\cart\cost\Cost;
 
 interface CalculatorInterface
 {
