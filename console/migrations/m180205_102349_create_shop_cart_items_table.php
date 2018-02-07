@@ -15,7 +15,6 @@ class m180205_102349_create_shop_cart_items_table extends Migration
             'modification_id' => $this->integer()->notNull(),
             'user_hash' => $this->string(32)->notNull(),
             'quantity' => $this->integer()->notNull(),
-            'price' => $this->decimal(7,2)->notNull(),
         ], $tableOptions);
 
         $this->createIndex('idx-shop_cart_items-user_id', 'shop_cart_items', ['user_id']);
