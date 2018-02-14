@@ -14,10 +14,9 @@ use yii\base\BootstrapInterface;
 use yii\di\Instance;
 use yii\mail\MailerInterface;
 
-/* @var $app \yii\web\Application */
-
 class SetUp implements BootstrapInterface
 {
+    /* @param \yii\web\Application $app  */
     public function bootstrap($app){
         $container = \Yii::$container;
 

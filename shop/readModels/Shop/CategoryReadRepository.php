@@ -2,11 +2,25 @@
 
 namespace shop\readModels\Shop;
 
+use Elasticsearch\Client;
+use Elasticsearch\ClientBuilder;
 use shop\entities\Shop\Category;
+use shop\readModels\Shop\views\CategoryView;
 use yii\helpers\ArrayHelper;
 
 class CategoryReadRepository
 {
+    private $client;
+
+    public function __construct()
+    {
+        \Yii::$container->setSingleton(Client::class, function(){
+            return ClientBuilder::create()->build();
+        });
+
+        $this->client = \Yii::$container->get(Client::class);
+    }
+
     public function getRoot(): Category
     {
         return Category::find()->roots()->one();
@@ -19,7 +33,7 @@ class CategoryReadRepository
 
     public function findBySlug(string $slug): ?Category
     {
-        return Category::find()->andWhere(['slug' => $slug])->one();
+        return Category::find()->andWhere(['slug' => $slug])->andWhere(['>', 'depth', 0])->one();
     }
 
     public function getTreeWithSubsOf(Category $category = null): array
@@ -37,7 +51,13 @@ class CategoryReadRepository
             $query->andWhere(['depth' => 1]);
         }
 
-        return $query->all();
+        $counts = $this->getProductsCount();
+
+        return array_map(function(Category $category) use($counts){
+            $count = ArrayHelper::getValue($counts, $category->id, 0);
+
+            return new CategoryView($category, $count);
+        }, $query->all());
     }
 
     public function categoriesList(): array
@@ -45,5 +65,27 @@ class CategoryReadRepository
         return ArrayHelper::map(Category::find()->andWhere(['>', 'depth', 0])->orderBy('lft')->asArray()->all(),'id',function(array $category){
             return ($category['depth'] > 1 ? str_repeat('-- ', $category['depth']-1).' ' : '').$category['name'];
         });
+    }
+
+    public function getProductsCount(): array
+    {
+        $aggs = $this->client->search([
+            'index' => 'shop',
+            'type' => 'products',
+            'body' => [
+                'size' => 0,
+                'aggs' => [
+                    'group_by_category' => [//Название агрегата по котором мы будем потом доставать результат
+                        'terms' => [//Ищем по точному совпадению
+                            'field' => 'categories',
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $counts = ArrayHelper::map($aggs['aggregations']['group_by_category']['buckets'], 'key', 'doc_count');
+
+        return $counts;
     }
 }

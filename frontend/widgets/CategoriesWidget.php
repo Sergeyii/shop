@@ -4,7 +4,9 @@ namespace frontend\widgets;
 
 use shop\entities\Shop\Category;
 use shop\readModels\Shop\CategoryReadRepository;
+use shop\readModels\Shop\views\CategoryView;
 use yii\base\Widget;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 class CategoriesWidget extends Widget
@@ -20,17 +22,17 @@ class CategoriesWidget extends Widget
 
     public function run()
     {
-        return Html::tag('div', implode(PHP_EOL, array_map(function(Category $category){
-            $indent = $category->depth > 1 ? str_repeat('&nbsp;&nbsp;&nbsp;', $category->depth-1).'- ' : '';
+        return Html::tag('div', implode(PHP_EOL, array_map(function(CategoryView $categoryView){
+            $indent = $categoryView->category->depth > 1 ? str_repeat('&nbsp;&nbsp;&nbsp;', $categoryView->category->depth-1).'- ' : '';
 
             $isActive = false;
             if($this->active){
-                $isActive = $category->id == $this->active->id || $this->active->isChildOf($category);
+                $isActive = $categoryView->category->id == $this->active->id || $this->active->isChildOf($categoryView->category);
             }
 
-            $content = $indent.Html::encode($category->name).' '.'('.$category->getChildren()->count().')';
+            $content = $indent.Html::encode($categoryView->category->name).' '.'('.$categoryView->count.')';
 
-            return Html::a($content, ['category', 'id' => $category->id], [
+            return Html::a($content, ['category', 'id' => $categoryView->category->id], [
                 'class' => 'list-group-item'.($isActive ? ' active' : ''),
             ]);
         }, $this->categories->getTreeWithSubsOf($this->active))), [
