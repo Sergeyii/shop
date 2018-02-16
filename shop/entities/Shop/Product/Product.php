@@ -20,6 +20,7 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property integer $status
  * @property integer $price_new
  * @property integer $price_old
+ * @property string $name
  * @property string $description
  * @property Value[] values
  * @property Photo[] photos
