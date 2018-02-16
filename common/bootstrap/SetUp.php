@@ -13,6 +13,7 @@ use shop\services\ContactService;
 use yii\base\BootstrapInterface;
 use yii\di\Instance;
 use yii\mail\MailerInterface;
+use Yii;
 
 class SetUp implements BootstrapInterface
 {
@@ -43,7 +44,10 @@ class SetUp implements BootstrapInterface
         ]);*/
 
         $container->setSingleton(Cart::class, function(){
-            return new Cart(new SessionStorage('cart'), new SimpleCost());
+            return new Cart(
+                new SessionStorage('cart', Yii::$app->session),
+                new SimpleCost()
+            );
         });
     }
 }
