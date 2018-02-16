@@ -2,9 +2,6 @@
 
 use yii\db\Migration;
 
-/**
- * Handles the creation of table `user_wishlist_items`.
- */
 class m180201_083653_create_user_wishlist_items_table extends Migration
 {
     public function up()
@@ -24,9 +21,6 @@ class m180201_083653_create_user_wishlist_items_table extends Migration
         $this->addForeignKey('fk-user_wishlist_items-product_id', '{{%user_wishlist_items}}', ['product_id'], '{{%shop_products}}', 'id');
     }
 
-    /**
-     * @inheritdoc
-     */
     public function down()
     {
         $this->dropTable('user_wishlist_items');

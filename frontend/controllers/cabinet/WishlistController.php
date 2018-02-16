@@ -62,7 +62,7 @@ class WishlistController extends Controller
         }catch(\DomainException $e){
             Yii::$app->errorHandler->logException($e);
 
-            $resultStatus = ['error' => 'Error!'];
+            $resultStatus = ['error' => $e->getMessage()];
         }
 
         return $this->asJson($resultStatus);
