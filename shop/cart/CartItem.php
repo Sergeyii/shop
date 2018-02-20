@@ -28,6 +28,11 @@ class CartItem
         return $this->product;
     }
 
+    public function getProductId(): ?int
+    {
+        return $this->product->id;
+    }
+
     public function getModificationId(): ?int
     {
         return $this->modificationId;
