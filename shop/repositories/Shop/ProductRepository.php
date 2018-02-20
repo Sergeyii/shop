@@ -30,6 +30,14 @@ class ProductRepository
         }
     }
 
+    /* @param Product[] $products */
+    public function saveAll(array $products): void
+    {
+        foreach($products as $product){
+            $this->save($product);
+        }
+    }
+
     public function existsByBrand($id): bool
     {
         Product::find()->andWhere(['brand_id' => $id])->exists();

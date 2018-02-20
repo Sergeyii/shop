@@ -28,6 +28,7 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property Review[] reviews
  * @mixin ImageUploadBehavior mainPhoto
  * @mixin MetaBehavior $meta
+ * @property integer $quantity
  * */
 
 class Product extends ActiveRecord
@@ -42,7 +43,7 @@ class Product extends ActiveRecord
         return '{{%shop_products}}';
     }
 
-    public static function create($brandId, $categoryId, $code, $name, $description, Meta $meta): self
+    public static function create($brandId, $categoryId, $code, $name, $description, $weight, $quantity, Meta $meta): self
     {
         $product = new static();
         $product->brand_id = $brandId;
@@ -51,6 +52,8 @@ class Product extends ActiveRecord
         $product->name = $name;
         $product->description = $description;
         $product->meta = $meta;
+        $product->weight = $weight;
+        $product->quantity = $quantity;
 
         $product->status = self::STATUS_DRAFT;
         $product->created_at = time();
@@ -64,13 +67,36 @@ class Product extends ActiveRecord
         $this->price_old = $old;
     }
 
-    public function edit($brandId, $code, $name, $description, Meta $meta): void
+    public function setQuantity(int $quantity): void
+    {
+        if($this->modifications){
+            throw new \DomainException('Change modifications quantity.');
+        }
+
+        $this->quantity = $quantity;
+    }
+
+    public function edit($brandId, $code, $name, $description, $quantity, Meta $meta): void
     {
         $this->brand_id = $brandId;
         $this->code = $code;
         $this->name = $name;
         $this->description = $description;
         $this->meta = $meta;
+        $this->quantity = $quantity;
+    }
+
+    public function changeMainCategory($categoryId): void
+    {
+        $this->category_id = $categoryId;
+    }
+
+    public function activate(): void
+    {
+        if ($this->isActive()) {
+            throw new \DomainException('Product is already active.');
+        }
+        $this->status = self::STATUS_ACTIVE;
     }
 
     public function updatePhotos(array $photos)
@@ -83,7 +109,7 @@ class Product extends ActiveRecord
     }
 
     //--Related products
-    public function assignRelatedProducts($id): void
+    public function assignRelatedProduct($id): void
     {
         $assignments = $this->relatedAssignments;
         foreach($assignments as $assignment){
@@ -94,6 +120,19 @@ class Product extends ActiveRecord
 
         $assignments[] = CategoryAssignment::create($id);
         $this->relatedAssignments = $assignments;
+    }
+
+    public function revokeRelatedProduct($id): void
+    {
+        $assignments = $this->relatedAssignments;
+        foreach($assignments as $i => $assignment){
+            if($assignment->isForProduct($id)){
+                unset($assignment[$i]);
+                $this->relatedAssignments = $assignments;
+                return;
+            }
+        }
+        throw new \DomainException('Assignment is not found.');
     }
     //-
 
@@ -152,6 +191,11 @@ class Product extends ActiveRecord
         return $this->hasMany(RelatedAssignment::class, ['product_id' => 'id']);
     }
 
+    public function getRelateds(): ActiveQuery
+    {
+        return $this->hasMany(Product::class, ['id' => 'related_id'])->via('relatedAssignments');
+    }
+
     public function getReviews(): ActiveQuery
     {
         return $this->hasMany(Review::class, ['product_id' => 'id']);
@@ -160,19 +204,6 @@ class Product extends ActiveRecord
     public function getWishlistItems(): ActiveQuery
     {
         return $this->hasMany(WishlistItem::class, ['product_id' => 'id']);
-    }
-
-    public function changeMainCategory($categoryId): void
-    {
-        $this->category_id = $categoryId;
-    }
-
-    public function activate(): void
-    {
-        if ($this->isActive()) {
-            throw new \DomainException('Product is already active.');
-        }
-        $this->status = self::STATUS_ACTIVE;
     }
 
     public function draft(): void
@@ -201,6 +232,31 @@ class Product extends ActiveRecord
     public function canChangeQuantity(): bool
     {
         return !$this->modifications;
+    }
+    public function canBeCheckout($modificationId, $quantity): bool
+    {
+        if($modificationId){
+            return $quantity <= $this->getmodification($modificationId)->quantity;
+        }
+        return $quantity <= $this->quantity;
+    }
+
+    public function checkout($modificationId, $quantity): void
+    {
+        if($modificationId){
+            $modifications = $this->modifications;
+            foreach($modifications as $i => $modification){
+                if($modification->isIdEqualTo($modificationId)){
+                    $modification->checkout($quantity);
+                    $this->updateModifications($modifications);
+                    return;
+                }
+            }
+        }
+        if($quantity > $this->quantity){
+            throw new \DomainException('Only '.$this->quantity.' items are available.');
+        }
+        $this->quantity -= $quantity;
     }
 
     public function getSeoTitle(): string
@@ -279,8 +335,30 @@ class Product extends ActiveRecord
 
         throw new \DomainException('Modification not found!');
     }
-    //-
 
+    public function removeModification($id): void
+    {
+        $modifications = $this->modifications;
+        foreach($modifications as $i => $modification){
+            if($modification->isIdEqualTo($id)){
+                unset($modifications[$i]);
+                $this->updateModifications($modifications);
+                return;
+            }
+        }
+
+        throw new \DomainException('Modification is not found.');
+    }
+
+    private function updateModifications(array $modifications): void
+    {
+        $this->modifications = $modifications;
+        $this->quantity = array_sum(array_map(function(Modification $modification){
+            return $modification->quantity;
+        }, $this->modifications));
+    }
+
+    //Categories
     public function assignCategory($id): void
     {
         $assignments = $this->getCategoryAssignments()->all();
@@ -326,13 +404,10 @@ class Product extends ActiveRecord
         foreach($reviews as $review){
             if($review->isIdEqualTo($id)){
                 $callback($review);
-
-                //$review->edit($vote, $text);
                 $this->updateReviews($reviews);
                 return;
             }
         }
-
         throw new \DomainException('Review not found!');
     }
 
@@ -373,6 +448,11 @@ class Product extends ActiveRecord
         throw new \DomainException('Review not found!');
     }
 
+    public function revokeCategories(): void
+    {
+        $this->categoryAssignments = [];
+    }
+
     private function updateReviews(array $reviews): void
     {
         $amount = 0;
@@ -390,11 +470,6 @@ class Product extends ActiveRecord
         $this->rating = $amount ? $total/$amount : null;
     }
     //-
-
-    public function revokeCategories(): void
-    {
-        $this->categoryAssignments = [];
-    }
 
     public function addPhoto(UploadedFile $file): void
     {
@@ -498,9 +573,27 @@ class Product extends ActiveRecord
             MetaBehavior::class,
             [
                 'class' => SaveRelationsBehavior::class,
-                'relations' => ['categoryAssignments', 'tagAssignments', 'relatedAssignments', 'values', 'photos'],
+                'relations' => ['categoryAssignments', 'tagAssignments', 'relatedAssignments', 'modifications', 'values', 'photos', 'reviews'],
             ],
         ];
+    }
+
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_ALL,
+        ];
+    }
+
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()) {
+            foreach($this->photos as $photo){
+                $photo->delete();
+            }
+            return true;
+        }
+        return false;
     }
 
     public function afterSave($insert, $changedAttributes)
@@ -515,7 +608,7 @@ class Product extends ActiveRecord
         }
     }
 
-    public static function find()
+    public static function find(): ProductQuery
     {
         return new ProductQuery(static::class);
     }
