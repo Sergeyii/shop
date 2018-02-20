@@ -29,6 +29,7 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @mixin ImageUploadBehavior mainPhoto
  * @mixin MetaBehavior $meta
  * @property integer $quantity
+ * @property float $weight
  * */
 
 class Product extends ActiveRecord
@@ -76,14 +77,14 @@ class Product extends ActiveRecord
         $this->quantity = $quantity;
     }
 
-    public function edit($brandId, $code, $name, $description, $quantity, Meta $meta): void
+    public function edit($brandId, $code, $name, $description, $weight, Meta $meta): void
     {
         $this->brand_id = $brandId;
         $this->code = $code;
         $this->name = $name;
         $this->description = $description;
         $this->meta = $meta;
-        $this->quantity = $quantity;
+        $this->weight = $weight;
     }
 
     public function changeMainCategory($categoryId): void

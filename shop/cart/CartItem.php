@@ -5,6 +5,9 @@ namespace shop\cart;
 use shop\entities\Shop\Product\Product;
 use shop\entities\Shop\Product\Modification;
 
+/**
+ * @property Product $product
+*/
 class CartItem
 {
     private $product;
@@ -59,6 +62,11 @@ class CartItem
         }
 
         return $this->product->price_new;
+    }
+
+    public function getWeight(): float
+    {
+        return $this->product->weight & $this->quantity;
     }
 
     public function getCost(): float

@@ -52,6 +52,8 @@ class ProductManageService
             $form->code,
             $form->name,
             $form->description,
+            $form->weight,
+            $form->quantity->quantity,
             new Meta($form->meta->title,$form->meta->keywords,$form->meta->description)
         );
 
@@ -101,7 +103,12 @@ class ProductManageService
         $category = $this->categories->get($form->categories->main);
 
         $product->edit(
-            $brand->id, $form->code, $form->name, $form->description, new Meta(
+            $brand->id,
+            $form->code,
+            $form->name,
+            $form->description,
+            $form->weight,
+            new Meta(
                 $form->meta->title,
                 $form->meta->keywords,
                 $form->meta->description

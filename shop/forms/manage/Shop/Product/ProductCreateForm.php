@@ -16,6 +16,8 @@ class ProductCreateForm extends CompositeForm
     public $code;
     public $name;
     public $description;
+    public $weight;
+    public $quantity;
 
     public $brandReadRepository;
 
@@ -28,6 +30,7 @@ class ProductCreateForm extends CompositeForm
         $this->categories = new CategoriesForm();
         $this->photos = new PhotosForm();
         $this->tags = new TagsForm();
+        $this->quantity = new QuantityForm();
         $this->values = array_map(function(Characteristic $characteristic){
             return new ValueForm($characteristic);
         }, Characteristic::find()->orderBy('sort')->all());
