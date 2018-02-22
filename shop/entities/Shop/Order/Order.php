@@ -10,6 +10,7 @@ use yii\db\ActiveRecord;
 use yii\helpers\Json;
 
 /**
+ * @property integer $id
  * @property integer $user_id
  * @property string $cost
  * @property string $note

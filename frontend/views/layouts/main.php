@@ -94,7 +94,7 @@ AppAsset::register($this);
                     <li><a href="<?=Url::to(['/shop/cart/index'])?>" title="Shopping Cart"><i
                                     class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">Shopping Cart</span></a>
                     </li>
-                    <li><a href="/index.php?route=checkout/checkout" title="Checkout"><i
+                    <li><a href="<?=Html::encode(Url::to(['/shop/checkout/index']))?>" title="Checkout"><i
                                     class="fa fa-share"></i> <span class="hidden-xs hidden-sm hidden-md">Checkout</span></a>
                     </li>
                 </ul>

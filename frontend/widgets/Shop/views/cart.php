@@ -61,7 +61,7 @@ $cost = $cart->getCost();
                     </tr>
                 </table>
                 <p class="text-right"><a href="<?=Html::encode(Url::to(['shop/cart/index']))?>"><strong><i class="fa fa-shopping-cart"></i> View Cart</strong></a>&nbsp;&nbsp;&nbsp;
-                    <a href="/index.php?route=checkout/checkout"><strong><i class="fa fa-share"></i> Checkout</strong></a>
+                    <a href="<?=Html::encode(Url::to(['/shop/checkout/index']))?>"><strong><i class="fa fa-share"></i> Checkout</strong></a>
                 </p>
             </div>
         </li>
