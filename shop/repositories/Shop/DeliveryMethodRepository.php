@@ -23,14 +23,14 @@ class DeliveryMethodRepository
     public function save(DeliveryMethod $method): void
     {
         if( !$method->save() ){
-            throw new \RuntimeException('Delivery method saving error.');
+            throw new \RuntimeException('Saving error.');
         }
     }
 
     public function remove(DeliveryMethod $method): void
     {
         if( !($method->delete()) ){
-            throw new \RuntimeException('Delivery method removing error.');
+            throw new \RuntimeException('Removing error.');
         }
     }
 }
