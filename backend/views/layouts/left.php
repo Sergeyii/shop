@@ -39,6 +39,7 @@
                             ['label' => 'Characteristics', 'icon' => 'file-o', 'url' => ['/shop/characteristic/index'], 'active' => ($this->context->id == 'shop/characteristic')],
                             ['label' => 'Products', 'icon' => 'file-o', 'url' => ['/shop/product/index'], 'active' => ($this->context->id == 'shop/product')],
                             ['label' => 'Delivery methods', 'icon' => 'file-o', 'url' => ['/shop/delivery/index'], 'active' => ($this->context->id == 'shop/delivery')],
+                            ['label' => 'Orders', 'icon' => 'file-o', 'url' => ['/shop/order/index'], 'active' => ($this->context->id == 'shop/order')],
                         ],
                     ],
                     /*['label' => 'Menu Yii2', 'options' => ['class' => 'header']],

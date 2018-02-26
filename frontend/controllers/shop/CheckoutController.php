@@ -38,7 +38,7 @@ class CheckoutController extends Controller
         ];
     }
 
-    public function actionIndex(): string
+    public function actionIndex()
     {
         $form = new OrderForm($this->cart->getWeight());
 
