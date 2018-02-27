@@ -63,12 +63,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     <tbody>
                     <?php foreach($order->items as $item):?>
                         <tr>
-                            <td class="text-left"><?=Html::encode($item->product_name)?></td>
                             <td class="text-left">
-                                <?=Html::encode($item->modification_code)?>
+                                <?=Html::encode($item->product_code)?><br/>
+                                <?=Html::encode($item->product_name)?>
+                            </td>
+                            <td class="text-left">
+                                <?=Html::encode($item->modification_code)?><br/>
                                 <?=Html::encode($item->modification_name)?>
                             </td>
-                            <td class="text-left"><?=$item->quantity?></td>
+                            <td class="text-left">
+                                <?=$item->quantity?>
+                            </td>
                             <td class="text-right"><?=PriceHelper::format($item->price)?></td>
                             <td class="text-right"><?=PriceHelper::format($item->getCost())?></td>
                         </tr>
@@ -78,4 +83,32 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
+
+    <div class="box">
+        <div class="box-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" style="margin-bottom: 0">
+                    <thead>
+                        <tr>
+                            <th clas="text-left">Date</th>
+                            <th clas="text-left">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($order->statuses as $status):?>
+                            <tr>
+                                <td class="text-left">
+                                    <?=Yii::$app->formatter->asDatetime($status->created_at)?>
+                                </td>
+                                <td class="text-left">
+                                    <?=OrderHelper::statusLabel($status->value)?>
+                                </td>
+                            </tr>
+                        <?php endforeach;?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </div>
