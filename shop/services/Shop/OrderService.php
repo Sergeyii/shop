@@ -89,4 +89,25 @@ class OrderService
 
         return $order;
     }
+
+    public function pay($id)
+    {
+        $order = $this->orders->get($id);
+        $order->setPaidStatus();
+        $this->orders->save($order);
+    }
+
+    public function failPaying($id)
+    {
+        $order = $this->orders->get($id);
+        $order->setPaidFailedStatus();
+        $this->orders->save($order);
+    }
+
+    public function setPayingStatus($id)
+    {
+        $order = $this->orders->get($id);
+        $order->setPayingStatus();
+        $this->orders->save($order);
+    }
 }

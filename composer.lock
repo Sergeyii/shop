@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "66752bb71ac8589203f96c0358946dad",
+    "content-hash": "170df44bba8db128b61be05d56ba54fe",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -100,7 +100,7 @@
             "version": "v4.7.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:FortAwesome/Font-Awesome.git",
+                "url": "https://github.com/FortAwesome/Font-Awesome.git",
                 "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687"
             },
             "dist": {
@@ -2453,6 +2453,47 @@
                 "validate"
             ],
             "time": "2016-11-23T20:04:58+00:00"
+        },
+        {
+            "name": "yii-cms/yii2-robokassa",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yii-cms/yii2-robokassa.git",
+                "reference": "8785073f1afdc5be4f91bb870a518ce9cfb7ad5e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yii-cms/yii2-robokassa/zipball/8785073f1afdc5be4f91bb870a518ce9cfb7ad5e",
+                "reference": "8785073f1afdc5be4f91bb870a518ce9cfb7ad5e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "robokassa\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sergey Gonimar",
+                    "email": "sergey.gonimar@gmail.com"
+                }
+            ],
+            "description": "Robokassa payment extension.",
+            "keywords": [
+                "robokassa",
+                "yii2"
+            ],
+            "time": "2017-12-05T19:46:55+00:00"
         },
         {
             "name": "yii-dream-team/yii2-upload-behavior",
