@@ -23,6 +23,7 @@ use yii\helpers\Json;
  * @property string delivery_method_name
  * @property float $delivery_cost
  * @property string $payment_method
+ * @property User $user
 */
 class Order extends ActiveRecord
 {
@@ -93,6 +94,20 @@ class Order extends ActiveRecord
         $this->addStatus(Status::CANCELLED);
     }
 
+    public function setPayingStatus()
+    {
+        $this->addStatus(Status::PAYING);
+    }
+
+    public function setPaidStatus()
+    {
+        $this->addStatus(Status::PAID);
+    }
+    public function setPaidFailedStatus()
+    {
+        $this->addStatus(Status::PAY_FAILED);
+    }
+
     public function getTotalCost(): int
     {
         return $this->cost + $this->delivery_cost;
@@ -137,7 +152,7 @@ class Order extends ActiveRecord
     ###################
     public function getUser(): ActiveQuery
     {
-        return $this->hasMany(User::class, ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
     public function getDeliveryMethod(): ActiveQuery

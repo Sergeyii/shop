@@ -10,6 +10,8 @@ class Status
     const COMPLETED = 4;
     const CANCELLED = 5;
     const CANCELLED_BY_CUSTOMER = 6;
+    const PAYING = 7;
+    const PAY_FAILED = 8;
 
     public $value;
     public $created_at;
