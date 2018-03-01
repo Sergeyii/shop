@@ -2,6 +2,7 @@
 
 namespace backend\controllers\shop;
 
+use shop\entities\Shop\Order\Order;
 use shop\forms\manage\Shop\Order\OrderEditForm;
 use shop\services\manage\Shop\OrderManageService;
 use Yii;
@@ -25,10 +26,52 @@ class OrderController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
+                    'export' => ['POST'],
                     'delete' => ['POST'],
                 ],
             ],
         ];
+    }
+
+    public function actionExport()
+    {
+        try{
+            //Просто взять все заказы и вывести их в документ Excel
+            $orders = Order::find()->orderBy(['id' => SORT_DESC]);
+
+            $objPHPExcel = new \PHPExcel();
+
+            // Set document properties
+            $objPHPExcel->getProperties()->setCreator("Ivan Dragomirov")
+                ->setLastModifiedBy("Ivan Dragomirov")
+                ->setTitle("Orders Document")
+                ->setSubject("Orders Document")
+                ->setDescription("Orders Document, generated using PHP classes.")
+                ->setKeywords("Orders Document")
+                ->setCategory("Orders Document");
+
+
+            $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A1', 'Order ID')
+                ->setCellValue('B1', 'Order created date');
+
+            $worksheet = $objPHPExcel->getActiveSheet();
+
+            foreach($orders->each() as $row => $order){
+                /* @var Order $order */
+                $worksheet->setCellValueByColumnAndRow(0, $row+1, $order->id);
+                $worksheet->setCellValueByColumnAndRow(1, $row+1, date('Y-m-d H:i:s', $order->created_at));
+            }
+
+            //Вернуть документ в виде файла на выход
+            $file = tempnam(sys_get_temp_dir(), 'export');
+            $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+            $objWriter->save($file);
+
+            return Yii::$app->response->sendFile($file, 'Orders.xlsx');
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
     }
 
     public function actionIndex()

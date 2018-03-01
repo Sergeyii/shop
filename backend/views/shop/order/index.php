@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use shop\entities\Shop\Order\Order;
 use yii\grid\ActionColumn;
 use shop\helpers\OrderHelper;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\forms\Shop\OrderSearch */
@@ -14,6 +15,10 @@ $this->title = 'Orders';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-index">
+
+    <p>
+        <?=Html::a('Export', ['export'], ['class' => 'btn btn-primary', 'data-method' => 'post', 'data-confirm' => 'Export?'])?>
+    </p>
 
     <div class="box">
         <div class="box-body">
