@@ -1,3 +1,9 @@
+<?
+echo '<pre>';
+print_r($this->context->id);
+echo '</pre>';
+die();
+?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -40,6 +46,9 @@
                             ['label' => 'Products', 'icon' => 'file-o', 'url' => ['/shop/product/index'], 'active' => ($this->context->id == 'shop/product')],
                             ['label' => 'Delivery methods', 'icon' => 'file-o', 'url' => ['/shop/delivery/index'], 'active' => ($this->context->id == 'shop/delivery')],
                             ['label' => 'Orders', 'icon' => 'file-o', 'url' => ['/shop/order/index'], 'active' => ($this->context->id == 'shop/order')],
+                            ['label' => 'Blog', 'icon' => 'folder', 'items' => [
+                                ['label' => 'Tags', 'icon' => 'file-o', 'url' => ['/Blog/tag/index'], 'active' => ($this->context->id == 'Blog/tags')],
+                            ]],
                         ],
                     ],
                 ],
