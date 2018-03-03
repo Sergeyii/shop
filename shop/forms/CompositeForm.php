@@ -26,8 +26,6 @@ abstract class CompositeForm extends Model
             }
         }
 
-
-
         return $success;
     }
 
