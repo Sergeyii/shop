@@ -1,9 +1,3 @@
-<?
-echo '<pre>';
-print_r($this->context->id);
-echo '</pre>';
-die();
-?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -49,6 +43,7 @@ die();
                             ['label' => 'Blog', 'icon' => 'folder', 'items' => [
                                 ['label' => 'Categories', 'icon' => 'file-o', 'url' => ['/Blog/category/index'], 'active' => ($this->context->id == 'Blog/category')],
                                 ['label' => 'Tags', 'icon' => 'file-o', 'url' => ['/Blog/tag/index'], 'active' => ($this->context->id == 'Blog/tags')],
+                                ['label' => 'Posts', 'icon' => 'file-o', 'url' => ['/Blog/post/index'], 'active' => ($this->context->id == 'Blog/post')],
                             ]],
                         ],
                     ],
