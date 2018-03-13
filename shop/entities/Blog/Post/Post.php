@@ -58,12 +58,6 @@ class Post extends ActiveRecord
         $this->photo = $photo;
     }
 
-    public function removePhoto(): void
-    {
-        $this->cleanFiles();
-        $this->setPhoto('');
-    }
-
     public function edit($categoryId, $title, $description, $content, Meta $meta): void
     {
         $this->category_id = $categoryId;
@@ -73,12 +67,12 @@ class Post extends ActiveRecord
         $this->meta = $meta;
     }
 
-    public function draft(): void
+    public function activate(): void
     {
         $this->status = self::STATUS_ACTIVE;
     }
 
-    public function activate(): void
+    public function draft(): void
     {
         $this->status = self::STATUS_DRAFT;
     }
@@ -254,6 +248,7 @@ class Post extends ActiveRecord
                 'thumbs' => [
                     'thumb' => ['width' => 100,  'height' => 70],
                     'admin' => ['width' => 640,  'height' => 480],
+                    'blog_list' => ['width' => 1000,  'height' => 150],
                     'origin' => ['processor' => [new WaterMarker(1024, 768, '@static/post/logo.png'), 'process']],
                 ],
             ]

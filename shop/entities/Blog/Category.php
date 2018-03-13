@@ -54,6 +54,16 @@ class Category extends \yii\db\ActiveRecord
         return Category::find()->max('sort')+1;
     }
 
+    public function getSeoTitle(): string
+    {
+        return $this->meta ? $this->meta->title : $this->title;
+    }
+
+    public function getHeadingTitle(): string
+    {
+        return $this->meta ? $this->meta->title : $this->name;
+    }
+
     public static function tableName()
     {
         return 'blog_categories';
