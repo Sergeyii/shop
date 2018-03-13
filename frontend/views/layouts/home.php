@@ -1,6 +1,6 @@
 <?php
 
-use \frontend\widgets\FeaturedProductsWidget;
+use \frontend\widgets\Shop\FeaturedProductsWidget;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
