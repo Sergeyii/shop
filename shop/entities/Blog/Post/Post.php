@@ -9,6 +9,7 @@ use shop\entities\Blog\Tag;
 use shop\entities\Meta;
 use shop\services\WaterMarker;
 use yii\db\ActiveQuery;
+use yii\web\UploadedFile;
 use yiidreamteam\upload\ImageUploadBehavior;
 use yii\db\ActiveRecord;
 
@@ -23,9 +24,11 @@ use yii\db\ActiveRecord;
  * @property string $content
  * @property string $photo
  * @property integer $status
- * @property string $meta_json
+ * @property Meta $meta
+ * @property integer $comments_count
+ * @property Comment $comments
  *
- * @property BlogCategories $category
+ * @property Category $category
  * @property TagAssignment[] $tagAssignments
  * @mixin ImageUploadBehavior
  */
@@ -46,10 +49,11 @@ class Post extends ActiveRecord
         $post->meta = $meta;
         $post->status = self::STATUS_DRAFT;
         $post->created_at = time();
+        $post->comments_count = 0;
         return $post;
     }
 
-    public function setPhoto($photo): void
+    public function setPhoto(UploadedFile $photo): void
     {
         $this->photo = $photo;
     }
@@ -58,6 +62,15 @@ class Post extends ActiveRecord
     {
         $this->cleanFiles();
         $this->setPhoto('');
+    }
+
+    public function edit($categoryId, $title, $description, $content, Meta $meta): void
+    {
+        $this->category_id = $categoryId;
+        $this->title = $title;
+        $this->description = $description;
+        $this->content = $content;
+        $this->meta = $meta;
     }
 
     public function draft(): void
@@ -80,13 +93,9 @@ class Post extends ActiveRecord
         return $this->status == self::STATUS_DRAFT;
     }
 
-    public function edit($categoryId, $title, $description, $content, Meta $meta): void
+    public function getSeoTitle(): string
     {
-        $this->category_id = $categoryId;
-        $this->title = $title;
-        $this->description = $description;
-        $this->content = $content;
-        $this->meta = $meta;
+        return $this->meta ? $this->meta->title : $this->title;
     }
 
     public function assignTag(Tag $tag): void
@@ -106,6 +115,99 @@ class Post extends ActiveRecord
         $this->tagAssignments = [];
     }
 
+    //Comments
+
+    public function addComment($userId, $parentId, $text): Comment
+    {
+        $parent = $parentId ? $this->getComment($parentId) : null;
+        if($parent && !$parent->isActive()){
+            throw new \DomainException('Cannot add comment to inactive parent.');
+        }
+
+        $comments = $this->comments;
+        $comments[] = $comment = Comment::create($this->id, $userId, $parentId ? $parent->id : null, $text);
+        $this->updateComments($comments);
+        return $comment;
+    }
+
+    public function editComment($id, $parentId, $text): void
+    {
+        $parent = $parentId ? $this->getComment($parentId) : null;
+        $comments = $this->comments;
+        foreach($comments as $comment){
+            if($comment->isIdEqualTo($id)){
+                $comment->edit($parent ? $parent->id : null, $text);
+                $this->updateComments($comments);
+                return;
+            }
+        }
+
+        throw new \DomainException('Comment not found.');
+    }
+
+    public function activateComment($id): void
+    {
+        $comments = $this->comments;
+        foreach($comments as $comment){
+            if($comment->isIdEqualTo($id)){
+                $comment->activate();
+                $this->updateComments($comments);
+                return;
+            }
+        }
+
+        throw new \DomainException('Comment not found.');
+    }
+
+    public function removeComment($id): void
+    {
+        $comments = $this->comments;
+        foreach($comments as $i => $comment){
+            if($comment->isIdEqualTo($id)){
+                if($this->hasChildren($comment->id)){
+                    $comment->draft();
+                }else{
+                    unset($comments[$i]);
+                }
+                $this->updateComments($comments);
+                return;
+            }
+        }
+
+        throw new \DomainException('');
+    }
+
+    public function getComment($id): Comment
+    {
+        foreach($this->comments as $comment){
+            if($comment->isIdEqualTo($id)){
+                return $comment;
+            }
+        }
+
+        throw new \DomainException('Comment not found.');
+    }
+
+    private function hasChildren($id): bool
+    {
+        foreach($this->comments as $comment){
+            if($comment->isChildOf($id)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private function updateComments(array $comments): void
+    {
+        $this->comments = $comments;
+        $this->comments_count = count(array_filter($comments, function(Comment $comment){
+            return $comment->isActive();
+        }));
+    }
+
+    ##########################
+
     public function getCategory(): ActiveQuery
     {
         return $this->hasOne(Category::class, ['id' => 'category_id']);
@@ -121,7 +223,14 @@ class Post extends ActiveRecord
         return $this->hasMany(Tag::class, ['id' => 'tag_id'])->via('tagAssignments');
     }
 
-    public static function tableName()
+    public function getComments(): ActiveQuery
+    {
+        return $this->hasMany(Comment::class, ['post_id' => 'id']);
+    }
+
+    ##########################
+
+    public static function tableName(): string
     {
         return 'blog_posts';
     }
