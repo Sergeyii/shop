@@ -135,30 +135,15 @@ AppAsset::register($this);
                 'id' => 'menu',
             ],
         ]);
-        ?>
-        <?php
-        $menuItems = [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Catalog', 'url' => ['shop/catalog/index']],
-            ['label' => 'Contact', 'url' => ['/contact/index']],
-        ];
-
-        if( Yii::$app->user->isGuest ){
-            $menuItems[] = ['label' => 'Signup', 'url' => ['/auth/signup/request']];
-            $menuItems[] = ['label' => 'Login', 'url' => ['/auth/auth/login']];
-        }else{
-            $menuItems[] = '<li>'
-                .Html::beginForm(['/auth/auth/login'], 'post')
-                .Html::submitButton('Logout ('.Yii::$app->user->id.')',
-                    ['class' => 'btn btn-link logout'])
-                .Html::endForm()
-                .'</li>';
-        }
-
         echo Nav::widget([
             'options' => ['class' => 'nav navbar-nav'],
-            'items' => $menuItems,
+            'items' => [
+                ['label' => 'Home', 'url' => ['/site/index']],
+                ['label' => 'Catalog', 'url' => ['shop/catalog/index']],
+                ['label' => 'Blog', 'url' => ['blog/post/index']],
+                ['label' => 'About', 'url' => ['/site/about']],
+                ['label' => 'Contact', 'url' => ['/contact/index']],
+            ],
         ]);
 
         NavBar::end();
