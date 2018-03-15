@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use frontend\widgets\Blog\CommentsWidget;
 
 /* @var $this \yii\web\View */
 /* @var $post \shop\entities\Blog\Post\Post */
@@ -33,3 +34,7 @@ foreach($post->tags as $tag){
 </article>
 
 <p>Tags: <?=implode(', ', $tagLinks)?></p>
+
+<?=CommentsWidget::widget([
+    'post' => $post,
+])?>

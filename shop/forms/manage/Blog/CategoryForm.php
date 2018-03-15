@@ -5,6 +5,7 @@ namespace shop\forms\manage\Blog;
 use shop\entities\Blog\Category;
 use shop\forms\CompositeForm;
 use shop\forms\manage\MetaForm;
+use yii\helpers\Inflector;
 
 /* @property MetaForm $meta */
 
@@ -51,5 +52,14 @@ class CategoryForm extends CompositeForm
     protected function internalForms(): array
     {
         return ['meta'];
+    }
+
+    public function beforeValidate()
+    {
+        if(parent::beforeValidate()){
+            $this->slug = Inflector::slug($this->slug);
+            return true;
+        }
+        return false;
     }
 }

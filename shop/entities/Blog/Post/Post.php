@@ -26,7 +26,7 @@ use yii\db\ActiveRecord;
  * @property integer $status
  * @property Meta $meta
  * @property integer $comments_count
- * @property Comment $comments
+ * @property Comment[] $comments
  *
  * @property Category $category
  * @property TagAssignment[] $tagAssignments
@@ -119,7 +119,7 @@ class Post extends ActiveRecord
         }
 
         $comments = $this->comments;
-        $comments[] = $comment = Comment::create($this->id, $userId, $parentId ? $parent->id : null, $text);
+        $comments[] = $comment = Comment::create($userId, $parentId ? $parent->id : null, $text);
         $this->updateComments($comments);
         return $comment;
     }
@@ -235,7 +235,7 @@ class Post extends ActiveRecord
             MetaBehavior::class,
             [
                 'class' => SaveRelationsBehavior::class,
-                'relations' => ['tagAssignments'],
+                'relations' => ['tagAssignments', 'comments'],
             ],
             [
                 'class' => ImageUploadBehavior::class,
