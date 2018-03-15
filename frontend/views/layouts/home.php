@@ -1,6 +1,7 @@
 <?php
 
 use \frontend\widgets\Shop\FeaturedProductsWidget;
+use \frontend\widgets\Blog\LastsPostWidget;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -27,6 +28,12 @@ use \frontend\widgets\Shop\FeaturedProductsWidget;
             <?=FeaturedProductsWidget::widget([
                 'limit' => 4
             ])?>
+
+            <h3>Last Posts</h3>
+            <?=LastsPostWidget::widget([
+                'limit' => 4,
+            ])?>
+
             <div id="carousel0" class="owl-carousel">
                 <div class="item text-center">
                     <img src="http://static.shop.dev/cache/manufacturers/nfl-130x100.png" alt="NFL"
