@@ -88,14 +88,4 @@ class SiteController extends Controller
         $this->layout = 'home';
         return $this->render('index');
     }
-
-    /**
-     * Displays about page.
-     *
-     * @return mixed
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
 }
