@@ -44,6 +44,7 @@
                                 ['label' => 'Categories', 'icon' => 'file-o', 'url' => ['/Blog/category/index'], 'active' => ($this->context->id == 'Blog/category')],
                                 ['label' => 'Tags', 'icon' => 'file-o', 'url' => ['/Blog/tag/index'], 'active' => ($this->context->id == 'Blog/tags')],
                                 ['label' => 'Posts', 'icon' => 'file-o', 'url' => ['/Blog/post/index'], 'active' => ($this->context->id == 'Blog/post')],
+                                ['label' => 'Comments', 'icon' => 'file-o', 'url' => ['/Blog/comment/index'], 'active' => ($this->context->id == 'Blog/comment')],
                             ]],
                         ],
                     ],

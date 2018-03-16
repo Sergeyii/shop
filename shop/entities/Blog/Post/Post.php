@@ -168,7 +168,7 @@ class Post extends ActiveRecord
             }
         }
 
-        throw new \DomainException('');
+        throw new \DomainException('Comment not found.');
     }
 
     public function getComment($id): Comment
