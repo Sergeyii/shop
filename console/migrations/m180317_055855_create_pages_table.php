@@ -23,7 +23,7 @@ class m180317_055855_create_pages_table extends Migration
 
         $this->insert('pages', [
             'id' => 1,
-            'title' => '',
+            'title' => 'Root',
             'slug' => 'root',
             'content' => null,
             'meta_json' => '',

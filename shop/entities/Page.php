@@ -45,7 +45,6 @@ class Page extends ActiveRecord
     {
         return [
             MetaBehavior::class,
-            NestedSetsBehavior::class,
         ];
     }
 

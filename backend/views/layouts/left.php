@@ -30,9 +30,10 @@
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
-                    ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/user'], 'active' => ( $this->context->id == 'user' ),],
+                    ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/user'], 'active' => ( $this->context->id == 'user' )],
                     ['label' => 'Shop', 'icon' => 'folder', 'items' =>
                         [
+                            ['label' => 'Страницы', 'icon' => 'file-o', 'url' => ['/page'], 'active' => ( $this->context->id == 'page' )],
                             ['label' => 'Brands', 'icon' => 'file-o', 'url' => ['/shop/brand/index'], 'active' => ( $this->context->id == 'shop/brand' ),],
                             ['label' => 'Tags', 'icon' => 'file-o', 'url' => ['/shop/tag/index'], 'active' => ($this->context->id == 'shop/tag')],
                             ['label' => 'Categories', 'icon' => 'file-o', 'url' => ['/shop/category/index'], 'active' => ($this->context->id == 'shop/category')],

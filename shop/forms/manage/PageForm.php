@@ -5,6 +5,7 @@ namespace shop\forms\manage;
 use shop\entities\Page;
 use shop\forms\CompositeForm;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Inflector;
 
 class PageForm extends CompositeForm
 {
@@ -36,7 +37,7 @@ class PageForm extends CompositeForm
             [['title', 'slug'], 'required'],
             [['title', 'slug'], 'string', 'max' => 255],
             [['content'], 'string'],
-            [['slug'], 'unique', 'filter' => $this->_page ? ['<>', 'id' => $this->_page->id] : null],
+            [['slug'], 'unique', 'targetClass' => Page::class, 'filter' => $this->_page ? ['<>', 'id', $this->_page->id] : null],
         ];
     }
 
@@ -45,6 +46,15 @@ class PageForm extends CompositeForm
         return ArrayHelper::map(Page::find()->orderBy('lft')->asArray()->all(), 'id', function(array $page){
             return ($page['depth'] > 1 ? str_repeat('-- ', $page['depth'] - 1).' ' : '').$page['title'];
         });
+    }
+
+    public function beforeValidate(): bool
+    {
+        if(parent::beforeValidate()){
+            $this->slug = Inflector::slug($this->slug);
+            return true;
+        }
+        return false;
     }
 
     protected function internalForms(): array
