@@ -41,6 +41,11 @@ class Page extends ActiveRecord
         $this->meta = $meta;
     }
 
+    public function getSeoTitle(): string
+    {
+        return $this->meta->title ?: $this->title;
+    }
+
     public function behaviors(): array
     {
         return [

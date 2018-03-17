@@ -19,6 +19,9 @@ return [
         'blog/<id:\d+>/comment' => 'blog/post/comment',
         'blog/<slug:[\w\-]+>' => 'blog/post/category',
 
+        'page/<slug:[\w\-]+>' => 'page/view',
+        //['class' => 'frontend\urls\PageUrlRule'],
+
         'catalog' => 'shop/catalog/index',
         ['class' => 'frontend\urls\CategoryUrlRule'],
         'catalog/<id:\d+>' => 'shop/catalog/product',
