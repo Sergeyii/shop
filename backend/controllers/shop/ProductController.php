@@ -116,7 +116,7 @@ class ProductController extends Controller
      */
     public function actionCreate()
     {
-        $form = new ProductCreateForm();
+        $form = new ProductCreateForm(new BrandReadRepository());
         if( $form->load(Yii::$app->request->post()) && $form->validate() ){
             try{
                 $product = $this->service->create($form);

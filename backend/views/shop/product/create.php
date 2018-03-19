@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\widgets\FileInput;
+use mihaildev\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model \shop\forms\manage\Shop\Product\ProductCreateForm */
@@ -32,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
                 </div>
             </div>
-            <?= $form->field($model, 'description')->textarea(['rows' => 10]) ?>
+            <?= $form->field($model, 'description')->widget(CKEditor::class) ?>
         </div>
     </div>
 

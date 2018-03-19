@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use mihaildev\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model shop\entities\Page */
@@ -16,7 +17,7 @@ use yii\widgets\ActiveForm;
         <div class="box-body">
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+            <?= $form->field($model, 'content')->widget(CKEditor::class) ?>
         </div>
     </div>
 
