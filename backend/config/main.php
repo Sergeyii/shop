@@ -11,8 +11,33 @@ return [
     'basePath' => dirname(__DIR__),
     'aliases' => $params['aliases'],
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'backend\bootstrap\SetUp',
+    ],
     'modules' => [],
+    'controllerMap' => [
+        'elfinder' => [
+            'class' => 'mihaildev\elfinder\Controller',
+            'access' => ['@'], //глобальный доступ к фаил менеджеру @ - для авторизорованных , ? - для гостей , чтоб открыть всем ['@', '?']
+            'disabledCommands' => ['netmount'], //отключение ненужных команд https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#commands
+            'plugin' => [
+                [
+                    'class'=>'\mihaildev\elfinder\plugin\Sluggable',
+                    'lowercase' => true,
+                    'replacement' => '-'
+                ]
+            ],
+            'roots' => [
+                [
+                    'baseUrl'=>'@static',
+                    'basePath'=>'@staticRoot',
+                    'path' => 'files',
+                    'name' => 'Global'
+                ],
+            ],
+        ]
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
