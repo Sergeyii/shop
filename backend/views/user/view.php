@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -32,6 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'username',
                     'email:email',
                     'status',
+                    [
+                        'label' => 'Role',
+                        'value' => implode(',', ArrayHelper::getColumn(Yii::$app->authManager->getRolesByUser($model->id), 'description')),
+                        'format' => 'raw',
+                    ],
                     'created_at:datetime',
                     'updated_at:datetime',
                 ],

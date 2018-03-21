@@ -3,9 +3,8 @@
 use yii\helpers\Html;
 use \yii\widgets\ActiveForm;
 
-
 /* @var $this yii\web\View */
-/* @var $model shop\entities\user\User */
+/* @var $model \shop\forms\manage\User\UserCreateForm */
 
 $this->title = 'Create User';
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
@@ -18,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?=$form->field($model, 'username')->textInput(['maxLength' => true])?>
     <?=$form->field($model, 'email')->textInput(['maxLength' => true])?>
     <?=$form->field($model, 'password')->textInput(['maxLength' => true])?>
+    <?=$form->field($model, 'role')->dropDownList($model->rolesList())?>
 
     <div class="form-group">
         <?= Html::submitButton('Create', ['class' => 'btn btn-success']) ?>

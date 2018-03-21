@@ -3,6 +3,10 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use \kartik\date\DatePicker;
+use \shop\entities\User\User;
+use \shop\helpers\UserHelper;
+use \yii\grid\ActionColumn;
+use \backend\widgets\grid\RoleColumn;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\forms\UserSearch */
@@ -12,8 +16,6 @@ $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <p>
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -24,7 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
                 'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
                     'id',
                     [
                         'attribute' => 'created_at',
@@ -32,8 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             'model' => $searchModel,
                             'attribute' => 'date_from',
                             'attribute2' => 'date_to',
-                            'separator' => '-',
                             'type' => DatePicker::TYPE_RANGE,
+                            'separator' => '-',
                             'pluginOptions' => [
                                 'todayHighlight'=>true,
                                 'autoclose'=>true,
@@ -42,20 +43,30 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]),
                         'format' => 'datetime',
                     ],
-                    'username',
-                    'email:email',
                     [
-                        'attribute' => 'status',
-                        'filter' => \shop\helpers\UserHelper::statusList(),
-                        'value' => function(\shop\entities\User\User $user){
-                            return \shop\helpers\UserHelper::statusLabel($user->status);
+                        'attribute' => 'username',
+                        'value' => function(User $model){
+                            return Html::a(Html::encode($model->username), ['view', 'id' => $model->id]);
                         },
                         'format' => 'raw',
                     ],
-                    ['class' => 'yii\grid\ActionColumn'],
+                    'email:email',
+                    [
+                        'attribute' => 'role',
+                        'class' => RoleColumn::class,
+                        'filter' => $searchModel->rolesList(),
+                    ],
+                    [
+                        'attribute' => 'status',
+                        'filter' => UserHelper::statusList(),
+                        'value' => function(User $model){
+                            return UserHelper::statusLabel($model->status);
+                        },
+                        'format' => 'raw',
+                    ],
+                    ['class' => ActionColumn::class],
                 ],
             ]); ?>
         </div>
     </div>
-
 </div>

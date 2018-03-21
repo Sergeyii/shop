@@ -39,4 +39,9 @@ class UserHelper
             'class' => $class,
         ]);
     }
+
+    public static function rolesList(): array
+    {
+        return ArrayHelper::map(\Yii::$app->authManager->getRoles(), 'name', 'description');
+    }
 }

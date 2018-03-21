@@ -44,6 +44,13 @@ class UserRepository
         }
     }
 
+    public function remove(User $user):void
+    {
+        if (!$user->delete()) {
+            throw new \RuntimeException('User removing error.');
+        }
+    }
+
     private function getBy(array $criteria):User
     {
         if( !($user = User::find()->andWhere($criteria)->limit(1)->one()) ){
