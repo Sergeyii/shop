@@ -10,6 +10,7 @@ use shop\cart\cost\calculator\DynamicCost;
 use shop\cart\cost\calculator\SimpleCost;
 use shop\cart\storage\CookieStorage;
 use shop\readModels\Shop\CategoryReadRepository;
+use shop\readModels\UserReadRepository;
 use shop\services\ContactService;
 use yii\base\BootstrapInterface;
 use yii\di\Instance;
@@ -20,7 +21,7 @@ class SetUp implements BootstrapInterface
 {
     /* @param \yii\web\Application $app  */
     public function bootstrap($app){
-        $container = \Yii::$container;
+        $container = Yii::$container;
 
         $container->setSingleton(MailerInterface::class, function() use($app){
             return $app->mailer;
@@ -49,6 +50,10 @@ class SetUp implements BootstrapInterface
                 new CookieStorage('cart', 604800),
                 new DynamicCost(new SimpleCost())
             );
+        });
+
+        $container->setSingleton(UserReadRepository::class, function(){
+            return new UserReadRepository();
         });
     }
 }

@@ -9,6 +9,7 @@ return [
     'supportEmail' => 'support@example.com',
     'user.passwordResetTokenExpire' => 3600,
     'user.rememberMeDuration' => 3600,
+    'cookieValidationKey' => '',
     'cookieDomain' => '.example.com',
     'aliases' => [
         '@staticRoot' => $static['staticPath'],
