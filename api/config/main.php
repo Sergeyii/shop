@@ -57,7 +57,7 @@ return [
             ],
         ],
         'user' => [
-            'identityClass' => 'shop\entities\User\User',
+            'identityClass' => 'common\auth\Identity',
             'enableAutoLogin' => false,//Запрет автоматического логина
             'enableSession' => false,
         ],
@@ -76,6 +76,7 @@ return [
             'showScriptName' => false,//Не выводить *.php
             'rules' => [
                 '' => 'site/index',
+                'profile' => 'user/profile/index',
                 'POST oauth2/<action:\w+>' => 'oauth2/rest/<action>',
             ],
         ],
