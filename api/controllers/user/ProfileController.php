@@ -2,7 +2,7 @@
 
 namespace api\controllers\user;
 
-use api\formatters\UserFormatter;
+use api\formatters\UserProfileFormatter;
 use shop\entities\User\User;
 use Yii;
 use yii\rest\Controller;
@@ -19,7 +19,7 @@ class ProfileController extends Controller
     public function actionIndex()
     {
         $model = $this->findModel();
-        return (new UserFormatter($model))->format();
+        return (new UserProfileFormatter($model))->format();
     }
 
     public function findModel(): ?User

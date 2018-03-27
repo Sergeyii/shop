@@ -6,7 +6,7 @@ use api\helpers\DateHelper;
 use shop\entities\User\User;
 use shop\helpers\UserHelper;
 
-class UserFormatter
+class UserProfileFormatter implements ApiFormatterInterface
 {
     private $model;
 
@@ -15,7 +15,7 @@ class UserFormatter
         $this->model = $model;
     }
 
-    public function format()
+    public function format(): array
     {
         return [
             'id' => $this->model->id,

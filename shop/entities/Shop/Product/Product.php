@@ -17,18 +17,23 @@ use yii\web\UploadedFile;
 use yiidreamteam\upload\ImageUploadBehavior;
 
 /**
+ * @property integer $id
  * @property integer $status
  * @property integer $price_new
  * @property integer $price_old
  * @property string $name
+ * @property string $code
  * @property string $description
  * @property Value[] values
  * @property Photo[] photos
  * @property Modification[] modifications
  * @property Review[] reviews
- * @mixin ImageUploadBehavior mainPhoto
+ * @property Category $category
+ * @property Brand $brand
+ * @mixin ImageUploadBehavior $mainPhoto
  * @mixin MetaBehavior $meta
  * @property integer $quantity
+ * @property integer rating
  * @property float $weight
  * */
 
