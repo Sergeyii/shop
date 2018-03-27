@@ -7,8 +7,8 @@ use shop\repositories\UserRepository;
 
 class WishlistService
 {
-    public $users;
-    public $products;
+    private $users;
+    private $products;
 
     public function __construct(UserRepository $users, ProductRepository $products)
     {
