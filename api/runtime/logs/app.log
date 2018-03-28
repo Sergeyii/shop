@@ -26642,3 +26642,1358 @@ Stack trace:
     'REQUEST_TIME_FLOAT' => 1522156636.0467
     'REQUEST_TIME' => 1522156636
 ]
+2018-03-28 10:43:06 [192.168.83.1][3][-][error][yii\base\InvalidConfigException] yii\base\InvalidConfigException: yii\web\Request::cookieValidationKey must be configured with a secret key. in /app/vendor/yiisoft/yii2/web/Request.php:1279
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/web/Request.php(1261): yii\web\Request->loadCookies()
+#1 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\Request->getCookies()
+#2 /app/shop/cart/storage/CookieStorage.php(24): yii\base\Component->__get('cookies')
+#3 /app/shop/cart/Cart.php(108): shop\cart\storage\CookieStorage->load()
+#4 /app/shop/cart/Cart.php(93): shop\cart\Cart->loadItems()
+#5 /app/api/formatters/CartFormatter.php(18): shop\cart\Cart->getCost()
+#6 /app/api/controllers/shop/CartController.php(35): api\formatters\CartFormatter->format()
+#7 [internal function]: api\controllers\shop\CartController->actionIndex()
+#8 /app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#9 /app/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#10 /app/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('index', Array)
+#11 /app/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('shop/cart/index', Array)
+#12 /app/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#13 /app/api/web/index.php(17): yii\base\Application->run()
+#14 {main}
+2018-03-28 10:43:04 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer 76a6497e79b0610de66ccf5224058fd7e41ac889'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '52769'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522233784.4952
+    'REQUEST_TIME' => 1522233784
+]
+2018-03-28 10:43:07 [192.168.83.1][3][-][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory does not exist: /app/api/web/assets' 
+
+in /app/vendor/yiisoft/yii2/web/AssetManager.php:213
+
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /app/vendor/yiisoft/yii2/di/Container.php(375): ReflectionClass->newInstanceArgs(Array)
+#3 /app/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /app/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /app/vendor/yiisoft/yii2/di/ServiceLocator.php(135): yii\BaseYii::createObject(Array)
+#6 /app/vendor/yiisoft/yii2/base/Application.php(605): yii\di\ServiceLocator->get('assetManager')
+#7 /app/vendor/yiisoft/yii2/web/View.php(225): yii\base\Application->getAssetManager()
+#8 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\View->getAssetManager()
+#9 /app/vendor/yiisoft/yii2-debug/panels/AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 /app/vendor/yiisoft/yii2-debug/LogTarget.php(54): yii\debug\panels\AssetPanel->save()
+#11 /app/vendor/yiisoft/yii2-debug/LogTarget.php(118): yii\debug\LogTarget->export()
+#12 /app/vendor/yiisoft/yii2/log/Dispatcher.php(188): yii\debug\LogTarget->collect(Array, true)
+#13 /app/vendor/yiisoft/yii2/log/Logger.php(177): yii\log\Dispatcher->dispatch(Array, true)
+#14 /app/vendor/yiisoft/yii2/base/ErrorHandler.php(113): yii\log\Logger->flush(true)
+#15 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\InvalidConfigException))
+#16 {main}
+2018-03-28 10:43:04 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer 76a6497e79b0610de66ccf5224058fd7e41ac889'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '52769'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522233784.4952
+    'REQUEST_TIME' => 1522233784
+]
+2018-03-28 13:58:26 [192.168.83.1][-][-][error][yii\web\HttpException:401] yii\web\UnauthorizedHttpException: Your request was made with invalid credentials. in /app/vendor/yiisoft/yii2/filters/auth/AuthMethod.php:91
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/filters/auth/HttpBearerAuth.php(46): yii\filters\auth\AuthMethod->handleFailure(Object(yii\web\Response))
+#1 /app/vendor/yiisoft/yii2/filters/auth/CompositeAuth.php(73): yii\filters\auth\HttpBearerAuth->authenticate(Object(yii\web\User), Object(yii\web\Request), Object(yii\web\Response))
+#2 /app/vendor/yiisoft/yii2/filters/auth/AuthMethod.php(60): yii\filters\auth\CompositeAuth->authenticate(Object(yii\web\User), Object(yii\web\Request), Object(yii\web\Response))
+#3 /app/vendor/yiisoft/yii2/filters/auth/CompositeAuth.php(57): yii\filters\auth\AuthMethod->beforeAction(Object(yii\base\InlineAction))
+#4 /app/vendor/filsh/yii2-oauth2-server/filters/auth/CompositeAuth.php(17): yii\filters\auth\CompositeAuth->beforeAction(Object(yii\base\InlineAction))
+#5 /app/vendor/yiisoft/yii2/base/ActionFilter.php(75): filsh\yii2\oauth2server\filters\auth\CompositeAuth->beforeAction(Object(yii\base\InlineAction))
+#6 [internal function]: yii\base\ActionFilter->beforeFilter(Object(yii\base\ActionEvent))
+#7 /app/vendor/yiisoft/yii2/base/Component.php(545): call_user_func(Array, Object(yii\base\ActionEvent))
+#8 /app/vendor/yiisoft/yii2/base/Module.php(676): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#9 /app/vendor/yiisoft/yii2/base/Controller.php(144): yii\base\Module->beforeAction(Object(yii\base\InlineAction))
+#10 /app/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('index', Array)
+#11 /app/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('shop/cart/index', Array)
+#12 /app/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#13 /app/api/web/index.php(17): yii\base\Application->run()
+#14 {main}
+2018-03-28 13:58:25 [192.168.83.1][-][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer 76a6497e79b0610de66ccf5224058fd7e41ac889'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53423'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522245505.5586
+    'REQUEST_TIME' => 1522245505
+]
+2018-03-28 13:58:26 [192.168.83.1][-][-][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory does not exist: /app/api/web/assets' 
+
+in /app/vendor/yiisoft/yii2/web/AssetManager.php:213
+
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /app/vendor/yiisoft/yii2/di/Container.php(375): ReflectionClass->newInstanceArgs(Array)
+#3 /app/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /app/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /app/vendor/yiisoft/yii2/di/ServiceLocator.php(135): yii\BaseYii::createObject(Array)
+#6 /app/vendor/yiisoft/yii2/base/Application.php(605): yii\di\ServiceLocator->get('assetManager')
+#7 /app/vendor/yiisoft/yii2/web/View.php(225): yii\base\Application->getAssetManager()
+#8 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\View->getAssetManager()
+#9 /app/vendor/yiisoft/yii2-debug/panels/AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 /app/vendor/yiisoft/yii2-debug/LogTarget.php(54): yii\debug\panels\AssetPanel->save()
+#11 /app/vendor/yiisoft/yii2-debug/LogTarget.php(118): yii\debug\LogTarget->export()
+#12 /app/vendor/yiisoft/yii2/log/Dispatcher.php(188): yii\debug\LogTarget->collect(Array, true)
+#13 /app/vendor/yiisoft/yii2/log/Logger.php(177): yii\log\Dispatcher->dispatch(Array, true)
+#14 /app/vendor/yiisoft/yii2/base/ErrorHandler.php(113): yii\log\Logger->flush(true)
+#15 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\UnauthorizedHttpException))
+#16 {main}
+2018-03-28 13:58:25 [192.168.83.1][-][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer 76a6497e79b0610de66ccf5224058fd7e41ac889'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53423'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522245505.5586
+    'REQUEST_TIME' => 1522245505
+]
+2018-03-28 13:58:51 [192.168.83.1][-][-][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory does not exist: /app/api/web/assets' 
+
+in /app/vendor/yiisoft/yii2/web/AssetManager.php:213
+
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /app/vendor/yiisoft/yii2/di/Container.php(375): ReflectionClass->newInstanceArgs(Array)
+#3 /app/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /app/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /app/vendor/yiisoft/yii2/di/ServiceLocator.php(135): yii\BaseYii::createObject(Array)
+#6 /app/vendor/yiisoft/yii2/base/Application.php(605): yii\di\ServiceLocator->get('assetManager')
+#7 /app/vendor/yiisoft/yii2/web/View.php(225): yii\base\Application->getAssetManager()
+#8 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\View->getAssetManager()
+#9 /app/vendor/yiisoft/yii2-debug/panels/AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 /app/vendor/yiisoft/yii2-debug/LogTarget.php(54): yii\debug\panels\AssetPanel->save()
+#11 /app/vendor/yiisoft/yii2-debug/LogTarget.php(118): yii\debug\LogTarget->export()
+#12 /app/vendor/yiisoft/yii2/log/Dispatcher.php(188): yii\debug\LogTarget->collect(Array, true)
+#13 /app/vendor/yiisoft/yii2/log/Logger.php(177): yii\log\Dispatcher->dispatch(Array, true)
+#14 [internal function]: yii\log\Logger->flush(true)
+#15 {main}
+2018-03-28 13:58:50 [192.168.83.1][-][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_CONTENT_LENGTH' => '120'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53425'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/oauth2/token'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => '120'
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522245530.6111
+    'REQUEST_TIME' => 1522245530
+]
+2018-03-28 13:59:04 [192.168.83.1][-][-][error][yii\web\HttpException:401] yii\web\UnauthorizedHttpException: Your request was made with invalid credentials. in /app/vendor/yiisoft/yii2/filters/auth/AuthMethod.php:91
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/filters/auth/AuthMethod.php(74): yii\filters\auth\AuthMethod->handleFailure(Object(yii\web\Response))
+#1 /app/vendor/yiisoft/yii2/filters/auth/CompositeAuth.php(57): yii\filters\auth\AuthMethod->beforeAction(Object(yii\base\InlineAction))
+#2 /app/vendor/filsh/yii2-oauth2-server/filters/auth/CompositeAuth.php(17): yii\filters\auth\CompositeAuth->beforeAction(Object(yii\base\InlineAction))
+#3 /app/vendor/yiisoft/yii2/base/ActionFilter.php(75): filsh\yii2\oauth2server\filters\auth\CompositeAuth->beforeAction(Object(yii\base\InlineAction))
+#4 [internal function]: yii\base\ActionFilter->beforeFilter(Object(yii\base\ActionEvent))
+#5 /app/vendor/yiisoft/yii2/base/Component.php(545): call_user_func(Array, Object(yii\base\ActionEvent))
+#6 /app/vendor/yiisoft/yii2/base/Module.php(676): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#7 /app/vendor/yiisoft/yii2/base/Controller.php(144): yii\base\Module->beforeAction(Object(yii\base\InlineAction))
+#8 /app/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('index', Array)
+#9 /app/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('shop/cart/index', Array)
+#10 /app/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 /app/api/web/index.php(17): yii\base\Application->run()
+#12 {main}
+2018-03-28 13:59:04 [192.168.83.1][-][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => '0dee0335f0462b3031e8df4def738609c2c7cd9b'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53426'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522245544.5148
+    'REQUEST_TIME' => 1522245544
+]
+2018-03-28 13:59:04 [192.168.83.1][-][-][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory does not exist: /app/api/web/assets' 
+
+in /app/vendor/yiisoft/yii2/web/AssetManager.php:213
+
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /app/vendor/yiisoft/yii2/di/Container.php(375): ReflectionClass->newInstanceArgs(Array)
+#3 /app/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /app/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /app/vendor/yiisoft/yii2/di/ServiceLocator.php(135): yii\BaseYii::createObject(Array)
+#6 /app/vendor/yiisoft/yii2/base/Application.php(605): yii\di\ServiceLocator->get('assetManager')
+#7 /app/vendor/yiisoft/yii2/web/View.php(225): yii\base\Application->getAssetManager()
+#8 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\View->getAssetManager()
+#9 /app/vendor/yiisoft/yii2-debug/panels/AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 /app/vendor/yiisoft/yii2-debug/LogTarget.php(54): yii\debug\panels\AssetPanel->save()
+#11 /app/vendor/yiisoft/yii2-debug/LogTarget.php(118): yii\debug\LogTarget->export()
+#12 /app/vendor/yiisoft/yii2/log/Dispatcher.php(188): yii\debug\LogTarget->collect(Array, true)
+#13 /app/vendor/yiisoft/yii2/log/Logger.php(177): yii\log\Dispatcher->dispatch(Array, true)
+#14 /app/vendor/yiisoft/yii2/base/ErrorHandler.php(113): yii\log\Logger->flush(true)
+#15 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\UnauthorizedHttpException))
+#16 {main}
+2018-03-28 13:59:04 [192.168.83.1][-][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => '0dee0335f0462b3031e8df4def738609c2c7cd9b'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53426'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522245544.5148
+    'REQUEST_TIME' => 1522245544
+]
+2018-03-28 13:59:28 [192.168.83.1][-][-][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory does not exist: /app/api/web/assets' 
+
+in /app/vendor/yiisoft/yii2/web/AssetManager.php:213
+
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /app/vendor/yiisoft/yii2/di/Container.php(375): ReflectionClass->newInstanceArgs(Array)
+#3 /app/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /app/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /app/vendor/yiisoft/yii2/di/ServiceLocator.php(135): yii\BaseYii::createObject(Array)
+#6 /app/vendor/yiisoft/yii2/base/Application.php(605): yii\di\ServiceLocator->get('assetManager')
+#7 /app/vendor/yiisoft/yii2/web/View.php(225): yii\base\Application->getAssetManager()
+#8 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\View->getAssetManager()
+#9 /app/vendor/yiisoft/yii2-debug/panels/AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 /app/vendor/yiisoft/yii2-debug/LogTarget.php(54): yii\debug\panels\AssetPanel->save()
+#11 /app/vendor/yiisoft/yii2-debug/LogTarget.php(118): yii\debug\LogTarget->export()
+#12 /app/vendor/yiisoft/yii2/log/Dispatcher.php(188): yii\debug\LogTarget->collect(Array, true)
+#13 /app/vendor/yiisoft/yii2/log/Logger.php(177): yii\log\Dispatcher->dispatch(Array, true)
+#14 [internal function]: yii\log\Logger->flush(true)
+#15 {main}
+2018-03-28 13:59:27 [192.168.83.1][-][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_CONTENT_LENGTH' => '120'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53427'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/oauth2/token'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => '120'
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522245567.6874
+    'REQUEST_TIME' => 1522245567
+]
+2018-03-28 13:59:49 [192.168.83.1][3][-][error][yii\base\InvalidConfigException] yii\base\InvalidConfigException: yii\web\Request::cookieValidationKey must be configured with a secret key. in /app/vendor/yiisoft/yii2/web/Request.php:1279
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/web/Request.php(1261): yii\web\Request->loadCookies()
+#1 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\Request->getCookies()
+#2 /app/shop/cart/storage/CookieStorage.php(24): yii\base\Component->__get('cookies')
+#3 /app/shop/cart/Cart.php(108): shop\cart\storage\CookieStorage->load()
+#4 /app/shop/cart/Cart.php(93): shop\cart\Cart->loadItems()
+#5 /app/api/formatters/CartFormatter.php(18): shop\cart\Cart->getCost()
+#6 /app/api/controllers/shop/CartController.php(38): api\formatters\CartFormatter->format()
+#7 [internal function]: api\controllers\shop\CartController->actionIndex()
+#8 /app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#9 /app/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#10 /app/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('index', Array)
+#11 /app/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('shop/cart/index', Array)
+#12 /app/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#13 /app/api/web/index.php(17): yii\base\Application->run()
+#14 {main}
+2018-03-28 13:59:49 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53428'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522245589.1991
+    'REQUEST_TIME' => 1522245589
+]
+2018-03-28 13:59:49 [192.168.83.1][3][-][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory does not exist: /app/api/web/assets' 
+
+in /app/vendor/yiisoft/yii2/web/AssetManager.php:213
+
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /app/vendor/yiisoft/yii2/di/Container.php(375): ReflectionClass->newInstanceArgs(Array)
+#3 /app/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /app/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /app/vendor/yiisoft/yii2/di/ServiceLocator.php(135): yii\BaseYii::createObject(Array)
+#6 /app/vendor/yiisoft/yii2/base/Application.php(605): yii\di\ServiceLocator->get('assetManager')
+#7 /app/vendor/yiisoft/yii2/web/View.php(225): yii\base\Application->getAssetManager()
+#8 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\View->getAssetManager()
+#9 /app/vendor/yiisoft/yii2-debug/panels/AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 /app/vendor/yiisoft/yii2-debug/LogTarget.php(54): yii\debug\panels\AssetPanel->save()
+#11 /app/vendor/yiisoft/yii2-debug/LogTarget.php(118): yii\debug\LogTarget->export()
+#12 /app/vendor/yiisoft/yii2/log/Dispatcher.php(188): yii\debug\LogTarget->collect(Array, true)
+#13 /app/vendor/yiisoft/yii2/log/Logger.php(177): yii\log\Dispatcher->dispatch(Array, true)
+#14 /app/vendor/yiisoft/yii2/base/ErrorHandler.php(113): yii\log\Logger->flush(true)
+#15 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\InvalidConfigException))
+#16 {main}
+2018-03-28 13:59:49 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53428'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522245589.1991
+    'REQUEST_TIME' => 1522245589
+]
+2018-03-28 16:34:54 [192.168.83.1][3][-][error][yii\base\InvalidConfigException] yii\base\InvalidConfigException: yii\web\Request::cookieValidationKey must be configured with a secret key. in /app/vendor/yiisoft/yii2/web/Request.php:1279
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/web/Request.php(1261): yii\web\Request->loadCookies()
+#1 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\Request->getCookies()
+#2 /app/shop/cart/storage/CookieStorage.php(24): yii\base\Component->__get('cookies')
+#3 /app/shop/cart/storage/HybridStorage.php(44): shop\cart\storage\CookieStorage->load()
+#4 /app/shop/cart/storage/HybridStorage.php(28): shop\cart\storage\HybridStorage->getStorage()
+#5 /app/shop/cart/Cart.php(108): shop\cart\storage\HybridStorage->load()
+#6 /app/shop/cart/Cart.php(93): shop\cart\Cart->loadItems()
+#7 /app/api/formatters/CartFormatter.php(18): shop\cart\Cart->getCost()
+#8 /app/api/controllers/shop/CartController.php(38): api\formatters\CartFormatter->format()
+#9 [internal function]: api\controllers\shop\CartController->actionIndex()
+#10 /app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#11 /app/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#12 /app/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('index', Array)
+#13 /app/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('shop/cart/index', Array)
+#14 /app/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#15 /app/api/web/index.php(17): yii\base\Application->run()
+#16 {main}
+2018-03-28 16:34:53 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53789'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522254893.9001
+    'REQUEST_TIME' => 1522254893
+]
+2018-03-28 16:34:54 [192.168.83.1][3][-][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory does not exist: /app/api/web/assets' 
+
+in /app/vendor/yiisoft/yii2/web/AssetManager.php:213
+
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /app/vendor/yiisoft/yii2/di/Container.php(375): ReflectionClass->newInstanceArgs(Array)
+#3 /app/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /app/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /app/vendor/yiisoft/yii2/di/ServiceLocator.php(135): yii\BaseYii::createObject(Array)
+#6 /app/vendor/yiisoft/yii2/base/Application.php(605): yii\di\ServiceLocator->get('assetManager')
+#7 /app/vendor/yiisoft/yii2/web/View.php(225): yii\base\Application->getAssetManager()
+#8 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\View->getAssetManager()
+#9 /app/vendor/yiisoft/yii2-debug/panels/AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 /app/vendor/yiisoft/yii2-debug/LogTarget.php(54): yii\debug\panels\AssetPanel->save()
+#11 /app/vendor/yiisoft/yii2-debug/LogTarget.php(118): yii\debug\LogTarget->export()
+#12 /app/vendor/yiisoft/yii2/log/Dispatcher.php(188): yii\debug\LogTarget->collect(Array, true)
+#13 /app/vendor/yiisoft/yii2/log/Logger.php(177): yii\log\Dispatcher->dispatch(Array, true)
+#14 /app/vendor/yiisoft/yii2/base/ErrorHandler.php(113): yii\log\Logger->flush(true)
+#15 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\InvalidConfigException))
+#16 {main}
+2018-03-28 16:34:53 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53789'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522254893.9001
+    'REQUEST_TIME' => 1522254893
+]
+2018-03-28 16:35:44 [192.168.83.1][3][-][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory does not exist: /app/api/web/assets' 
+
+in /app/vendor/yiisoft/yii2/web/AssetManager.php:213
+
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /app/vendor/yiisoft/yii2/di/Container.php(375): ReflectionClass->newInstanceArgs(Array)
+#3 /app/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /app/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /app/vendor/yiisoft/yii2/di/ServiceLocator.php(135): yii\BaseYii::createObject(Array)
+#6 /app/vendor/yiisoft/yii2/base/Application.php(605): yii\di\ServiceLocator->get('assetManager')
+#7 /app/vendor/yiisoft/yii2/web/View.php(225): yii\base\Application->getAssetManager()
+#8 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\View->getAssetManager()
+#9 /app/vendor/yiisoft/yii2-debug/panels/AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 /app/vendor/yiisoft/yii2-debug/LogTarget.php(54): yii\debug\panels\AssetPanel->save()
+#11 /app/vendor/yiisoft/yii2-debug/LogTarget.php(118): yii\debug\LogTarget->export()
+#12 /app/vendor/yiisoft/yii2/log/Dispatcher.php(188): yii\debug\LogTarget->collect(Array, true)
+#13 /app/vendor/yiisoft/yii2/log/Logger.php(177): yii\log\Dispatcher->dispatch(Array, true)
+#14 [internal function]: yii\log\Logger->flush(true)
+#15 {main}
+2018-03-28 16:35:43 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53791'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522254943.8982
+    'REQUEST_TIME' => 1522254943
+]
+2018-03-28 16:36:01 [192.168.83.1][3][-][error][yii\base\InvalidConfigException] yii\base\InvalidConfigException: yii\web\Request::cookieValidationKey must be configured with a secret key. in /app/vendor/yiisoft/yii2/web/Request.php:1279
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/web/Request.php(1261): yii\web\Request->loadCookies()
+#1 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\Request->getCookies()
+#2 /app/shop/cart/storage/CookieStorage.php(24): yii\base\Component->__get('cookies')
+#3 /app/shop/cart/storage/HybridStorage.php(44): shop\cart\storage\CookieStorage->load()
+#4 /app/shop/cart/storage/HybridStorage.php(28): shop\cart\storage\HybridStorage->getStorage()
+#5 /app/shop/cart/Cart.php(108): shop\cart\storage\HybridStorage->load()
+#6 /app/shop/cart/Cart.php(93): shop\cart\Cart->loadItems()
+#7 /app/api/formatters/CartFormatter.php(18): shop\cart\Cart->getCost()
+#8 /app/api/controllers/shop/CartController.php(38): api\formatters\CartFormatter->format()
+#9 [internal function]: api\controllers\shop\CartController->actionIndex()
+#10 /app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#11 /app/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#12 /app/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('index', Array)
+#13 /app/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('shop/cart/index', Array)
+#14 /app/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#15 /app/api/web/index.php(17): yii\base\Application->run()
+#16 {main}
+2018-03-28 16:36:00 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53792'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522254960.8646
+    'REQUEST_TIME' => 1522254960
+]
+2018-03-28 16:36:01 [192.168.83.1][3][-][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory does not exist: /app/api/web/assets' 
+
+in /app/vendor/yiisoft/yii2/web/AssetManager.php:213
+
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /app/vendor/yiisoft/yii2/di/Container.php(375): ReflectionClass->newInstanceArgs(Array)
+#3 /app/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /app/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /app/vendor/yiisoft/yii2/di/ServiceLocator.php(135): yii\BaseYii::createObject(Array)
+#6 /app/vendor/yiisoft/yii2/base/Application.php(605): yii\di\ServiceLocator->get('assetManager')
+#7 /app/vendor/yiisoft/yii2/web/View.php(225): yii\base\Application->getAssetManager()
+#8 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\View->getAssetManager()
+#9 /app/vendor/yiisoft/yii2-debug/panels/AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 /app/vendor/yiisoft/yii2-debug/LogTarget.php(54): yii\debug\panels\AssetPanel->save()
+#11 /app/vendor/yiisoft/yii2-debug/LogTarget.php(118): yii\debug\LogTarget->export()
+#12 /app/vendor/yiisoft/yii2/log/Dispatcher.php(188): yii\debug\LogTarget->collect(Array, true)
+#13 /app/vendor/yiisoft/yii2/log/Logger.php(177): yii\log\Dispatcher->dispatch(Array, true)
+#14 /app/vendor/yiisoft/yii2/base/ErrorHandler.php(113): yii\log\Logger->flush(true)
+#15 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\InvalidConfigException))
+#16 {main}
+2018-03-28 16:36:00 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53792'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522254960.8646
+    'REQUEST_TIME' => 1522254960
+]
+2018-03-28 16:44:46 [192.168.83.1][3][-][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory does not exist: /app/api/web/assets' 
+
+in /app/vendor/yiisoft/yii2/web/AssetManager.php:213
+
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /app/vendor/yiisoft/yii2/di/Container.php(375): ReflectionClass->newInstanceArgs(Array)
+#3 /app/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /app/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /app/vendor/yiisoft/yii2/di/ServiceLocator.php(135): yii\BaseYii::createObject(Array)
+#6 /app/vendor/yiisoft/yii2/base/Application.php(605): yii\di\ServiceLocator->get('assetManager')
+#7 /app/vendor/yiisoft/yii2/web/View.php(225): yii\base\Application->getAssetManager()
+#8 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\View->getAssetManager()
+#9 /app/vendor/yiisoft/yii2-debug/panels/AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 /app/vendor/yiisoft/yii2-debug/LogTarget.php(54): yii\debug\panels\AssetPanel->save()
+#11 /app/vendor/yiisoft/yii2-debug/LogTarget.php(118): yii\debug\LogTarget->export()
+#12 /app/vendor/yiisoft/yii2/log/Dispatcher.php(188): yii\debug\LogTarget->collect(Array, true)
+#13 /app/vendor/yiisoft/yii2/log/Logger.php(177): yii\log\Dispatcher->dispatch(Array, true)
+#14 [internal function]: yii\log\Logger->flush(true)
+#15 {main}
+2018-03-28 16:44:45 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53838'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522255485.8418
+    'REQUEST_TIME' => 1522255485
+]
+2018-03-28 16:44:55 [192.168.83.1][3][-][error][yii\base\InvalidConfigException] yii\base\InvalidConfigException: yii\web\Request::cookieValidationKey must be configured with a secret key. in /app/vendor/yiisoft/yii2/web/Request.php:1279
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/web/Request.php(1261): yii\web\Request->loadCookies()
+#1 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\Request->getCookies()
+#2 /app/shop/cart/storage/CookieStorage.php(24): yii\base\Component->__get('cookies')
+#3 /app/shop/cart/storage/HybridStorage.php(44): shop\cart\storage\CookieStorage->load()
+#4 /app/shop/cart/storage/HybridStorage.php(28): shop\cart\storage\HybridStorage->getStorage()
+#5 /app/shop/cart/Cart.php(108): shop\cart\storage\HybridStorage->load()
+#6 /app/shop/cart/Cart.php(93): shop\cart\Cart->loadItems()
+#7 /app/api/formatters/CartFormatter.php(18): shop\cart\Cart->getCost()
+#8 /app/api/controllers/shop/CartController.php(38): api\formatters\CartFormatter->format()
+#9 [internal function]: api\controllers\shop\CartController->actionIndex()
+#10 /app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#11 /app/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#12 /app/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('index', Array)
+#13 /app/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('shop/cart/index', Array)
+#14 /app/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#15 /app/api/web/index.php(17): yii\base\Application->run()
+#16 {main}
+2018-03-28 16:44:55 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53839'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522255495.686
+    'REQUEST_TIME' => 1522255495
+]
+2018-03-28 16:44:55 [192.168.83.1][3][-][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory does not exist: /app/api/web/assets' 
+
+in /app/vendor/yiisoft/yii2/web/AssetManager.php:213
+
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /app/vendor/yiisoft/yii2/di/Container.php(375): ReflectionClass->newInstanceArgs(Array)
+#3 /app/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /app/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /app/vendor/yiisoft/yii2/di/ServiceLocator.php(135): yii\BaseYii::createObject(Array)
+#6 /app/vendor/yiisoft/yii2/base/Application.php(605): yii\di\ServiceLocator->get('assetManager')
+#7 /app/vendor/yiisoft/yii2/web/View.php(225): yii\base\Application->getAssetManager()
+#8 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\View->getAssetManager()
+#9 /app/vendor/yiisoft/yii2-debug/panels/AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 /app/vendor/yiisoft/yii2-debug/LogTarget.php(54): yii\debug\panels\AssetPanel->save()
+#11 /app/vendor/yiisoft/yii2-debug/LogTarget.php(118): yii\debug\LogTarget->export()
+#12 /app/vendor/yiisoft/yii2/log/Dispatcher.php(188): yii\debug\LogTarget->collect(Array, true)
+#13 /app/vendor/yiisoft/yii2/log/Logger.php(177): yii\log\Dispatcher->dispatch(Array, true)
+#14 /app/vendor/yiisoft/yii2/base/ErrorHandler.php(113): yii\log\Logger->flush(true)
+#15 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\InvalidConfigException))
+#16 {main}
+2018-03-28 16:44:55 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53839'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522255495.686
+    'REQUEST_TIME' => 1522255495
+]
+2018-03-28 16:45:23 [192.168.83.1][3][-][error][yii\base\InvalidConfigException] yii\base\InvalidConfigException: yii\web\Request::cookieValidationKey must be configured with a secret key. in /app/vendor/yiisoft/yii2/web/Request.php:1279
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/web/Request.php(1261): yii\web\Request->loadCookies()
+#1 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\Request->getCookies()
+#2 /app/shop/cart/storage/CookieStorage.php(24): yii\base\Component->__get('cookies')
+#3 /app/shop/cart/storage/HybridStorage.php(44): shop\cart\storage\CookieStorage->load()
+#4 /app/shop/cart/storage/HybridStorage.php(28): shop\cart\storage\HybridStorage->getStorage()
+#5 /app/shop/cart/Cart.php(108): shop\cart\storage\HybridStorage->load()
+#6 /app/shop/cart/Cart.php(93): shop\cart\Cart->loadItems()
+#7 /app/api/formatters/CartFormatter.php(18): shop\cart\Cart->getCost()
+#8 /app/api/controllers/shop/CartController.php(38): api\formatters\CartFormatter->format()
+#9 [internal function]: api\controllers\shop\CartController->actionIndex()
+#10 /app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#11 /app/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#12 /app/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('index', Array)
+#13 /app/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('shop/cart/index', Array)
+#14 /app/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#15 /app/api/web/index.php(17): yii\base\Application->run()
+#16 {main}
+2018-03-28 16:45:23 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53841'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522255523.582
+    'REQUEST_TIME' => 1522255523
+]
+2018-03-28 16:45:23 [192.168.83.1][3][-][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory does not exist: /app/api/web/assets' 
+
+in /app/vendor/yiisoft/yii2/web/AssetManager.php:213
+
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /app/vendor/yiisoft/yii2/di/Container.php(375): ReflectionClass->newInstanceArgs(Array)
+#3 /app/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /app/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /app/vendor/yiisoft/yii2/di/ServiceLocator.php(135): yii\BaseYii::createObject(Array)
+#6 /app/vendor/yiisoft/yii2/base/Application.php(605): yii\di\ServiceLocator->get('assetManager')
+#7 /app/vendor/yiisoft/yii2/web/View.php(225): yii\base\Application->getAssetManager()
+#8 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\View->getAssetManager()
+#9 /app/vendor/yiisoft/yii2-debug/panels/AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 /app/vendor/yiisoft/yii2-debug/LogTarget.php(54): yii\debug\panels\AssetPanel->save()
+#11 /app/vendor/yiisoft/yii2-debug/LogTarget.php(118): yii\debug\LogTarget->export()
+#12 /app/vendor/yiisoft/yii2/log/Dispatcher.php(188): yii\debug\LogTarget->collect(Array, true)
+#13 /app/vendor/yiisoft/yii2/log/Logger.php(177): yii\log\Dispatcher->dispatch(Array, true)
+#14 /app/vendor/yiisoft/yii2/base/ErrorHandler.php(113): yii\log\Logger->flush(true)
+#15 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\InvalidConfigException))
+#16 {main}
+2018-03-28 16:45:23 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53841'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522255523.582
+    'REQUEST_TIME' => 1522255523
+]
+2018-03-28 16:45:36 [192.168.83.1][3][-][error][yii\base\InvalidConfigException] yii\base\InvalidConfigException: yii\web\Request::cookieValidationKey must be configured with a secret key. in /app/vendor/yiisoft/yii2/web/Request.php:1279
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/web/Request.php(1261): yii\web\Request->loadCookies()
+#1 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\Request->getCookies()
+#2 /app/shop/cart/storage/CookieStorage.php(24): yii\base\Component->__get('cookies')
+#3 /app/shop/cart/storage/HybridStorage.php(44): shop\cart\storage\CookieStorage->load()
+#4 /app/shop/cart/storage/HybridStorage.php(28): shop\cart\storage\HybridStorage->getStorage()
+#5 /app/shop/cart/Cart.php(108): shop\cart\storage\HybridStorage->load()
+#6 /app/shop/cart/Cart.php(93): shop\cart\Cart->loadItems()
+#7 /app/api/formatters/CartFormatter.php(18): shop\cart\Cart->getCost()
+#8 /app/api/controllers/shop/CartController.php(38): api\formatters\CartFormatter->format()
+#9 [internal function]: api\controllers\shop\CartController->actionIndex()
+#10 /app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#11 /app/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#12 /app/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('index', Array)
+#13 /app/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('shop/cart/index', Array)
+#14 /app/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#15 /app/api/web/index.php(17): yii\base\Application->run()
+#16 {main}
+2018-03-28 16:45:36 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53842'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522255536.2709
+    'REQUEST_TIME' => 1522255536
+]
+2018-03-28 16:45:36 [192.168.83.1][3][-][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory does not exist: /app/api/web/assets' 
+
+in /app/vendor/yiisoft/yii2/web/AssetManager.php:213
+
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /app/vendor/yiisoft/yii2/di/Container.php(375): ReflectionClass->newInstanceArgs(Array)
+#3 /app/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /app/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /app/vendor/yiisoft/yii2/di/ServiceLocator.php(135): yii\BaseYii::createObject(Array)
+#6 /app/vendor/yiisoft/yii2/base/Application.php(605): yii\di\ServiceLocator->get('assetManager')
+#7 /app/vendor/yiisoft/yii2/web/View.php(225): yii\base\Application->getAssetManager()
+#8 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\View->getAssetManager()
+#9 /app/vendor/yiisoft/yii2-debug/panels/AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 /app/vendor/yiisoft/yii2-debug/LogTarget.php(54): yii\debug\panels\AssetPanel->save()
+#11 /app/vendor/yiisoft/yii2-debug/LogTarget.php(118): yii\debug\LogTarget->export()
+#12 /app/vendor/yiisoft/yii2/log/Dispatcher.php(188): yii\debug\LogTarget->collect(Array, true)
+#13 /app/vendor/yiisoft/yii2/log/Logger.php(177): yii\log\Dispatcher->dispatch(Array, true)
+#14 /app/vendor/yiisoft/yii2/base/ErrorHandler.php(113): yii\log\Logger->flush(true)
+#15 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\InvalidConfigException))
+#16 {main}
+2018-03-28 16:45:36 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53842'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522255536.2709
+    'REQUEST_TIME' => 1522255536
+]
+2018-03-28 16:54:16 [192.168.83.1][3][-][error][yii\base\InvalidConfigException] yii\base\InvalidConfigException: yii\web\Request::cookieValidationKey must be configured with a secret key. in /app/vendor/yiisoft/yii2/web/Request.php:1279
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/web/Request.php(1261): yii\web\Request->loadCookies()
+#1 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\Request->getCookies()
+#2 /app/shop/cart/storage/CookieStorage.php(24): yii\base\Component->__get('cookies')
+#3 /app/shop/cart/storage/HybridStorage.php(44): shop\cart\storage\CookieStorage->load()
+#4 /app/shop/cart/storage/HybridStorage.php(28): shop\cart\storage\HybridStorage->getStorage()
+#5 /app/shop/cart/Cart.php(108): shop\cart\storage\HybridStorage->load()
+#6 /app/shop/cart/Cart.php(93): shop\cart\Cart->loadItems()
+#7 /app/api/formatters/CartFormatter.php(18): shop\cart\Cart->getCost()
+#8 /app/api/controllers/shop/CartController.php(38): api\formatters\CartFormatter->format()
+#9 [internal function]: api\controllers\shop\CartController->actionIndex()
+#10 /app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#11 /app/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#12 /app/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('index', Array)
+#13 /app/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('shop/cart/index', Array)
+#14 /app/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#15 /app/api/web/index.php(17): yii\base\Application->run()
+#16 {main}
+2018-03-28 16:54:16 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53969'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522256056.2119
+    'REQUEST_TIME' => 1522256056
+]
+2018-03-28 16:54:16 [192.168.83.1][3][-][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory does not exist: /app/api/web/assets' 
+
+in /app/vendor/yiisoft/yii2/web/AssetManager.php:213
+
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /app/vendor/yiisoft/yii2/di/Container.php(375): ReflectionClass->newInstanceArgs(Array)
+#3 /app/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /app/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /app/vendor/yiisoft/yii2/di/ServiceLocator.php(135): yii\BaseYii::createObject(Array)
+#6 /app/vendor/yiisoft/yii2/base/Application.php(605): yii\di\ServiceLocator->get('assetManager')
+#7 /app/vendor/yiisoft/yii2/web/View.php(225): yii\base\Application->getAssetManager()
+#8 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\View->getAssetManager()
+#9 /app/vendor/yiisoft/yii2-debug/panels/AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 /app/vendor/yiisoft/yii2-debug/LogTarget.php(54): yii\debug\panels\AssetPanel->save()
+#11 /app/vendor/yiisoft/yii2-debug/LogTarget.php(118): yii\debug\LogTarget->export()
+#12 /app/vendor/yiisoft/yii2/log/Dispatcher.php(188): yii\debug\LogTarget->collect(Array, true)
+#13 /app/vendor/yiisoft/yii2/log/Logger.php(177): yii\log\Dispatcher->dispatch(Array, true)
+#14 /app/vendor/yiisoft/yii2/base/ErrorHandler.php(113): yii\log\Logger->flush(true)
+#15 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\InvalidConfigException))
+#16 {main}
+2018-03-28 16:54:16 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '53969'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522256056.2119
+    'REQUEST_TIME' => 1522256056
+]
+2018-03-28 17:06:09 [192.168.83.1][3][-][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory does not exist: /app/api/web/assets' 
+
+in /app/vendor/yiisoft/yii2/web/AssetManager.php:213
+
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 /app/vendor/yiisoft/yii2/di/Container.php(375): ReflectionClass->newInstanceArgs(Array)
+#3 /app/vendor/yiisoft/yii2/di/Container.php(156): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 /app/vendor/yiisoft/yii2/BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 /app/vendor/yiisoft/yii2/di/ServiceLocator.php(135): yii\BaseYii::createObject(Array)
+#6 /app/vendor/yiisoft/yii2/base/Application.php(605): yii\di\ServiceLocator->get('assetManager')
+#7 /app/vendor/yiisoft/yii2/web/View.php(225): yii\base\Application->getAssetManager()
+#8 /app/vendor/yiisoft/yii2/base/Component.php(132): yii\web\View->getAssetManager()
+#9 /app/vendor/yiisoft/yii2-debug/panels/AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 /app/vendor/yiisoft/yii2-debug/LogTarget.php(54): yii\debug\panels\AssetPanel->save()
+#11 /app/vendor/yiisoft/yii2-debug/LogTarget.php(118): yii\debug\LogTarget->export()
+#12 /app/vendor/yiisoft/yii2/log/Dispatcher.php(188): yii\debug\LogTarget->collect(Array, true)
+#13 /app/vendor/yiisoft/yii2/log/Logger.php(177): yii\log\Dispatcher->dispatch(Array, true)
+#14 [internal function]: yii\log\Logger->flush(true)
+#15 {main}
+2018-03-28 17:06:09 [192.168.83.1][3][-][info][application] $_SERVER = [
+    'USER' => 'vagrant'
+    'HOME' => '/home/vagrant'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_USER_AGENT' => 'Apache-HttpClient/4.5.2 (Java/1.8.0_152-release)'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_HOST' => 'api.shop.local'
+    'HTTP_AUTHORIZATION' => 'Bearer f52ac034bd6dd20ea5b0e88771ed1203e4a68e80'
+    'HTTP_CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_ACCEPT' => 'application/json'
+    'REDIRECT_STATUS' => '200'
+    'SERVER_NAME' => 'api.shop.local'
+    'SERVER_PORT' => '80'
+    'SERVER_ADDR' => '192.168.83.137'
+    'REMOTE_PORT' => '54019'
+    'REMOTE_ADDR' => '192.168.83.1'
+    'SERVER_SOFTWARE' => 'nginx/1.4.6'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'DOCUMENT_ROOT' => '/app/api/web'
+    'DOCUMENT_URI' => '/index.php'
+    'REQUEST_URI' => '/shop/cart'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/app/api/web/index.php'
+    'CONTENT_LENGTH' => ''
+    'CONTENT_TYPE' => 'application/json; charset=UTF-8'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'FCGI_ROLE' => 'RESPONDER'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1522256769.5129
+    'REQUEST_TIME' => 1522256769
+]

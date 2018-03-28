@@ -8,7 +8,7 @@ use frontend\urls\CategoryUrlRule;
 use shop\cart\Cart;
 use shop\cart\cost\calculator\DynamicCost;
 use shop\cart\cost\calculator\SimpleCost;
-use shop\cart\storage\CookieStorage;
+use shop\cart\storage\HybridStorage;
 use shop\readModels\Shop\CategoryReadRepository;
 use shop\readModels\UserReadRepository;
 use shop\services\ContactService;
@@ -45,9 +45,9 @@ class SetUp implements BootstrapInterface
             Instance::of('cache')
         ]);*/
 
-        $container->setSingleton(Cart::class, function(){
+        $container->setSingleton(Cart::class, function() use ($app){
             return new Cart(
-                new CookieStorage('cart', 604800),
+                new HybridStorage($app->get('user'), 'cart', 604800, $app->db),
                 new DynamicCost(new SimpleCost())
             );
         });

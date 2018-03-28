@@ -85,9 +85,15 @@ return [
                 'GET shop/products/tag/<id:\d+>' => 'shop/product/tag',
                 'GET shop/products' => 'shop/product/index',
                 'POST shop/products/<id:\d+>/wish' => 'shop/wishlist/add',
+                'POST shop/products/<id:\d+>/cart' => 'shop/cart/add',
 
                 'GET shop/wishlist' => 'shop/wishlist/index',
                 'DELETE shop/wishlist/<id:\d+>' => 'shop/wishlist/delete',
+
+                'GET shop/cart' => 'shop/cart/index',
+                'DELETE shop/cart' => 'shop/cart/clear',
+                'POST shop/cart/<id:\d+>/quantity' => 'shop/cart/quantity',
+                'DELETE shop/cart/<id:\d+>' => 'shop/cart/delete',
             ],
         ],
     ],
