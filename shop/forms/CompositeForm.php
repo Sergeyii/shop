@@ -91,7 +91,7 @@ abstract class CompositeForm extends Model
         }
         return $errors;
     }
-    
+
     //Получаем форму по ключу-имени
     public function __get($name)
     {

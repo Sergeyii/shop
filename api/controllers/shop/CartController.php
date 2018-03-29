@@ -3,6 +3,7 @@
 namespace api\controllers\shop;
 
 use api\formatters\CartFormatter;
+use shop\forms\Shop\AddToCartForm;
 use shop\readModels\Shop\ProductReadRepository;
 use shop\services\Shop\CartService;
 use yii\rest\Controller;
@@ -26,7 +27,7 @@ class CartController extends Controller
     {
         return [
             'index' => ['GET'],
-            'add' => ['GET'],
+            'add' => ['POST'],
             'quantity' => ['POST'],
             'delete' => ['DELETE'],
             'clear' => ['DELETE'],
@@ -45,8 +46,9 @@ class CartController extends Controller
         }
 
         $form = new AddToCartForm($product);
+        $form->load(Yii::$app->request->getBodyParams(), '');
 
-        if( $form->load(Yii::$app->request->getBodyParams()) && $form->validate() ){
+        if($form->validate()){
             try{
                 $this->service->add($product->id, $form->modification, $form->quantity);
                 Yii::$app->response->setStatusCode(201);
@@ -55,7 +57,6 @@ class CartController extends Controller
                 throw new BadRequestHttpException($e->getMessage(), null, $e);
             }
         }
-
         return $form;
     }
 

@@ -12,7 +12,7 @@ class m180205_102349_create_shop_cart_items_table extends Migration
             'id' => $this->bigPrimaryKey(),
             'user_id' => $this->integer()->notNull(),
             'product_id' => $this->integer()->notNull(),
-            'modification_id' => $this->integer()->notNull(),
+            'modification_id' => $this->integer(),
             'user_hash' => $this->string(32)->notNull(),
             'quantity' => $this->integer()->notNull(),
         ], $tableOptions);

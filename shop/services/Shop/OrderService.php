@@ -61,6 +61,10 @@ class OrderService
             );
         }, $this->cart->getItems());
 
+        if(empty($items)){
+            throw new \DomainException('Order must have items!');
+        }
+
         $order = Order::create(
             $user->id,
             new CustomerData(

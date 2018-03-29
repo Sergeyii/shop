@@ -3,6 +3,7 @@
 namespace api\formatters;
 
 use shop\cart\Cart;
+use yii\helpers\Url;
 
 class CartFormatter implements ApiFormatterInterface
 {
@@ -58,6 +59,9 @@ class CartFormatter implements ApiFormatterInterface
                     ];
                 }, $cost->getDiscounts()),
                 'total' => $cost->getTotal(),
+            ],
+            '_links' => [
+                'checkout' => ['href' => Url::to(['shop/checkout/index'], true)],
             ],
         ];
     }

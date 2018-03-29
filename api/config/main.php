@@ -92,6 +92,7 @@ return [
 
                 'GET shop/cart' => 'shop/cart/index',
                 'DELETE shop/cart' => 'shop/cart/clear',
+                'POST shop/cart/checkout' => 'shop/checkout/index',
                 'POST shop/cart/<id:\d+>/quantity' => 'shop/cart/quantity',
                 'DELETE shop/cart/<id:\d+>' => 'shop/cart/delete',
             ],
