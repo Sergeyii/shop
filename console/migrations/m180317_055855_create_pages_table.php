@@ -21,7 +21,7 @@ class m180317_055855_create_pages_table extends Migration
 
         $this->createIndex('idx-pages-slug', 'pages', 'slug', true);
 
-        $this->insert('pages', [
+        /*$this->insert('pages', [
             'id' => 1,
             'title' => 'Root',
             'slug' => 'root',
@@ -30,7 +30,7 @@ class m180317_055855_create_pages_table extends Migration
             'lft' => 1,
             'rgt' => 2,
             'depth' => 0,
-        ]);
+        ]);*/
     }
 
     public function down()
