@@ -23,6 +23,8 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property integer $price_old
  * @property string $name
  * @property string $code
+ * @property integer $brand_id
+ * @property integer $category_id
  * @property string $description
  * @property Value[] values
  * @property Photo[] photos
@@ -35,6 +37,7 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property integer $quantity
  * @property integer rating
  * @property float $weight
+ * @property integer created_at
  * */
 
 class Product extends ActiveRecord

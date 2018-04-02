@@ -2,6 +2,8 @@
 
 namespace frontend\bootstrap;
 
+use shop\services\yandex\ShopInfo;
+use shop\services\yandex\YandexMarket;
 use yii\base\BootstrapInterface;
 use yii\helpers\ArrayHelper;
 use yii\widgets\Breadcrumbs;
@@ -22,5 +24,9 @@ class SetUp implements BootstrapInterface
                 ],
             ], $args));
         });
+
+        $container->setSingleton(YandexMarket::class, [], [
+            new ShopInfo($app->name, $app->name, $app->params['frontendHostInfo']),
+        ]);
     }
 }

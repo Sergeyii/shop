@@ -38,6 +38,14 @@ class ProductReadRepository
         return Product::find()->active()->with('mainPhoto')->orderBy(['id' => SORT_DESC])->limit($limit)->all();
     }
 
+    /**
+     * @return iterable|Product[]
+     * */
+    public function getAllIterator(): iterable
+    {
+        return Product::find()->alias('p')->active('p')->with('mainPhoto', 'brand', 'values')->each();
+    }
+
     public function getAll(): DataProviderInterface
     {
         $query = Product::find()->alias('p')->active('p')->with('mainPhoto');
