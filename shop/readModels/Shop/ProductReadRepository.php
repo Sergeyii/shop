@@ -38,6 +38,16 @@ class ProductReadRepository
         return Product::find()->active()->with('mainPhoto')->orderBy(['id' => SORT_DESC])->limit($limit)->all();
     }
 
+    public function count(): int
+    {
+        return Product::find()->active()->count();
+    }
+
+    public function getAllByRange(int $offset=0, int $limit=0): array
+    {
+        return Product::find()->active()->orderBy(['id' => SORT_ASC])->limit($limit)->offset($offset)->all();
+    }
+
     /**
      * @return iterable|Product[]
      * */
