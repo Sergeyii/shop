@@ -1,6 +1,6 @@
 <?php
 
-namespace shop\services\manage\Shop;
+namespace shop\useCases\manage\Shop;
 
 use shop\entities\Shop\Tag;
 use shop\forms\manage\Shop\TagForm;

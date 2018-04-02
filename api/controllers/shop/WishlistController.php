@@ -5,7 +5,7 @@ namespace api\controllers\shop;
 use api\formatters\WishlistProductListFormatter;
 use api\providers\MapDataProvider;
 use shop\readModels\Shop\ProductReadRepository;
-use shop\services\cabinet\WishlistService;
+use shop\useCases\cabinet\WishlistService;
 use yii\data\DataProviderInterface;
 use yii\rest\Controller;
 use yii\web\BadRequestHttpException;

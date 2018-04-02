@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use shop\forms\manage\PageForm;
-use shop\services\manage\PageManageService;
+use shop\useCases\manage\PageManageService;
 use Yii;
 use backend\forms\PageSearch;
 use yii\web\Controller;

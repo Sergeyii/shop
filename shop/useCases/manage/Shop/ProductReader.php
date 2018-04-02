@@ -1,6 +1,6 @@
 <?php
 
-namespace services\manage\Shop;
+namespace shop\useCases\manage\Shop;
 
 use values\shop\product\ProductCsvRow;
 

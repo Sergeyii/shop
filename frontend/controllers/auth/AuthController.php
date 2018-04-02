@@ -5,14 +5,14 @@ namespace frontend\controllers\auth;
 use common\auth\Identity;
 use shop\forms\auth\LoginForm;
 use Yii;
-use shop\services\auth\AuthService;
+use shop\useCases\auth\AuthService;
 use yii\web\Controller;
 
 class AuthController extends Controller
 {
     private $authService;
 
-    public function __construct($id, $module, array $config = [], AuthService $authService)
+    public function __construct($id, $module, array $config = [], \shop\useCases\auth\AuthService $authService)
     {
         parent::__construct($id, $module, $config);
 

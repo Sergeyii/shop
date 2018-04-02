@@ -11,7 +11,7 @@ use shop\cart\cost\calculator\SimpleCost;
 use shop\cart\storage\HybridStorage;
 use shop\readModels\Shop\CategoryReadRepository;
 use shop\readModels\UserReadRepository;
-use shop\services\ContactService;
+use shop\useCases\ContactService;
 use yii\base\BootstrapInterface;
 use yii\di\Instance;
 use yii\mail\MailerInterface;

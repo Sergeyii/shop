@@ -1,9 +1,9 @@
 <?php
 
-namespace shop\services\manage\Shop;
+namespace shop\useCases\manage\Shop;
 
 use forms\manage\Shop\Product\ProductImportForm;
-use services\manage\Shop\ProductReader;
+use shop\useCases\manage\Shop\ProductReader;
 use shop\entities\Meta;
 use shop\entities\Shop\Product\Product;
 use shop\entities\Shop\Tag;

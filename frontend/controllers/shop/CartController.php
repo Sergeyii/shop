@@ -4,7 +4,7 @@ namespace frontend\controllers\shop;
 
 use shop\forms\Shop\AddToCartForm;
 use shop\readModels\Shop\ProductReadRepository;
-use shop\services\Shop\CartService;
+use shop\useCases\Shop\CartService;
 use yii\filters\VerbFilter;
 use \yii\web\Controller;
 use yii\web\NotFoundHttpException;

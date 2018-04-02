@@ -3,7 +3,7 @@
 namespace backend\controllers\Blog;
 
 use shop\forms\manage\Blog\Post\PostForm;
-use shop\services\manage\Blog\PostManageService;
+use shop\useCases\manage\Blog\PostManageService;
 use Yii;
 use backend\forms\Blog\PostSearch;
 use yii\web\Controller;

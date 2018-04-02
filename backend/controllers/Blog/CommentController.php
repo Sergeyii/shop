@@ -3,8 +3,8 @@
 namespace backend\controllers\Blog;
 
 use shop\forms\manage\Blog\Post\CommentEditForm;
-use shop\services\manage\Blog\CommentManageService;
-use shop\services\manage\Blog\PostManageService;
+use shop\useCases\manage\Blog\CommentManageService;
+use shop\useCases\manage\Blog\PostManageService;
 use Yii;
 use backend\forms\Blog\CommentSearch;
 use yii\web\Controller;

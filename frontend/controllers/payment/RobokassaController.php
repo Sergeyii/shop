@@ -8,7 +8,7 @@ use robokassa\ResultAction;
 use robokassa\SuccessAction;
 use shop\entities\Shop\Order\Order;
 use shop\readModels\Shop\OrderReadRepository;
-use shop\services\Shop\OrderService;
+use shop\useCases\Shop\OrderService;
 use yii\web\Controller;
 use Yii;
 

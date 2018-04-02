@@ -4,7 +4,7 @@ namespace frontend\controllers\auth;
 
 use Yii;
 use yii\web\Controller;
-use shop\services\auth\PasswordResetService;
+use shop\useCases\auth\PasswordResetService;
 use shop\forms\auth\PasswordResetRequestForm;
 use shop\forms\auth\ResetPasswordForm;
 use yii\base\InvalidParamException;

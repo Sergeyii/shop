@@ -5,7 +5,7 @@ namespace api\controllers\shop;
 use api\formatters\CartFormatter;
 use shop\forms\Shop\AddToCartForm;
 use shop\readModels\Shop\ProductReadRepository;
-use shop\services\Shop\CartService;
+use shop\useCases\Shop\CartService;
 use yii\rest\Controller;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
