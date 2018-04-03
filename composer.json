@@ -36,7 +36,8 @@
         "mihaildev/yii2-elfinder": "*",
         "fishvision/yii2-migrate": "*",
         "filsh/yii2-oauth2-server": "*",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "drewm/mailchimp-api": "^2.5"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

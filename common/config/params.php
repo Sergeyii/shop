@@ -14,5 +14,9 @@ return [
     'aliases' => [
         '@staticRoot' => $static['staticPath'],
         '@static' => $static['staticHostInfo'],
-    ]
+    ],
+    'mailChimp' => [
+        'apiKey' => '',
+        'listId' => '',
+    ],
 ];
