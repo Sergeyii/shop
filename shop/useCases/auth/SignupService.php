@@ -36,7 +36,7 @@ class SignupService
 
     public function signup(SignupForm $form):void
     {
-        $user = User::requestSignup($form-username, $form->email, $form->password);
+        $user = User::requestSignup($form->username, $form->email, $form->password);
 
         $this->transaction->wrap(function() use($user){
             $this->users->save($user);
