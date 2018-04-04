@@ -19,6 +19,7 @@ use yii\web\IdentityInterface;
  * @property string $email
  * @property string $auth_key
  * @property string $email_confirm_token
+ * @property string $phone
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
@@ -31,11 +32,12 @@ class User extends ActiveRecord
     const STATUS_WAIT = 0;
     const STATUS_ACTIVE = 10;
 
-    public static function create(string $username, string $email, string $password): self
+    public static function create(string $username, string $email, string $phone, string $password): self
     {
         $user = new static();
         $user->username = $username;
         $user->email = $email;
+        $user->phone = $phone;
         $user->setPassword(!empty($password) ? $password : Yii::$app->security->generateRandomString());
         $user->created_at = time();
         $user->status = static::STATUS_ACTIVE;
@@ -44,18 +46,27 @@ class User extends ActiveRecord
         return $user;
     }
 
-    public function edit(string $username, string $email): void
+    public function edit(string $username, string $email, string $phone): void
     {
         $this->username = $username;
         $this->email = $email;
+        $this->phone = $phone;
         $this->updated_at = time();
     }
 
-    public static function requestSignup(string $username, string $email, string $password): self
+    public function editProfile(string $email, string $phone): void
+    {
+        $this->email = $email;
+        $this->phone = $phone;
+        $this->updated_at = time();
+    }
+
+    public static function requestSignup(string $username, string $email, string $phone, string $password): self
     {
         $user = new static();
         $user->username = $username;
         $user->email = $email;
+        $user->phone = $phone;
         $user->setPassword($password);
         $user->created_at = time();
         $user->status = static::STATUS_WAIT;

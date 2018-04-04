@@ -10,6 +10,7 @@ class UserEditForm extends Model
 {
     public $username;
     public $email;
+    public $phone;
     public $role;
 
     private $_user;
@@ -18,19 +19,20 @@ class UserEditForm extends Model
     {
         $this->username = $user->username;
         $this->email = $user->email;
+        $this->phone = $user->phone;
         $roles = \Yii::$app->authManager->getRolesByUser($user->id);
         $this->role = $roles ? reset($roles)->name : null;
         $this->_user = $user;
-
         parent::__construct($config);
     }
 
     public function rules(): array
     {
         return [
-            [['username', 'email', 'role'], 'required'],
+            [['username', 'email', 'phone', 'role'], 'required'],
             ['email', 'email'],
             [['username', 'email'], 'string', 'max' => 255],
+            ['phone', 'integer'],
             [['username', 'email'], 'unique', 'targetClass' => User::class, 'filter' => $this->_user ? ['<>', 'id', $this->_user->id] : null],
         ];
     }

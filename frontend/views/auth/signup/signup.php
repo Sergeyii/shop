@@ -5,7 +5,7 @@
 /* @var $model \shop\forms\auth\SignupForm */
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use kartik\form\ActiveForm;
 
 $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
@@ -20,9 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
                 <?= $form->field($model, 'email') ?>
-
+                <?= $form->field($model, 'phone', ['addon' => ['prepend' => ['content' => '+']]]) ?>
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
                 <div class="form-group">

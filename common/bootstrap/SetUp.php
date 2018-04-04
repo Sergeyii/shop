@@ -11,6 +11,10 @@ use shop\cart\cost\calculator\SimpleCost;
 use shop\cart\storage\HybridStorage;
 use shop\readModels\Shop\CategoryReadRepository;
 use shop\readModels\UserReadRepository;
+use shop\services\newsletter\MailChimp;
+use shop\services\newsletter\Newsletter;
+use shop\services\yandex\ShopInfo;
+use shop\services\yandex\YandexMarket;
 use shop\useCases\ContactService;
 use yii\base\BootstrapInterface;
 use yii\di\Instance;
@@ -54,6 +58,17 @@ class SetUp implements BootstrapInterface
             return new Cart(
                 new HybridStorage($app->get('user'), 'cart', 604800, $app->db),
                 new DynamicCost(new SimpleCost())
+            );
+        });
+
+        $container->setSingleton(YandexMarket::class, [], [
+            new ShopInfo($app->name, $app->name, $app->params['frontendHostInfo']),
+        ]);
+
+        $container->setSingleton(Newsletter::class, function() use($app){
+            return new MailChimp(
+                new \DrewM\MailChimp\MailChimp($app->params['mailChimp']['apiKey']),
+                $app->params['mailChimp']['listId']
             );
         });
 

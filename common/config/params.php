@@ -19,4 +19,5 @@ return [
         'apiKey' => '',
         'listId' => '',
     ],
+    'frontendHostInfo' => 'http://example.com',
 ];

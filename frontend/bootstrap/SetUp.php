@@ -2,10 +2,6 @@
 
 namespace frontend\bootstrap;
 
-use shop\services\newsletter\MailChimp;
-use shop\services\newsletter\Newsletter;
-use shop\services\yandex\ShopInfo;
-use shop\services\yandex\YandexMarket;
 use yii\base\BootstrapInterface;
 use yii\helpers\ArrayHelper;
 use yii\widgets\Breadcrumbs;
@@ -25,17 +21,6 @@ class SetUp implements BootstrapInterface
                     'url' => \Yii::$app->homeUrl,
                 ],
             ], $args));
-        });
-
-        $container->setSingleton(YandexMarket::class, [], [
-            new ShopInfo($app->name, $app->name, $app->params['frontendHostInfo']),
-        ]);
-
-        $container->setSingleton(Newsletter::class, function() use($app){
-            return new MailChimp(
-              new \DrewM\MailChimp\MailChimp($app->params['mailChimp']['apiKey']),
-                $app->params['mailChimp']['listId']
-            );
         });
     }
 }
