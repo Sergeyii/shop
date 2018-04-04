@@ -13,6 +13,8 @@ use shop\readModels\Shop\CategoryReadRepository;
 use shop\readModels\UserReadRepository;
 use shop\services\newsletter\MailChimp;
 use shop\services\newsletter\Newsletter;
+use shop\services\sms\SmsRu;
+use shop\services\sms\SmsSender;
 use shop\services\yandex\ShopInfo;
 use shop\services\yandex\YandexMarket;
 use shop\useCases\ContactService;
@@ -75,5 +77,9 @@ class SetUp implements BootstrapInterface
         $container->setSingleton(UserReadRepository::class, function(){
             return new UserReadRepository();
         });
+
+        $container->setSingleton(SmsSender::class, SmsRu::class, [
+            $app->params['sms']['api_id']
+        ]);
     }
 }

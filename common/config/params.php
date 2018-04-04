@@ -11,6 +11,7 @@ return [
     'user.rememberMeDuration' => 3600,
     'cookieValidationKey' => '',
     'cookieDomain' => '.example.com',
+    'frontendHostInfo' => 'http://example.com',
     'aliases' => [
         '@staticRoot' => $static['staticPath'],
         '@static' => $static['staticHostInfo'],
@@ -19,5 +20,8 @@ return [
         'apiKey' => '',
         'listId' => '',
     ],
-    'frontendHostInfo' => 'http://example.com',
+    'sms' => [
+        'api_id' => '',
+        'base_url' => '',
+    ],
 ];
