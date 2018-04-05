@@ -3,12 +3,14 @@
 namespace shop\useCases\auth;
 
 use shop\access\Rbac;
+use shop\dispatchers\EventDispatcher;
 use shop\entities\User\User;
 use shop\repositories\UserRepository;
 use shop\forms\auth\SignupForm;
 use shop\services\newsletter\Newsletter;
 use shop\services\RoleManager;
 use shop\services\TransactionManager;
+use shop\useCases\auth\events\UserSignupConfirmed;
 use yii\mail\MailerInterface;
 
 class SignupService
@@ -18,13 +20,15 @@ class SignupService
     private $roles;
     private $transaction;
     private $newsletter;
+    private $dispatcher;
 
     public function __construct(
         UserRepository $users,
         MailerInterface $mailer,
         RoleManager $roles,
         TransactionManager $transaction,
-        Newsletter $newsletter
+        Newsletter $newsletter,
+        EventDispatcher $dispatcher
     )
     {
          $this->mailer = $mailer;
@@ -32,6 +36,7 @@ class SignupService
          $this->roles = $roles;
          $this->transaction = $transaction;
          $this->newsletter = $newsletter;
+         $this->dispatcher = $dispatcher;
     }
 
     public function signup(SignupForm $form):void
@@ -43,7 +48,9 @@ class SignupService
             $this->roles->assign($user->id, Rbac::ROLE_USER);
         });
 
-        $send = $this->mailer->compose(
+
+        $this->dispatcher->dispatch(new UserSignupRequested($user));
+        /*$send = $this->mailer->compose(
             ['html' => 'auth/signup/confirm-html', 'text' => 'auth/signup/confirm-text'],
             ['user' => $user]
         )
@@ -53,7 +60,7 @@ class SignupService
 
         if( !$send ){
             throw new \RuntimeException('Email sending error.');
-        }
+        }*/
     }
 
     public function confirm($token):void
@@ -64,6 +71,9 @@ class SignupService
         $user = $this->users->getByEmailConfirmToken($token);
         $user->confirmSignup();
         $this->users->save($user);
+
+        $this->dispatcher->dispatch(new UserSignupConfirmed($user));
+
         $this->newsletter->subscribe($user->email);
     }
 }
