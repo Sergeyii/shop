@@ -4,7 +4,7 @@ namespace shop\useCases\auth\events;
 
 use shop\entities\User\User;
 
-class UserSignupRequested
+class UserSignUpRequested
 {
     public $user;
 

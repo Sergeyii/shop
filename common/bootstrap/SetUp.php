@@ -9,6 +9,10 @@ use shop\cart\Cart;
 use shop\cart\cost\calculator\DynamicCost;
 use shop\cart\cost\calculator\SimpleCost;
 use shop\cart\storage\HybridStorage;
+use shop\dispatchers\EventDispatcher;
+use shop\dispatchers\SimpleEventDispatcher;
+use shop\listeners\User\UserSignupConfirmedListener;
+use shop\listeners\User\UserSignupRequestedListener;
 use shop\readModels\Shop\CategoryReadRepository;
 use shop\readModels\UserReadRepository;
 use shop\services\newsletter\MailChimp;
@@ -18,6 +22,8 @@ use shop\services\sms\SmsRu;
 use shop\services\sms\SmsSender;
 use shop\services\yandex\ShopInfo;
 use shop\services\yandex\YandexMarket;
+use shop\useCases\auth\events\UserSignUpConfirmed;
+use shop\useCases\auth\events\UserSignUpRequested;
 use shop\useCases\ContactService;
 use yii\base\BootstrapInterface;
 use yii\di\Instance;
@@ -79,15 +85,22 @@ class SetUp implements BootstrapInterface
             return new UserReadRepository();
         });
 
-        /*$container->setSingleton(SmsSender::class, SmsRu::class, [
-            $app->params['sms']['api_id']
-        ]);*/
-
         $container->setSingleton(SmsSender::class, function() use($app){
             return new LoggedSender(
                 new SmsRu($app->params['sms']['api_id'], $app->params['sms']['base_url']),
                 Yii::getLogger()
             );
+        });
+
+        $container->setSingleton(EventDispatcher::class, function() use ($container){
+            return new SimpleEventDispatcher([
+                UserSignUpRequested::class => [
+                    [$container->get(UserSignupRequestedListener::class), 'handle'],
+                ],
+                UserSignUpConfirmed::class => [
+                    [$container->get(UserSignupConfirmedListener::class), 'handle'],
+                ],
+            ]);
         });
     }
 }
