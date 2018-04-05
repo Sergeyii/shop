@@ -13,6 +13,7 @@ use shop\readModels\Shop\CategoryReadRepository;
 use shop\readModels\UserReadRepository;
 use shop\services\newsletter\MailChimp;
 use shop\services\newsletter\Newsletter;
+use shop\services\sms\LoggedSender;
 use shop\services\sms\SmsRu;
 use shop\services\sms\SmsSender;
 use shop\services\yandex\ShopInfo;
@@ -78,8 +79,15 @@ class SetUp implements BootstrapInterface
             return new UserReadRepository();
         });
 
-        $container->setSingleton(SmsSender::class, SmsRu::class, [
+        /*$container->setSingleton(SmsSender::class, SmsRu::class, [
             $app->params['sms']['api_id']
-        ]);
+        ]);*/
+
+        $container->setSingleton(SmsSender::class, function() use($app){
+            return new LoggedSender(
+                new SmsRu($app->params['sms']['api_id'], $app->params['sms']['base_url']),
+                Yii::getLogger()
+            );
+        });
     }
 }
