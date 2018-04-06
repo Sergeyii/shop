@@ -9,8 +9,8 @@ use shop\repositories\UserRepository;
 use shop\forms\auth\SignupForm;
 use shop\services\RoleManager;
 use shop\services\TransactionManager;
-use shop\useCases\auth\events\UserSignUpConfirmed;
-use shop\useCases\auth\events\UserSignUpRequested;
+use shop\entities\User\events\UserSignUpConfirmed;
+use shop\entities\User\events\UserSignUpRequested;
 
 class SignupService
 {
@@ -40,7 +40,7 @@ class SignupService
             $this->users->save($user);
             $this->roles->assign($user->id, Rbac::ROLE_USER);
         });
-        $this->dispatcher->dispatch(new UserSignUpRequested($user));
+        $this->dispatcher->dispatchAll($user->releaseEvents());
     }
 
     public function confirm($token):void
@@ -51,6 +51,6 @@ class SignupService
         $user = $this->users->getByEmailConfirmToken($token);
         $user->confirmSignup();
         $this->users->save($user);
-        $this->dispatcher->dispatch(new UserSignUpConfirmed($user));
+        $this->dispatcher->dispatchAll($user->releaseEvents());
     }
 }
