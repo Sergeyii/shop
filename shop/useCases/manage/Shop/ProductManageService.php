@@ -3,6 +3,8 @@
 namespace shop\useCases\manage\Shop;
 
 use forms\manage\Shop\Product\ProductImportForm;
+use shop\forms\manage\Shop\Product\PriceForm;
+use shop\forms\manage\Shop\Product\QuantityForm;
 use shop\useCases\manage\Shop\ProductReader;
 use shop\entities\Meta;
 use shop\entities\Shop\Product\Product;
@@ -149,6 +151,20 @@ class ProductManageService
 
             $this->products->save($product);
         });
+    }
+
+    public function changePrice($id, PriceForm $form): void
+    {
+        $product = $this->products->get($id);
+        $product->setPrice($form->new, $form->old);
+        $this->products->save($product);
+    }
+
+    public function changeQuantity($id, QuantityForm $form): void
+    {
+        $product = $this->products->get($id);
+        $product->setQuantity($form->quantity);
+        $this->products->save($product);
     }
 
     public function changeCategories($id, CategoriesForm $form)

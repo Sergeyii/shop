@@ -4,6 +4,7 @@ namespace common\bootstrap;
 
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
+use shop\entities\Shop\Product\events\ProductAppearedInStock;
 use frontend\urls\CategoryUrlRule;
 use shop\cart\Cart;
 use shop\cart\cost\calculator\DynamicCost;
@@ -12,6 +13,7 @@ use shop\cart\storage\HybridStorage;
 use shop\dispatchers\DeferredEventDispatcher;
 use shop\dispatchers\EventDispatcher;
 use shop\dispatchers\SimpleEventDispatcher;
+use shop\listeners\Shop\Product\ProductAppearedInStockListener;
 use shop\listeners\User\UserSignupConfirmedListener;
 use shop\listeners\User\UserSignupRequestedListener;
 use shop\readModels\Shop\CategoryReadRepository;
@@ -27,6 +29,7 @@ use shop\entities\User\events\UserSignUpConfirmed;
 use shop\entities\User\events\UserSignUpRequested;
 use shop\useCases\ContactService;
 use yii\base\BootstrapInterface;
+use yii\base\ErrorHandler;
 use yii\di\Instance;
 use yii\mail\MailerInterface;
 use Yii;
@@ -52,6 +55,10 @@ class SetUp implements BootstrapInterface
 
         $container->setSingleton(Client::class, function(){
            return ClientBuilder::create()->build();
+        });
+
+        $container->setSingleton(ErrorHandler::class, function() use($app) {
+            return $app->errorHandler;
         });
 
         /*//TODO::почему-то не работает!
@@ -98,6 +105,7 @@ class SetUp implements BootstrapInterface
             return new DeferredEventDispatcher(new SimpleEventDispatcher($container, [
                 UserSignUpRequested::class => [UserSignupRequestedListener::class],
                 UserSignUpConfirmed::class => [UserSignupConfirmedListener::class],
+                ProductAppearedInStock::class => [ProductAppearedInStockListener::class],
             ]));
         });
     }
