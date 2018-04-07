@@ -2,11 +2,19 @@
 
 namespace shop\repositories;
 
+use shop\dispatchers\EventDispatcher;
 use shop\entities\User\User;
 use shop\repositories\NotFoundException;
 
 class UserRepository
 {
+    private $dispatcher;
+
+    public function __construct(EventDispatcher $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
+    }
+
     public function findByUsernameOrEmail(string $value):?User
     {
         return $this->getBy(['or', ['username' => $value], ['email' => $value]]);
@@ -51,6 +59,7 @@ class UserRepository
         if (!$user->save()) {
             throw new \RuntimeException('User saving error.');
         }
+        $this->dispatcher->dispatchAll($user->releaseEvents());
     }
 
     public function remove(User $user):void
@@ -58,6 +67,7 @@ class UserRepository
         if (!$user->delete()) {
             throw new \RuntimeException('User removing error.');
         }
+        $this->dispatcher->dispatchAll($user->releaseEvents());
     }
 
     private function getBy(array $criteria):User
