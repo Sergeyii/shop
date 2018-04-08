@@ -18,3 +18,4 @@ sudo service nginx restart
 sudo service mysql restart
 
 service elasticsearch restart
+service redis restart
