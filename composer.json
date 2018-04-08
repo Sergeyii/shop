@@ -38,7 +38,8 @@
         "filsh/yii2-oauth2-server": "*",
         "guzzlehttp/guzzle": "^6.3",
         "drewm/mailchimp-api": "^2.5",
-        "yiisoft/yii2-redis": "^2.0"
+        "yiisoft/yii2-redis": "^2.0",
+        "yiisoft/yii2-queue": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

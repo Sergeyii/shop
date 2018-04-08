@@ -7,6 +7,7 @@ return [
     ],
     'bootstrap' => [
         'debug',
+        'queue',
     ],
     'modules' => [
         'debug' => [
@@ -54,6 +55,10 @@ return [
             'itemChildTable' => '{{%auth_item_children}}',
             'assignmentTable' => '{{%auth_assignments}}',
             'ruleTable' => '{{%auth_rules}}',
+        ],
+        'queue' => [
+            'class' => \yii\queue\redis\Queue::class,
+            'as log' => \yii\queue\LogBehavior::class,
         ],
     ],
 ];
