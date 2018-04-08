@@ -64,7 +64,11 @@ apt-get install -y elasticsearch
 sed -i 's/-Xms2g/-Xms256m/' /etc/elasticsearch/jvm.options
 sed -i 's/-Xmx2g/-Xmx256m/' /etc/elasticsearch/jvm.options
 
+info "Install Redis Server"
 sudo apt-get install -y redis-server
+
+info "Install Supervisor"
+sudo apt-get install supervisor
 
 info "Configure MySQL"
 sudo sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
