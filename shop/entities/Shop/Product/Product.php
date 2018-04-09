@@ -9,6 +9,7 @@ use shop\entities\EventTrait;
 use shop\entities\Meta;
 use shop\entities\Shop\Brand;
 use shop\entities\Shop\Category;
+use shop\entities\Shop\Product\events\ProductAppearedInStock;
 use shop\entities\Shop\Product\queries\ProductQuery;
 use shop\entities\Shop\Tag;
 use shop\entities\User\WishlistItem;

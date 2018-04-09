@@ -5,8 +5,10 @@ namespace backend\controllers\shop;
 use forms\manage\Shop\Product\ProductImportForm;
 use shop\entities\Shop\Product\Modification;
 use shop\forms\manage\Shop\Product\PhotosForm;
+use shop\forms\manage\Shop\Product\PriceForm;
 use shop\forms\manage\Shop\Product\ProductCreateForm;
 use shop\forms\manage\Shop\Product\ProductEditForm;
+use shop\forms\manage\Shop\Product\QuantityForm;
 use shop\readModels\Shop\BrandReadRepository;
 use shop\useCases\manage\Shop\ProductManageService;
 use Yii;
@@ -65,18 +67,6 @@ class ProductController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
-    /**
-     * Displays a single Product model.
-     * @param integer $id
-     * @return mixed
-     */
-    /*public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }*/
 
     public function actionView($id)
     {
@@ -157,6 +147,52 @@ class ProductController extends Controller
         }
 
         return $this->render('update', [
+            'model' => $form,
+            'product' => $product,
+        ]);
+    }
+
+    /**
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionPrice($id)
+    {
+        $product = $this->findModel($id);
+        $form = new PriceForm($product);
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $this->service->changePrice($product->id, $form);
+                return $this->redirect(['view', 'id' => $product->id]);
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }
+        return $this->render('price', [
+            'model' => $form,
+            'product' => $product,
+        ]);
+    }
+
+    /**
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionQuantity($id)
+    {
+        $product = $this->findModel($id);
+        $form = new QuantityForm($product);
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $this->service->changeQuantity($product->id, $form);
+                return $this->redirect(['view', 'id' => $product->id]);
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }
+        return $this->render('quantity', [
             'model' => $form,
             'product' => $product,
         ]);
