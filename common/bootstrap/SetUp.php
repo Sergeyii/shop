@@ -33,6 +33,7 @@ use yii\base\ErrorHandler;
 use yii\di\Instance;
 use yii\mail\MailerInterface;
 use Yii;
+use yii\queue\Queue;
 use yii\rbac\ManagerInterface;
 
 class SetUp implements BootstrapInterface
@@ -59,6 +60,10 @@ class SetUp implements BootstrapInterface
 
         $container->setSingleton(ErrorHandler::class, function() use($app) {
             return $app->errorHandler;
+        });
+
+        $container->setSingleton(Queue::class, function() use ($app) {
+            return $app->get('queue');
         });
 
         /*//TODO::почему-то не работает!
