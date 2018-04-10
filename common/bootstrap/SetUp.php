@@ -4,6 +4,7 @@ namespace common\bootstrap;
 
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
+use shop\dispatchers\AsyncEventDispatcher;
 use shop\entities\Shop\Product\events\ProductAppearedInStock;
 use frontend\urls\CategoryUrlRule;
 use shop\cart\Cart;
@@ -13,6 +14,7 @@ use shop\cart\storage\HybridStorage;
 use shop\dispatchers\DeferredEventDispatcher;
 use shop\dispatchers\EventDispatcher;
 use shop\dispatchers\SimpleEventDispatcher;
+use shop\jobs\AsyncEventJobHandler;
 use shop\listeners\Shop\Product\ProductAppearedInStockListener;
 use shop\listeners\User\UserSignupConfirmedListener;
 use shop\listeners\User\UserSignupRequestedListener;
@@ -30,6 +32,7 @@ use shop\entities\User\events\UserSignUpRequested;
 use shop\useCases\ContactService;
 use yii\base\BootstrapInterface;
 use yii\base\ErrorHandler;
+use yii\di\Container;
 use yii\di\Instance;
 use yii\mail\MailerInterface;
 use Yii;
@@ -106,12 +109,21 @@ class SetUp implements BootstrapInterface
         });
 
         $container->setSingleton(EventDispatcher::class, DeferredEventDispatcher::class);
-        $container->setSingleton(DeferredEventDispatcher::class, function() use ($container){
-            return new DeferredEventDispatcher(new SimpleEventDispatcher($container, [
+
+        $container->setSingleton(DeferredEventDispatcher::class, function (Container $container) {
+            return new DeferredEventDispatcher(new AsyncEventDispatcher($container->get(Queue::class)));
+        });
+
+        $container->setSingleton(SimpleEventDispatcher::class, function(Container $container){
+            return new SimpleEventDispatcher($container, [
                 UserSignUpRequested::class => [UserSignupRequestedListener::class],
                 UserSignUpConfirmed::class => [UserSignupConfirmedListener::class],
                 ProductAppearedInStock::class => [ProductAppearedInStockListener::class],
-            ]));
+            ]);
         });
+
+        $container->setSingleton(AsyncEventJobHandler::class, [], [
+            Instance::of(SimpleEventDispatcher::class)
+        ]);
     }
 }
