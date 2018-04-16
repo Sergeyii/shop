@@ -145,7 +145,7 @@ class SitemapController extends Controller
                     MapItem::WEEKLY
                 );
             }, $this->shopCategories->getAll()));
-        }, ['sitemapShopCategories']);
+        }, ['categories', 'sitemapShopCategories']);
     }
 
     public function actionShopProductsIndex(): Response
