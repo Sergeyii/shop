@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use yii\web\Controller;
-use shop\services\ContactService;
+use shop\useCases\ContactService;
 use shop\forms\ContactForm;
 
 class ContactController extends Controller

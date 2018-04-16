@@ -2,12 +2,14 @@
 
 namespace frontend\controllers\blog;
 
+use shop\forms\Blog\CommentForm;
 use shop\readModels\Blog\CategoryReadRepository;
 use shop\readModels\Blog\PostReadRepository;
 use shop\readModels\Blog\TagReadRepository;
-use shop\services\Blog\CommentService;
+use shop\useCases\Blog\CommentService;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use \Yii;
 
 class PostController extends Controller
 {
@@ -20,7 +22,7 @@ class PostController extends Controller
 
     public function __construct(
         string $id, $module,
-        CommentService $service,
+        \shop\useCases\Blog\CommentService $service,
         PostReadRepository $posts,
         CategoryReadRepository $categories,
         TagReadRepository $tags,
@@ -79,6 +81,30 @@ class PostController extends Controller
 
         return $this->render('post', [
             'post' => $post
+        ]);
+    }
+
+    public function actionComment($id)
+    {
+        if(!$post = $this->posts->find($id)){
+            throw new NotFoundHttpException("The requested page doesn't exists.");
+        }
+
+        $form = new CommentForm();
+
+        if( $form->load(Yii::$app->request->post()) && $form->validate() ){
+            try{
+                $comment = $this->service->create($post->id, Yii::$app->user->id, $form);
+                return $this->redirect(['post', 'id' => $post->id, '#' => 'comment_'.$comment->id]);
+            }catch(\DomainException $e){
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }
+
+        return $this->render('comment', [
+            'post' => $post,
+            'model' => $form,
         ]);
     }
 }

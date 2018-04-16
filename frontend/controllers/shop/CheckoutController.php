@@ -4,7 +4,7 @@ namespace frontend\controllers\shop;
 
 use shop\cart\Cart;
 use shop\forms\Shop\Order\OrderForm;
-use shop\services\Shop\OrderService;
+use shop\useCases\Shop\OrderService;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use Yii;
@@ -16,7 +16,7 @@ class CheckoutController extends Controller
     private $cart;
     private $service;
 
-    public function __construct(string $id, $module, Cart $cart, OrderService $service, array $config = [])
+    public function __construct(string $id, $module, Cart $cart, \shop\useCases\Shop\OrderService $service, array $config = [])
     {
         $this->cart = $cart;
         $this->service = $service;

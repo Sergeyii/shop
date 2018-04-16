@@ -26,7 +26,7 @@ use yii\db\ActiveRecord;
  * @property integer $status
  * @property Meta $meta
  * @property integer $comments_count
- * @property Comment $comments
+ * @property Comment[] $comments
  *
  * @property Category $category
  * @property TagAssignment[] $tagAssignments
@@ -119,7 +119,7 @@ class Post extends ActiveRecord
         }
 
         $comments = $this->comments;
-        $comments[] = $comment = Comment::create($this->id, $userId, $parentId ? $parent->id : null, $text);
+        $comments[] = $comment = Comment::create($userId, $parentId ? $parent->id : null, $text);
         $this->updateComments($comments);
         return $comment;
     }
@@ -168,7 +168,7 @@ class Post extends ActiveRecord
             }
         }
 
-        throw new \DomainException('');
+        throw new \DomainException('Comment not found.');
     }
 
     public function getComment($id): Comment
@@ -235,7 +235,7 @@ class Post extends ActiveRecord
             MetaBehavior::class,
             [
                 'class' => SaveRelationsBehavior::class,
-                'relations' => ['tagAssignments'],
+                'relations' => ['tagAssignments', 'comments'],
             ],
             [
                 'class' => ImageUploadBehavior::class,
@@ -249,6 +249,7 @@ class Post extends ActiveRecord
                     'thumb' => ['width' => 100,  'height' => 70],
                     'admin' => ['width' => 640,  'height' => 480],
                     'blog_list' => ['width' => 1000,  'height' => 150],
+                    'widget_list' => ['width' => 228,  'height' => 228],
                     'origin' => ['processor' => [new WaterMarker(1024, 768, '@static/post/logo.png'), 'process']],
                 ],
             ]

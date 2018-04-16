@@ -3,10 +3,13 @@
 namespace shop\entities\Shop\Product;
 
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
+use shop\entities\AggregateRoot;
 use shop\entities\behaviors\MetaBehavior;
+use shop\entities\EventTrait;
 use shop\entities\Meta;
 use shop\entities\Shop\Brand;
 use shop\entities\Shop\Category;
+use shop\entities\Shop\Product\events\ProductAppearedInStock;
 use shop\entities\Shop\Product\queries\ProductQuery;
 use shop\entities\Shop\Tag;
 use shop\entities\User\WishlistItem;
@@ -17,23 +20,34 @@ use yii\web\UploadedFile;
 use yiidreamteam\upload\ImageUploadBehavior;
 
 /**
+ * @property integer $id
  * @property integer $status
  * @property integer $price_new
  * @property integer $price_old
  * @property string $name
+ * @property string $code
+ * @property integer $brand_id
+ * @property integer $category_id
  * @property string $description
  * @property Value[] values
  * @property Photo[] photos
  * @property Modification[] modifications
  * @property Review[] reviews
- * @mixin ImageUploadBehavior mainPhoto
+ * @property Category $category
+ * @property Brand $brand
+ * @mixin ImageUploadBehavior $mainPhoto
  * @mixin MetaBehavior $meta
  * @property integer $quantity
+ * @property integer rating
  * @property float $weight
+ * @property integer created_at
+ * @mixin EventTrait
  * */
 
-class Product extends ActiveRecord
+class Product extends ActiveRecord implements AggregateRoot
 {
+    use EventTrait;
+
     public $meta;
 
     const STATUS_DRAFT = 0;
@@ -68,13 +82,12 @@ class Product extends ActiveRecord
         $this->price_old = $old;
     }
 
-    public function setQuantity(int $quantity): void
+    public function changeQuantity(int $quantity): void
     {
         if($this->modifications){
             throw new \DomainException('Change modifications quantity.');
         }
-
-        $this->quantity = $quantity;
+        $this->setQuantity($quantity);
     }
 
     public function edit($brandId, $code, $name, $description, $weight, Meta $meta): void
@@ -257,7 +270,16 @@ class Product extends ActiveRecord
         if($quantity > $this->quantity){
             throw new \DomainException('Only '.$this->quantity.' items are available.');
         }
-        $this->quantity -= $quantity;
+        $this->setQuantity($this->quantity - $quantity);
+    }
+
+    public function setQuantity($quantity): void
+    {
+        if($this->quantity == 0 && $quantity > 0){
+            $this->recordEvent(new ProductAppearedInStock($this));
+        }
+
+        $this->quantity = $quantity;
     }
 
     public function getSeoTitle(): string
@@ -354,9 +376,9 @@ class Product extends ActiveRecord
     private function updateModifications(array $modifications): void
     {
         $this->modifications = $modifications;
-        $this->quantity = array_sum(array_map(function(Modification $modification){
+        $this->setQuantity(array_sum(array_map(function(Modification $modification){
             return $modification->quantity;
-        }, $this->modifications));
+        }, $this->modifications)));
     }
 
     //Categories
@@ -586,7 +608,7 @@ class Product extends ActiveRecord
         ];
     }
 
-    public function beforeDelete()
+    public function beforeDelete(): bool
     {
         if (parent::beforeDelete()) {
             foreach($this->photos as $photo){
@@ -597,7 +619,7 @@ class Product extends ActiveRecord
         return false;
     }
 
-    public function afterSave($insert, $changedAttributes)
+    public function afterSave($insert, $changedAttributes): void
     {
         //Просто взять привязанные товары по mainPhoto
         $related = $this->getRelatedRecords();

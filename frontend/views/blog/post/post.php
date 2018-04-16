@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use frontend\widgets\Blog\CommentsWidget;
 
 /* @var $this \yii\web\View */
 /* @var $post \shop\entities\Blog\Post\Post */
@@ -29,7 +30,18 @@ foreach($post->tags as $tag){
         <p><img src="<?=Html::encode($post->getThumbFileUrl('photo', 'origin'))?>" alt="" class="img-responsive"/></p>
     <?php endif;?>
 
-    <p><?=Yii::$app->formatter->asNtext($post->content)?></p>
+    <div><?= Yii::$app->formatter->asHtml($post->description, [
+        'Attr.AllowedRel' => array('nofollow'),
+        'HTML.SafeObject' => true,
+        'Output.FlashCompat' => true,
+        'HTML.SafeIframe' => true,
+        'URI.SafeIframeRegexp'=>'%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
+    ]) ?></div>
+
 </article>
 
 <p>Tags: <?=implode(', ', $tagLinks)?></p>
+
+<?=CommentsWidget::widget([
+    'post' => $post,
+])?>

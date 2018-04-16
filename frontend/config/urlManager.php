@@ -4,20 +4,30 @@ return [
     'class' => 'yii\web\UrlManager',
     'enablePrettyUrl' => true,
     'hostInfo' => $params['frontendHostInfo'],
+    'baseUrl' => '',
     'showScriptName' => false,
     'cache' => false,
     'rules' => [
         '' => 'site/index',
-        '<_a:about>' => 'site/<_a>',
         'contact' => 'contact/index',
         'signup' => 'auth/signup/request',
         'signup/<_a:[\w-]+>' => 'auth/signup/<_a>',
         '<_a:login|logout>' => 'auth/auth/<_a>',
 
+        ['pattern' => 'yandex-market', 'route' => 'market/index', 'suffix' => '.xml'],
+
+        ['pattern' => 'sitemap', 'route' => 'sitemap/index', 'suffix' => '.xml'],
+        ['pattern' => 'sitemap-<target:[a-z-]+>-<start:\d+>', 'route' => 'sitemap/<target>', 'suffix' => '.xml'],
+        ['pattern' => 'sitemap-<target:[a-z-]+>', 'route' => 'sitemap/<target>', 'suffix' => '.xml'],
+
         'blog' => 'blog/post/index',
         'blog/tag/<slug:[\w\-]+>' => 'blog/post/tag',
         'blog/<id:\d+>' => 'blog/post/post',
+        'blog/<id:\d+>/comment' => 'blog/post/comment',
         'blog/<slug:[\w\-]+>' => 'blog/post/category',
+
+        'page/<slug:[\w\-]+>' => 'page/view',
+        //['class' => 'frontend\urls\PageUrlRule'],
 
         'catalog' => 'shop/catalog/index',
         ['class' => 'frontend\urls\CategoryUrlRule'],

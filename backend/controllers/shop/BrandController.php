@@ -3,7 +3,7 @@
 namespace backend\controllers\shop;
 
 use shop\forms\manage\Shop\BrandForm;
-use shop\services\manage\Shop\BrandManageService;
+use shop\useCases\manage\Shop\BrandManageService;
 use Yii;
 use shop\entities\Shop\Brand;
 use backend\forms\Shop\BrandSearch;
@@ -18,7 +18,7 @@ class BrandController extends Controller
 {
     private $service;
 
-    public function __construct(string $id, $module, BrandManageService $service, array $config = [])
+    public function __construct(string $id, $module, \shop\useCases\manage\Shop\BrandManageService $service, array $config = [])
     {
         parent::__construct($id, $module, $config);
 

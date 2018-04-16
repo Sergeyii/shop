@@ -30,9 +30,11 @@
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
-                    ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/user'], 'active' => ( $this->context->id == 'user' ),],
+                    ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/user'], 'active' => ( $this->context->id == 'user' )],
                     ['label' => 'Shop', 'icon' => 'folder', 'items' =>
                         [
+                            ['label' => 'Страницы', 'icon' => 'file-o', 'url' => ['/page'], 'active' => ( $this->context->id == 'page' )],
+                            ['label' => 'Файлы', 'icon' => 'file-o', 'url' => ['/file'], 'active' => ( $this->context->id == 'file' )],
                             ['label' => 'Brands', 'icon' => 'file-o', 'url' => ['/shop/brand/index'], 'active' => ( $this->context->id == 'shop/brand' ),],
                             ['label' => 'Tags', 'icon' => 'file-o', 'url' => ['/shop/tag/index'], 'active' => ($this->context->id == 'shop/tag')],
                             ['label' => 'Categories', 'icon' => 'file-o', 'url' => ['/shop/category/index'], 'active' => ($this->context->id == 'shop/category')],
@@ -44,6 +46,7 @@
                                 ['label' => 'Categories', 'icon' => 'file-o', 'url' => ['/Blog/category/index'], 'active' => ($this->context->id == 'Blog/category')],
                                 ['label' => 'Tags', 'icon' => 'file-o', 'url' => ['/Blog/tag/index'], 'active' => ($this->context->id == 'Blog/tags')],
                                 ['label' => 'Posts', 'icon' => 'file-o', 'url' => ['/Blog/post/index'], 'active' => ($this->context->id == 'Blog/post')],
+                                ['label' => 'Comments', 'icon' => 'file-o', 'url' => ['/Blog/comment/index'], 'active' => ($this->context->id == 'Blog/comment')],
                             ]],
                         ],
                     ],

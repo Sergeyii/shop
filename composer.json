@@ -32,7 +32,15 @@
         "bower-asset/magnific-popup": "^1.1",
         "elasticsearch/elasticsearch": "^6.0",
         "yii-cms/yii2-robokassa": "^1.1",
-        "phpoffice/phpexcel": "^1.8"
+        "phpoffice/phpexcel": "^1.8",
+        "mihaildev/yii2-elfinder": "*",
+        "fishvision/yii2-migrate": "*",
+        "filsh/yii2-oauth2-server": "*",
+        "guzzlehttp/guzzle": "^6.3",
+        "drewm/mailchimp-api": "^2.5",
+        "yiisoft/yii2-redis": "^2.0",
+        "yiisoft/yii2-queue": "^2.0",
+        "league/flysystem": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
@@ -40,7 +48,9 @@
         "yiisoft/yii2-faker": "~2.0.0",
 
         "codeception/base": "^2.2.3",
-        "codeception/verify": "~0.3.1"
+        "codeception/verify": "~0.3.1",
+        "flow/jsonpath": "^0.4.0",
+        "zircote/swagger-php": "^2.0"
     },
     "config": {
         "process-timeout": 1800

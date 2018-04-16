@@ -4,6 +4,7 @@ require 'fileutils'
 domains = {
   frontend: 'shop.local',
   backend:  'backend.shop.local',
+  api:  'api.shop.local',
   static:  'static.shop.local'
 }
 
@@ -69,5 +70,8 @@ Vagrant.configure(2) do |config|
   config.vm.provision 'shell', path: './vagrant/provision/always-as-root.sh', run: 'always'
 
   # post-install message (vagrant console)
-  config.vm.post_up_message = "Frontend URL: http://#{domains[:frontend]}\nBackend URL: http://#{domains[:backend]}\nStatic URL: http://#{domains[:static]}"
+  config.vm.post_up_message = "Frontend URL: http://#{domains[:frontend]}
+  Backend URL: http://#{domains[:backend]}
+  Api URL: http://#{domains[:api]}
+  Static URL: http://#{domains[:static]}"
 end

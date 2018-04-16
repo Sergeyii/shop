@@ -13,7 +13,7 @@ class CategoriesForm extends Model
     public $others = [];
     public $categories;
 
-    public function __construct(Product $product = null, CategoryReadRepository $categories = null, array $config = [])
+    public function __construct(Product $product = null, CategoryReadRepository $categories, array $config = [])
     {
         if($product){
             $this->main = $product->category_id;
