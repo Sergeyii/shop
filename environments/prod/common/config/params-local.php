@@ -12,4 +12,18 @@ return [
         'api_id' => '',
         'base_url' => 'https://sms.ru/sms/send',
     ],
+    'flysystem' => [
+        'ftp' => [
+            'host' => 'ftp.example.com',
+            'username' => 'username',
+            'password' => 'password',
+
+            /** optional config settings */
+            'port' => 21,
+            'root' => '/path/to/root',
+            'passive' => true,
+            'ssl' => true,
+            'timeout' => 30,
+        ]
+    ],
 ];

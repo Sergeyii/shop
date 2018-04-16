@@ -4,7 +4,10 @@ namespace common\bootstrap;
 
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
+use League\Flysystem\Adapter\Ftp;
+use League\Flysystem\Filesystem;
 use shop\dispatchers\AsyncEventDispatcher;
+use shop\entities\behaviors\FlySystemImageUploadBehavior;
 use shop\entities\Shop\Product\events\ProductAppearedInStock;
 use frontend\urls\CategoryUrlRule;
 use shop\cart\Cart;
@@ -43,6 +46,7 @@ use yii\mail\MailerInterface;
 use Yii;
 use yii\queue\Queue;
 use yii\rbac\ManagerInterface;
+use yiidreamteam\upload\ImageUploadBehavior;
 
 class SetUp implements BootstrapInterface
 {
@@ -138,5 +142,11 @@ class SetUp implements BootstrapInterface
         $container->setSingleton(AsyncEventJobHandler::class, [], [
             Instance::of(SimpleEventDispatcher::class)
         ]);
+
+        /*$container->setSingleton(Filesystem::class, function() use($app) {
+            return new Filesystem(new Ftp($app->params['flysystem']['ftp']));
+        });
+
+        $container->set(ImageUploadBehavior::class, FlySystemImageUploadBehavior::class);*/
     }
 }
