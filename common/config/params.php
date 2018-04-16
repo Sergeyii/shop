@@ -12,6 +12,7 @@ return [
     'cookieValidationKey' => '',
     'cookieDomain' => '.example.com',
     'frontendHostInfo' => 'http://example.com',
+    'backendHostInfo' => 'http://backend.example.com',
     'aliases' => [
         '@staticRoot' => $static['staticPath'],
         '@static' => $static['staticHostInfo'],
