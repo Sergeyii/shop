@@ -33,6 +33,7 @@
                     ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/user'], 'active' => ( $this->context->id == 'user' )],
                     ['label' => 'Shop', 'icon' => 'folder', 'items' =>
                         [
+                            ['label' => 'Производители', 'icon' => 'file-o', 'url' => ['/manufacturer'], 'active' => ( $this->context->id == 'manufacturer' )],
                             ['label' => 'Страницы', 'icon' => 'file-o', 'url' => ['/page'], 'active' => ( $this->context->id == 'page' )],
                             ['label' => 'Файлы', 'icon' => 'file-o', 'url' => ['/file'], 'active' => ( $this->context->id == 'file' )],
                             ['label' => 'Brands', 'icon' => 'file-o', 'url' => ['/shop/brand/index'], 'active' => ( $this->context->id == 'shop/brand' ),],
