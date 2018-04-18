@@ -54,10 +54,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'value' => ProductHelper::statusLabel($product->status),
                                 'format' => 'raw',
                             ],
-                            /*[
+                            [
                                 'attribute' => 'brand_id',
                                 'value' => ArrayHelper::getValue($product, 'brand.name'),
-                            ],*/
+                            ],
                             'code',
                             'name',
                             [
@@ -68,10 +68,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'label' => 'Other categories',
                                 'value' => implode(', ', ArrayHelper::getColumn($product->categories, 'name')),
                             ],
-                            /*[
+                            [
                                 'label' => 'Tags',
                                 'value' => implode(', ', ArrayHelper::getColumn($product->tags, 'name')),
-                            ],*/
+                            ],
                             'quantity',
                             [
                                 'attribute' => 'weight',
@@ -102,10 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="box box-default">
                 <div class="box-header with-border">Characteristics</div>
                 <div class="box-body">
-                    <?
-                    /**
-                    //TODO::почему-то не работает
-                    = DetailView::widget([
+                    <?= DetailView::widget([
                         'model' => $product,
                         'attributes' => array_map(function (Value $value) {
                             return [
@@ -113,7 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'value' => $value->value,
                             ];
                         }, $product->values),
-                    ]) */?>
+                    ]) ?>
                 </div>
             </div>
         </div>
