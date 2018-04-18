@@ -12,5 +12,6 @@ $this->params['breadcrumbs'][] = 'Update';
 <div class="manufacturer-update">
     <?= $this->render('_form', [
         'model' => $model,
+        'manufacturer' => $manufacturer,
     ]) ?>
 </div>

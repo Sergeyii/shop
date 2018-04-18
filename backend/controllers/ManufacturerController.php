@@ -26,6 +26,8 @@ class ManufacturerController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'activate' => ['POST'],
+                    'draft' => ['POST'],
                 ],
             ],
         ];
@@ -67,6 +69,10 @@ class ManufacturerController extends Controller
         $form = new ManufacturerForm($manufacturer);
 
         if( $form->load(Yii::$app->request->post()) && $form->validate() ){
+            /*echo '<pre>';
+            print_r($form);
+            echo '</pre>';
+            die();*/
             try{
                 $this->service->edit($manufacturer->id, $form);
                 return $this->redirect(['view', 'id' => $manufacturer->id]);
@@ -80,6 +86,18 @@ class ManufacturerController extends Controller
             'model' => $form,
             'manufacturer' => $manufacturer,
         ]);
+    }
+
+    public function actionActivate($id)
+    {
+        $this->service->activate($id);
+        return $this->redirect(['view', 'id' => $id]);
+    }
+
+    public function actionDraft($id)
+    {
+        $this->service->draft($id);
+        return $this->redirect(['view', 'id' => $id]);
     }
 
     public function actionView($id)
@@ -99,5 +117,17 @@ class ManufacturerController extends Controller
         }
 
         return $this->redirect(['index']);
+    }
+
+    public function actionDeletePhoto($id)
+    {
+        try{
+            $this->service->removePhoto($id);
+        }catch(\DomainException $e){
+            Yii::$app->errorHandler->logException($e);
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+
+        return $this->redirect(['view', 'id' => $id]);
     }
 }

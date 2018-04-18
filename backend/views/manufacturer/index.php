@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use \shop\entities\Site\Manufacturer;
+use \shop\helpers\ManufacturerHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\forms\ManufacturerSearch */
@@ -19,7 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
             'id',
             [
                 'attribute' => 'title',
@@ -29,6 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
             ],
             'slug',
+            [
+                'attribute' => 'status',
+                'filter' => $searchModel->statusList(),
+                'value' => function (Manufacturer $model) {
+                    return ManufacturerHelper::statusLabel($model->status);
+                },
+                'format' => 'raw',
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

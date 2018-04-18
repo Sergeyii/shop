@@ -14,9 +14,9 @@ class ManufacturerRepository
         return $model;
     }
 
-    public function create($title, $slug, $description): Manufacturer
+    public function create($title, $slug, $description, $sort, $file): Manufacturer
     {
-        return Manufacturer::create($title, $slug, $description);
+        return Manufacturer::create($title, $slug, $description, $sort, $file);
     }
 
     public function save(Manufacturer $model): void

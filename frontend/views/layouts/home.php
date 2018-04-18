@@ -2,6 +2,7 @@
 
 use \frontend\widgets\Shop\FeaturedProductsWidget;
 use \frontend\widgets\Blog\LastsPostWidget;
+use \frontend\widgets\Site\ManufacturersWidget;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -34,52 +35,10 @@ use \frontend\widgets\Blog\LastsPostWidget;
                 'limit' => 4,
             ])?>
 
-            <div id="carousel0" class="owl-carousel">
-                <div class="item text-center">
-                    <img src="http://static.shop.dev/cache/manufacturers/nfl-130x100.png" alt="NFL"
-                         class="img-responsive"/>
-                </div>
-                <div class="item text-center">
-                    <img src="http://static.shop.dev/cache/manufacturers/redbull-130x100.png"
-                         alt="RedBull" class="img-responsive"/>
-                </div>
-                <div class="item text-center">
-                    <img src="http://static.shop.dev/cache/manufacturers/sony-130x100.png" alt="Sony"
-                         class="img-responsive"/>
-                </div>
-                <div class="item text-center">
-                    <img src="http://static.shop.dev/cache/manufacturers/cocacola-130x100.png"
-                         alt="Coca Cola" class="img-responsive"/>
-                </div>
-                <div class="item text-center">
-                    <img src="http://static.shop.dev/cache/manufacturers/burgerking-130x100.png"
-                         alt="Burger King" class="img-responsive"/>
-                </div>
-                <div class="item text-center">
-                    <img src="http://static.shop.dev/cache/manufacturers/canon-130x100.png" alt="Canon"
-                         class="img-responsive"/>
-                </div>
-                <div class="item text-center">
-                    <img src="http://static.shop.dev/cache/manufacturers/harley-130x100.png"
-                         alt="Harley Davidson" class="img-responsive"/>
-                </div>
-                <div class="item text-center">
-                    <img src="http://static.shop.dev/cache/manufacturers/dell-130x100.png" alt="Dell"
-                         class="img-responsive"/>
-                </div>
-                <div class="item text-center">
-                    <img src="http://static.shop.dev/cache/manufacturers/disney-130x100.png"
-                         alt="Disney" class="img-responsive"/>
-                </div>
-                <div class="item text-center">
-                    <img src="http://static.shop.dev/cache/manufacturers/starbucks-130x100.png"
-                         alt="Starbucks" class="img-responsive"/>
-                </div>
-                <div class="item text-center">
-                    <img src="http://static.shop.dev/cache/manufacturers/nintendo-130x100.png"
-                         alt="Nintendo" class="img-responsive"/>
-                </div>
-            </div>
+            <?=ManufacturersWidget::widget([
+                'limit' => 20,
+            ])?>
+
             <?= $content ?>
         </div>
     </div>
