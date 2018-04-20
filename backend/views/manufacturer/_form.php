@@ -31,6 +31,11 @@ use yii\widgets\ActiveForm;
             'initialPreviewConfig' => [
                 ['caption' => $model->file],
             ],
+            'layoutTemplates' => [
+                'actions' => '',
+            ],
+            'showUpload' => false,
+            'showRemove' => false,
         ]
     ]) ?>
 
