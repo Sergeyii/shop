@@ -1,5 +1,6 @@
 <?php
 
+use \powerkernel\slugify\Slugify;
 use yii\helpers\Html;
 use \shop\helpers\ManufacturerHelper;
 use yii\widgets\ActiveForm;
@@ -15,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'sort')->textInput() ?>
-    <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'slug')->widget(Slugify::className(),['source'=>'#manufacturerform-title']) ?>
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'file')->label(false)->widget(\kartik\file\FileInput::class, [

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8c5afd40c9a11ec11c97d17a20fafc3",
+    "content-hash": "be7e487ea3916e75e0c42f272066f026",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -145,6 +145,29 @@
                 "javascript",
                 "jquery",
                 "library"
+            ]
+        },
+        {
+            "name": "bower-asset/jquery-slugify",
+            "version": "1.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/madflow/jquery-slugify.git",
+                "reference": "30f6bb0c4ad1181fe81dd2c1447d1e0403f52d8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/madflow/jquery-slugify/zipball/30f6bb0c4ad1181fe81dd2c1447d1e0403f52d8d",
+                "reference": "30f6bb0c4ad1181fe81dd2c1447d1e0403f52d8d",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.7",
+                "bower-asset/speakingurl": "~9.0.0"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
             ]
         },
         {
@@ -293,6 +316,22 @@
                     "package.json"
                 ]
             }
+        },
+        {
+            "name": "bower-asset/speakingurl",
+            "version": "v9.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pid/speakingurl.git",
+                "reference": "013eb82b59b1e5942ca3ccdfaeec2bffca81f7b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pid/speakingurl/zipball/013eb82b59b1e5942ca3ccdfaeec2bffca81f7b8",
+                "reference": "013eb82b59b1e5942ca3ccdfaeec2bffca81f7b8",
+                "shasum": null
+            },
+            "type": "bower-asset"
         },
         {
             "name": "bower-asset/yii2-pjax",
@@ -2792,6 +2831,47 @@
             ],
             "abandoned": "phpoffice/phpspreadsheet",
             "time": "2015-05-01T07:00:55+00:00"
+        },
+        {
+            "name": "powerkernel/yii2-slugify",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/powerkernel/yii2-slugify.git",
+                "reference": "80ed152d9695ec753a808761af25869d5ed5a5d2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/powerkernel/yii2-slugify/zipball/80ed152d9695ec753a808761af25869d5ed5a5d2",
+                "reference": "80ed152d9695ec753a808761af25869d5ed5a5d2",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery-slugify": "~1.2.5",
+                "yiisoft/yii2": "~2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "powerkernel\\slugify\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Harry Tang",
+                    "email": "harry@powerkernel.com"
+                }
+            ],
+            "description": "Slugify extension for Yii2",
+            "keywords": [
+                "slugify",
+                "yii2"
+            ],
+            "time": "2017-12-14T05:30:14+00:00"
         },
         {
             "name": "psr/http-message",

@@ -5,7 +5,6 @@ namespace shop\forms\manage;
 use shop\entities\Site\Manufacturer;
 use shop\helpers\ManufacturerHelper;
 use yii\base\Model;
-use yii\helpers\Inflector;
 use yii\web\UploadedFile;
 
 class ManufacturerForm extends Model
@@ -49,7 +48,6 @@ class ManufacturerForm extends Model
     public function beforeValidate(): bool
     {
         if(parent::beforeValidate()){
-            $this->slug = Inflector::slug($this->slug);
             $this->file = UploadedFile::getInstance($this, 'file');
             return true;
         }
