@@ -16,13 +16,10 @@ use \frontend\widgets\Site\ManufacturersWidget;
         <div id="content" class="col-sm-12">
             <div id="slideshow0" class="owl-carousel" style="opacity: 1;">
                 <div class="item">
-                    <a href="index.php?route=product/product&amp;path=57&amp;product_id=49"><img
-                            src="http://static.shop.dev/cache/banners/iPhone6-1140x380.jpg"
-                            alt="iPhone 6" class="img-responsive"/></a>
+                    <img src="<?=Yii::getAlias('@static')?>/files/main_page_slider/iphone1.jpg" alt="iPhone 6" class="img-responsive" style="max-height: 340px;"/>
                 </div>
                 <div class="item">
-                    <img src="http://static.shop.dev/cache/banners/MacBookAir-1140x380.jpg"
-                         alt="MacBookAir" class="img-responsive"/>
+                    <img src="<?=Yii::getAlias('@static')?>/files/main_page_slider/samsunggalaxy.jpg" alt="Samsung galaxy" class="img-responsive" style="max-height: 340px;"/>
                 </div>
             </div>
             <h3>Featured</h3>
@@ -46,9 +43,10 @@ use \frontend\widgets\Site\ManufacturersWidget;
 <?php $this->registerJs('
 $(\'#slideshow0\').owlCarousel({
     items: 1,
+    center: true,
     loop: true,
     autoplay:true,
-    autoplayTimeout:3000,
+    autoplayTimeout:4000,
     autoplayHoverPause:true,
     nav: true,
     navText: [\'<i class="fa fa-chevron-left fa-5x"></i>\', \'<i class="fa fa-chevron-right fa-5x"></i>\'],
